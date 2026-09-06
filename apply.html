@@ -1522,6 +1522,13 @@ function goToStep(step) {
     if (!validateStep(currentStep)) return;
   }
 
+  // Grade the quiz/psychology sections as soon as the applicant moves on,
+  // instead of relying solely on the 5-minute timer running out.
+  if (step > currentStep) {
+    if (currentStep === 3 && !quizSubmitted) submitQuiz();
+    if (currentStep === 4 && !psychSubmitted) submitPsychQuiz();
+  }
+
   document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
   const targetEl = document.querySelector(`.step-content[data-step="${step}"]`);
   if (targetEl) targetEl.classList.add('active');
