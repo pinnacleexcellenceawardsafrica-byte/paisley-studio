@@ -46,6 +46,7 @@
       --success: #2EB872;
       --error: #E74C3C;
       --warning: #F39C12;
+      --header-h: 68px;
     }
 
     @keyframes fadeInUp {
@@ -99,7 +100,7 @@
     }
 
     * { box-sizing:border-box; margin:0; padding:0; }
-    html { scroll-behavior:smooth; }
+    html { scroll-behavior:smooth; overflow-x:hidden; width:100%; }
     body {
       font-family: 'Quicksand', sans-serif;
       color: var(--ink);
@@ -107,6 +108,8 @@
       -webkit-font-smoothing: antialiased;
       line-height: 1.6;
       overflow-x: hidden;
+      width: 100%;
+      position: relative;
     }
     img { max-width:100%; display:block; }
     a { color:inherit; text-decoration:none; }
@@ -115,7 +118,7 @@
 
     h1,h2,h3,h4 { font-family:'Quicksand', sans-serif; font-weight:800; letter-spacing:-.02em; color:var(--ink); }
 
-    .container { max-width:var(--container); margin:0 auto; padding:0 1.75rem; }
+    .container { max-width:var(--container); margin:0 auto; padding:0 1.75rem; width:100%; }
     .section { padding:var(--pad) 0; position:relative; overflow:hidden; }
     @media(max-width:900px){ .section { padding:var(--pad-sm) 0; } }
 
@@ -192,6 +195,7 @@
     /* ===== HEADER ===== */
     .site-header {
       position:fixed; top:0; left:0; right:0; z-index:1000;
+      width:100%;
       background:rgba(241,249,247,.92);
       backdrop-filter:blur(12px);
       border-bottom:1px solid transparent;
@@ -200,18 +204,21 @@
     .site-header.scrolled { border-bottom-color:var(--line); box-shadow:0 4px 20px rgba(0,0,0,.04); }
     .header-inner {
       display:flex; align-items:center; justify-content:space-between;
-      padding:1.15rem 0;
+      gap:.5rem;
+      padding:.85rem 0;
+      min-height:var(--header-h);
     }
 
     .logo {
       display: flex;
       align-items: center;
-      gap: .7rem;
-      flex-shrink: 0;
+      gap: .6rem;
+      flex-shrink: 1;
+      min-width: 0;
     }
     .logo-img {
-      width: 100px;
-      height: 55px;
+      width: 90px;
+      height: 50px;
       border-radius: 10px;
       object-fit: cover;
       flex-shrink: 0;
@@ -222,23 +229,40 @@
     }
     .logo-word {
       font-weight: 800;
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       letter-spacing: -.01em;
       color: var(--ink);
+      line-height: 1.2;
+      white-space: nowrap;
     }
     .logo-word span {
       display: block;
-      font-size: .58rem;
+      font-size: .5rem;
       font-weight: 600;
-      letter-spacing: .1em;
+      letter-spacing: .08em;
       color: var(--muted);
-      margin-top: -2px;
+      margin-top: -1px;
       text-transform: uppercase;
+      white-space: nowrap;
     }
 
-    .main-nav { display:flex; align-items:center; gap:1.2rem; flex-wrap:wrap; }
+    @media(max-width: 768px) {
+      .logo-img { width: clamp(56px, 16vw, 78px); height: clamp(34px, 9vw, 44px); }
+      .logo-word { font-size: clamp(.85rem, 3.6vw, .98rem); }
+      .logo-word span { font-size: clamp(.46rem, 2vw, .5rem); }
+      .logo { gap: .5rem; }
+    }
+    @media(max-width: 420px) {
+      .logo-img { width: clamp(50px, 17vw, 62px); height: clamp(30px, 10vw, 38px); }
+      .logo-word { font-size: clamp(.74rem, 4vw, .86rem); }
+      .logo-word span { font-size: clamp(.4rem, 2.2vw, .46rem); letter-spacing:.05em; }
+      .logo { gap: .4rem; }
+    }
+    @media(max-width: 340px) { .logo-word span { display:none; } }
+
+    .main-nav { display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
     .main-nav a {
-      font-weight:700; font-size:.72rem; color:var(--ink); position:relative; padding:.3rem 0;
+      font-weight:700; font-size:.7rem; color:var(--ink); position:relative; padding:.3rem 0;
       text-transform:uppercase;
       letter-spacing:.06em;
       transition:all .3s ease;
@@ -250,20 +274,44 @@
     }
     .main-nav a:hover::after { width:100%; }
     .main-nav a:hover { color:var(--brand); }
-    .header-cta { display:flex; align-items:center; gap:0.8rem; flex-shrink:0; }
-    .header-cta .link-underline { font-size:.75rem; }
-    .header-cta .btn { padding:.6rem 1.4rem; font-size:.75rem; }
-    .nav-toggle { display:none; background:none; border:none; font-size:1.4rem; color:var(--ink); cursor:pointer; }
+    .header-cta { display:flex; align-items:center; gap:0.6rem; flex-shrink:0; }
+    .header-cta .link-underline { font-size:.7rem; }
+    .header-cta .btn { padding:.5rem 1.2rem; font-size:.7rem; }
+    .nav-toggle {
+      display:none;
+      background:none;
+      border:none;
+      font-size:1.4rem;
+      color:var(--ink);
+      cursor:pointer;
+      flex-shrink:0;
+      width:44px;
+      height:44px;
+      align-items:center;
+      justify-content:center;
+      -webkit-tap-highlight-color: transparent;
+    }
 
     .mobile-nav {
-      position:fixed; inset:0; background:var(--paper); z-index:1100;
-      display:flex; flex-direction:column; padding:1.8rem 1.75rem;
-      transform:translateX(100%); transition:transform .32s cubic-bezier(.4,0,.2,1);
+      position:fixed;
+      top:0; left:0; right:0; bottom:0;
+      width:100%;
+      height:100%;
+      background:var(--paper);
+      z-index:1100;
+      display:flex; flex-direction:column; padding:1.4rem 1.5rem;
+      padding-top: calc(1.4rem + env(safe-area-inset-top, 0px));
+      padding-bottom: calc(1.4rem + env(safe-area-inset-bottom, 0px));
+      transform:translateX(100%);
+      transition:transform .32s cubic-bezier(.4,0,.2,1);
       overflow-y:auto;
+      -webkit-overflow-scrolling:touch;
+      visibility:hidden;
     }
-    .mobile-nav.open { transform:translateX(0); }
+    .mobile-nav.open { transform:translateX(0); visibility:visible; }
     .mobile-nav .close-btn {
       align-self:flex-end; background:none; border:none; font-size:1.8rem; color:var(--ink); cursor:pointer; padding:0.5rem;
+      flex-shrink:0;
     }
     .mobile-nav a {
       font-size:1.1rem; font-weight:600; padding:.8rem 0; border-bottom:1px solid var(--line); color:var(--ink);
@@ -288,9 +336,11 @@
       font-size:.9rem;
     }
 
+    body.nav-open { overflow:hidden; height:100%; }
+
     @media(max-width:960px){
       .main-nav, .header-cta { display:none; }
-      .nav-toggle { display:block; }
+      .nav-toggle { display:flex; }
     }
 
     /* ===== PAGE HERO ===== */
@@ -360,14 +410,10 @@
       margin-top: 2rem;
     }
     @media(max-width: 992px) {
-      .requirements-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .requirements-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media(max-width: 600px) {
-      .requirements-grid {
-        grid-template-columns: 1fr;
-      }
+      .requirements-grid { grid-template-columns: 1fr; }
     }
 
     .req-card {
@@ -642,14 +688,6 @@
       border-color: var(--brand);
       background: rgba(85,191,179,0.08);
     }
-    .quiz-question .options label.correct {
-      border-color: var(--success);
-      background: rgba(46,184,114,0.1);
-    }
-    .quiz-question .options label.incorrect {
-      border-color: var(--error);
-      background: rgba(231,76,60,0.08);
-    }
     .quiz-question .feedback {
       margin-top: .6rem;
       padding: .6rem .8rem;
@@ -658,15 +696,10 @@
       display: none;
     }
     .quiz-question .feedback.show { display: block; }
-    .quiz-question .feedback.correct {
-      background: rgba(46,184,114,0.1);
+    .quiz-question .feedback.answered {
+      background: rgba(46,184,114,0.08);
       color: var(--success);
-      border: 1px solid rgba(46,184,114,0.2);
-    }
-    .quiz-question .feedback.incorrect {
-      background: rgba(231,76,60,0.08);
-      color: var(--error);
-      border: 1px solid rgba(231,76,60,0.15);
+      border: 1px solid rgba(46,184,114,0.15);
     }
 
     .step-nav {
@@ -868,9 +901,11 @@
     .footer-newsletter .newsletter-box {
       display:flex;
       gap:0.5rem;
+      flex-wrap:wrap;
     }
     .footer-newsletter .newsletter-box input {
-      flex:1;
+      flex:1 1 140px;
+      min-width:0;
       padding:.6rem .8rem;
       border:1px solid var(--dark-line);
       border-radius:8px;
@@ -893,6 +928,7 @@
       padding:.6rem 1.2rem;
       font-size:.7rem;
       white-space:nowrap;
+      flex-shrink:0;
     }
     .footer-bottom {
       display:flex;
@@ -906,8 +942,8 @@
 
     .scroll-top-btn {
       position:fixed;
-      bottom:24px;
-      right:24px;
+      bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+      right: calc(24px + env(safe-area-inset-right, 0px));
       z-index:999;
       width:48px;
       height:48px;
@@ -936,10 +972,13 @@
       transform:translateY(-3px) scale(1.05);
     }
 
-    /* ===== RESPONSIVE ===== */
     @media(max-width:600px){
       .page-hero { padding-top: 6rem; }
       .page-hero h1 { font-size: clamp(1.8rem, 6vw, 2.4rem); }
+      .scroll-top-btn { width:44px; height:44px; font-size:1.05rem; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); right: calc(18px + env(safe-area-inset-right, 0px)); }
+    }
+    @media(max-width:480px){
+      .scroll-top-btn { width:40px; height:40px; font-size:.95rem; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); right: calc(14px + env(safe-area-inset-right, 0px)); }
     }
   </style>
 </head>
@@ -1413,15 +1452,24 @@ const mobileNav = document.getElementById('mobileNav');
 
 function openNav() {
   mobileNav.classList.add('open');
+  document.body.classList.add('nav-open');
   navToggle.setAttribute('aria-expanded', 'true');
 }
 function closeNav() {
   mobileNav.classList.remove('open');
+  document.body.classList.remove('nav-open');
   navToggle.setAttribute('aria-expanded', 'false');
 }
+
 navToggle.addEventListener('click', openNav);
 navClose.addEventListener('click', closeNav);
-mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+mobileNav.querySelectorAll('a:not(.mobile-cta-group a)').forEach(a => a.addEventListener('click', closeNav));
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 960 && mobileNav.classList.contains('open')) {
+    closeNav();
+  }
+});
 
 // ============================================================
 // SCROLL REVEAL
@@ -1451,11 +1499,25 @@ let uploadedFiles = {
 };
 let quizScore = 0;
 let psychScore = 0;
+let quizSubmitted = false;
+let psychSubmitted = false;
+let quizTimer = 300;
+let psychTimer = 300;
+let quizTimerInterval = null;
+let psychTimerInterval = null;
 
 // ============================================================
 // STEP NAVIGATION
 // ============================================================
 function goToStep(step) {
+  // Clear timers when leaving quiz steps
+  if (currentStep === 3 && step !== 3) {
+    if (quizTimerInterval) clearInterval(quizTimerInterval);
+  }
+  if (currentStep === 4 && step !== 4) {
+    if (psychTimerInterval) clearInterval(psychTimerInterval);
+  }
+
   if (step > currentStep) {
     if (!validateStep(currentStep)) return;
   }
@@ -1618,7 +1680,6 @@ function removeFile(key) {
   document.getElementById(inputId).value = '';
 }
 
-// Setup all upload areas
 setupUpload('photoUpload', 'photoInput', 'photoList', 'photo');
 setupUpload('cvUpload', 'cvInput', 'cvList', 'cv');
 setupUpload('tscUpload', 'tscInput', 'tscList', 'tsc');
@@ -1631,290 +1692,59 @@ setupUpload('extraUpload', 'extraInput', 'extraList', 'extra');
 // ============================================================
 const subjectQuestions = {
   maths: [
-    {
-      question: 'Solve for x: 2x + 5 = 13',
-      options: ['x = 3', 'x = 4', 'x = 5', 'x = 6'],
-      correct: 1,
-      explanation: '2x + 5 = 13 → 2x = 8 → x = 4'
-    },
-    {
-      question: 'What is the gradient of the line y = 3x - 7?',
-      options: ['-7', '3', '7', '-3'],
-      correct: 1,
-      explanation: 'In y = mx + c, m is the gradient. Here m = 3.'
-    },
-    {
-      question: 'Simplify: (x³ × x⁴) / x²',
-      options: ['x⁵', 'x⁶', 'x⁷', 'x⁹'],
-      correct: 0,
-      explanation: 'x³ × x⁴ = x⁷, then x⁷ / x² = x⁵'
-    },
-    {
-      question: 'What is the area of a circle with radius 5cm? (Use π = 3.14)',
-      options: ['78.5 cm²', '31.4 cm²', '157 cm²', '25 cm²'],
-      correct: 0,
-      explanation: 'Area = πr² = 3.14 × 25 = 78.5 cm²'
-    },
-    {
-      question: 'Solve: 3(x - 2) = 5x - 10',
-      options: ['x = 2', 'x = 4', 'x = 6', 'x = 8'],
-      correct: 1,
-      explanation: '3x - 6 = 5x - 10 → 4 = 2x → x = 2'
-    }
+    { question: 'Solve for x: 2x + 5 = 13', options: ['x = 3', 'x = 4', 'x = 5', 'x = 6'], correct: 1 },
+    { question: 'What is the gradient of the line y = 3x - 7?', options: ['-7', '3', '7', '-3'], correct: 1 },
+    { question: 'Simplify: (x³ × x⁴) / x²', options: ['x⁵', 'x⁶', 'x⁷', 'x⁹'], correct: 0 },
+    { question: 'What is the area of a circle with radius 5cm? (Use π = 3.14)', options: ['78.5 cm²', '31.4 cm²', '157 cm²', '25 cm²'], correct: 0 },
+    { question: 'Solve: 3(x - 2) = 5x - 10', options: ['x = 2', 'x = 4', 'x = 6', 'x = 8'], correct: 1 }
   ],
   english: [
-    {
-      question: 'Which of the following is a complex sentence?',
-      options: [
-        'She ran to the shop.',
-        'She ran to the shop because she needed milk.',
-        'She ran to the shop and bought milk.',
-        'Running to the shop, she bought milk.'
-      ],
-      correct: 1,
-      explanation: 'A complex sentence has one independent clause and one dependent clause. "because she needed milk" is the dependent clause.'
-    },
-    {
-      question: 'What is the correct spelling?',
-      options: ['Necessary', 'Neccessary', 'Necesary', 'Necassary'],
-      correct: 0,
-      explanation: '"Necessary" has one c and two s\'s.'
-    },
-    {
-      question: 'Identify the simile: "Her eyes were like stars."',
-      options: ['Her eyes', 'like stars', 'were like', 'stars'],
-      correct: 1,
-      explanation: 'A simile uses "like" or "as" to compare two things.'
-    },
-    {
-      question: 'What does "benevolent" mean?',
-      options: ['Kind and generous', 'Cruel and harsh', 'Indifferent', 'Confused'],
-      correct: 0,
-      explanation: '"Benevolent" means kind, generous, and well-meaning.'
-    },
-    {
-      question: 'Which is the correct past tense of "lie" (meaning to recline)?',
-      options: ['Layed', 'Lied', 'Laid', 'Lay'],
-      correct: 3,
-      explanation: 'The past tense of "lie" (recline) is "lay".'
-    }
+    { question: 'Which of the following is a complex sentence?', options: ['She ran to the shop.', 'She ran to the shop because she needed milk.', 'She ran to the shop and bought milk.', 'Running to the shop, she bought milk.'], correct: 1 },
+    { question: 'What is the correct spelling?', options: ['Necessary', 'Neccessary', 'Necesary', 'Necassary'], correct: 0 },
+    { question: 'Identify the simile: "Her eyes were like stars."', options: ['Her eyes', 'like stars', 'were like', 'stars'], correct: 1 },
+    { question: 'What does "benevolent" mean?', options: ['Kind and generous', 'Cruel and harsh', 'Indifferent', 'Confused'], correct: 0 },
+    { question: 'Which is the correct past tense of "lie" (meaning to recline)?', options: ['Layed', 'Lied', 'Laid', 'Lay'], correct: 3 }
   ],
   physics: [
-    {
-      question: 'What is the SI unit of force?',
-      options: ['Joule', 'Newton', 'Watt', 'Pascal'],
-      correct: 1,
-      explanation: 'The Newton (N) is the SI unit of force.'
-    },
-    {
-      question: 'What is the speed of light in a vacuum? (approximately)',
-      options: ['3 × 10⁶ m/s', '3 × 10⁸ m/s', '3 × 10¹⁰ m/s', '3 × 10⁴ m/s'],
-      correct: 1,
-      explanation: 'The speed of light is approximately 3 × 10⁸ m/s.'
-    },
-    {
-      question: 'Which law states that energy cannot be created or destroyed?',
-      options: [
-        'Newton\'s First Law',
-        'Law of Conservation of Energy',
-        'Ohm\'s Law',
-        'Hooke\'s Law'
-      ],
-      correct: 1,
-      explanation: 'The Law of Conservation of Energy states that energy can be transformed but not created or destroyed.'
-    },
-    {
-      question: 'What is the formula for kinetic energy?',
-      options: ['E = mc²', 'E = ½mv²', 'E = mgh', 'E = Fd'],
-      correct: 1,
-      explanation: 'Kinetic energy = ½ × mass × velocity²'
-    },
-    {
-      question: 'What is the unit of electrical resistance?',
-      options: ['Ohm', 'Volt', 'Ampere', 'Watt'],
-      correct: 0,
-      explanation: 'The Ohm (Ω) is the SI unit of electrical resistance.'
-    }
+    { question: 'What is the SI unit of force?', options: ['Joule', 'Newton', 'Watt', 'Pascal'], correct: 1 },
+    { question: 'What is the speed of light in a vacuum? (approximately)', options: ['3 × 10⁶ m/s', '3 × 10⁸ m/s', '3 × 10¹⁰ m/s', '3 × 10⁴ m/s'], correct: 1 },
+    { question: 'Which law states that energy cannot be created or destroyed?', options: ['Newton\'s First Law', 'Law of Conservation of Energy', 'Ohm\'s Law', 'Hooke\'s Law'], correct: 1 },
+    { question: 'What is the formula for kinetic energy?', options: ['E = mc²', 'E = ½mv²', 'E = mgh', 'E = Fd'], correct: 1 },
+    { question: 'What is the unit of electrical resistance?', options: ['Ohm', 'Volt', 'Ampere', 'Watt'], correct: 0 }
   ],
   chemistry: [
-    {
-      question: 'What is the chemical symbol for gold?',
-      options: ['Au', 'Ag', 'Go', 'Gd'],
-      correct: 0,
-      explanation: 'Gold\'s chemical symbol is Au, from the Latin "aurum".'
-    },
-    {
-      question: 'What is the pH of a neutral solution?',
-      options: ['0', '7', '14', '1'],
-      correct: 1,
-      explanation: 'A neutral solution has a pH of 7.'
-    },
-    {
-      question: 'What is the formula for sodium chloride?',
-      options: ['NaCl', 'Na₂Cl', 'NaCl₂', 'Na₂Cl₂'],
-      correct: 0,
-      explanation: 'Sodium chloride is NaCl (one sodium atom, one chlorine atom).'
-    },
-    {
-      question: 'What type of bond exists between two non-metals?',
-      options: ['Ionic bond', 'Covalent bond', 'Metallic bond', 'Hydrogen bond'],
-      correct: 1,
-      explanation: 'Covalent bonds form between non-metals by sharing electrons.'
-    },
-    {
-      question: 'What is the molar mass of water (H₂O)? (H=1, O=16)',
-      options: ['16 g/mol', '18 g/mol', '20 g/mol', '22 g/mol'],
-      correct: 1,
-      explanation: 'H₂O: (2 × 1) + 16 = 18 g/mol'
-    }
+    { question: 'What is the chemical symbol for gold?', options: ['Au', 'Ag', 'Go', 'Gd'], correct: 0 },
+    { question: 'What is the pH of a neutral solution?', options: ['0', '7', '14', '1'], correct: 1 },
+    { question: 'What is the formula for sodium chloride?', options: ['NaCl', 'Na₂Cl', 'NaCl₂', 'Na₂Cl₂'], correct: 0 },
+    { question: 'What type of bond exists between two non-metals?', options: ['Ionic bond', 'Covalent bond', 'Metallic bond', 'Hydrogen bond'], correct: 1 },
+    { question: 'What is the molar mass of water (H₂O)? (H=1, O=16)', options: ['16 g/mol', '18 g/mol', '20 g/mol', '22 g/mol'], correct: 1 }
   ],
   biology: [
-    {
-      question: 'What is the powerhouse of the cell?',
-      options: ['Nucleus', 'Mitochondria', 'Ribosome', 'Golgi body'],
-      correct: 1,
-      explanation: 'Mitochondria are known as the powerhouse of the cell because they produce ATP energy.'
-    },
-    {
-      question: 'What is the function of the human heart?',
-      options: [
-        'Filter blood',
-        'Pump blood around the body',
-        'Produce hormones',
-        'Store nutrients'
-      ],
-      correct: 1,
-      explanation: 'The heart pumps blood around the body, delivering oxygen and nutrients.'
-    },
-    {
-      question: 'What is photosynthesis?',
-      options: [
-        'The process of cell division',
-        'The process by which plants make food using sunlight',
-        'The process of respiration',
-        'The process of digestion'
-      ],
-      correct: 1,
-      explanation: 'Photosynthesis is the process by which plants convert sunlight into chemical energy (food).'
-    },
-    {
-      question: 'What is the largest organ in the human body?',
-      options: ['Liver', 'Skin', 'Brain', 'Heart'],
-      correct: 1,
-      explanation: 'The skin is the largest organ in the human body.'
-    },
-    {
-      question: 'What is the function of red blood cells?',
-      options: [
-        'Fight infection',
-        'Carry oxygen',
-        'Produce antibodies',
-        'Carry hormones'
-      ],
-      correct: 1,
-      explanation: 'Red blood cells contain haemoglobin and carry oxygen around the body.'
-    }
+    { question: 'What is the powerhouse of the cell?', options: ['Nucleus', 'Mitochondria', 'Ribosome', 'Golgi body'], correct: 1 },
+    { question: 'What is the function of the human heart?', options: ['Filter blood', 'Pump blood around the body', 'Produce hormones', 'Store nutrients'], correct: 1 },
+    { question: 'What is photosynthesis?', options: ['The process of cell division', 'The process by which plants make food using sunlight', 'The process of respiration', 'The process of digestion'], correct: 1 },
+    { question: 'What is the largest organ in the human body?', options: ['Liver', 'Skin', 'Brain', 'Heart'], correct: 1 },
+    { question: 'What is the function of red blood cells?', options: ['Fight infection', 'Carry oxygen', 'Produce antibodies', 'Carry hormones'], correct: 1 }
   ],
   history: [
-    {
-      question: 'In which year did World War II end?',
-      options: ['1944', '1945', '1946', '1947'],
-      correct: 1,
-      explanation: 'World War II ended in 1945.'
-    },
-    {
-      question: 'Who was the first President of the United States?',
-      options: ['Thomas Jefferson', 'George Washington', 'Abraham Lincoln', 'John Adams'],
-      correct: 1,
-      explanation: 'George Washington was the first President of the United States.'
-    },
-    {
-      question: 'What was the Industrial Revolution?',
-      options: [
-        'A political revolution',
-        'A period of industrialisation and technological change',
-        'A religious movement',
-        'A military conflict'
-      ],
-      correct: 1,
-      explanation: 'The Industrial Revolution was a period of industrialisation and technological change from the 18th to 19th centuries.'
-    },
-    {
-      question: 'When was the Magna Carta signed?',
-      options: ['1066', '1215', '1500', '1600'],
-      correct: 1,
-      explanation: 'The Magna Carta was signed in 1215.'
-    },
-    {
-      question: 'What was the Cold War?',
-      options: [
-        'A physical war between the US and USSR',
-        'A period of geopolitical tension between the US and USSR',
-        'A war in Antarctica',
-        'A trade war'
-      ],
-      correct: 1,
-      explanation: 'The Cold War was a period of geopolitical tension between the US and USSR from 1947 to 1991.'
-    }
+    { question: 'In which year did World War II end?', options: ['1944', '1945', '1946', '1947'], correct: 1 },
+    { question: 'Who was the first President of the United States?', options: ['Thomas Jefferson', 'George Washington', 'Abraham Lincoln', 'John Adams'], correct: 1 },
+    { question: 'What was the Industrial Revolution?', options: ['A political revolution', 'A period of industrialisation and technological change', 'A religious movement', 'A military conflict'], correct: 1 },
+    { question: 'When was the Magna Carta signed?', options: ['1066', '1215', '1500', '1600'], correct: 1 },
+    { question: 'What was the Cold War?', options: ['A physical war between the US and USSR', 'A period of geopolitical tension between the US and USSR', 'A war in Antarctica', 'A trade war'], correct: 1 }
   ],
   geography: [
-    {
-      question: 'What is the longest river in the world?',
-      options: ['Amazon', 'Nile', 'Mississippi', 'Yangtze'],
-      correct: 1,
-      explanation: 'The Nile River is the longest river in the world (approximately 6,650 km).'
-    },
-    {
-      question: 'What is the largest continent by land area?',
-      options: ['Africa', 'Asia', 'North America', 'Europe'],
-      correct: 1,
-      explanation: 'Asia is the largest continent by land area.'
-    },
-    {
-      question: 'What is a biome?',
-      options: [
-        'A small ecosystem',
-        'A large geographical area with distinct climate and life',
-        'A type of weather',
-        'A population of animals'
-      ],
-      correct: 1,
-      explanation: 'A biome is a large geographical area with distinct climate, flora, and fauna.'
-    },
-    {
-      question: 'What is the capital of Australia?',
-      options: ['Sydney', 'Melbourne', 'Canberra', 'Brisbane'],
-      correct: 2,
-      explanation: 'Canberra is the capital of Australia.'
-    },
-    {
-      question: 'What is the greenhouse effect?',
-      options: [
-        'The trapping of heat in the Earth\'s atmosphere',
-        'The cooling of the Earth',
-        'The effect of plants on the atmosphere',
-        'The movement of tectonic plates'
-      ],
-      correct: 0,
-      explanation: 'The greenhouse effect is the trapping of heat in the Earth\'s atmosphere by greenhouse gases.'
-    }
+    { question: 'What is the longest river in the world?', options: ['Amazon', 'Nile', 'Mississippi', 'Yangtze'], correct: 1 },
+    { question: 'What is the largest continent by land area?', options: ['Africa', 'Asia', 'North America', 'Europe'], correct: 1 },
+    { question: 'What is a biome?', options: ['A small ecosystem', 'A large geographical area with distinct climate and life', 'A type of weather', 'A population of animals'], correct: 1 },
+    { question: 'What is the capital of Australia?', options: ['Sydney', 'Melbourne', 'Canberra', 'Brisbane'], correct: 2 },
+    { question: 'What is the greenhouse effect?', options: ['The trapping of heat in the Earth\'s atmosphere', 'The cooling of the Earth', 'The effect of plants on the atmosphere', 'The movement of tectonic plates'], correct: 0 }
   ]
 };
 
-// Default questions if subject not found
 const defaultQuestions = [
-  {
-    question: 'What is 2 + 2?',
-    options: ['3', '4', '5', '6'],
-    correct: 1,
-    explanation: '2 + 2 = 4'
-  },
-  {
-    question: 'What is the capital of Kenya?',
-    options: ['Mombasa', 'Nairobi', 'Kisumu', 'Nakuru'],
-    correct: 1,
-    explanation: 'Nairobi is the capital of Kenya.'
-  }
+  { question: 'What is 2 + 2?', options: ['3', '4', '5', '6'], correct: 1 },
+  { question: 'What is the capital of Kenya?', options: ['Mombasa', 'Nairobi', 'Kisumu', 'Nakuru'], correct: 1 }
 ];
 
 // ============================================================
@@ -1923,96 +1753,48 @@ const defaultQuestions = [
 const psychologyQuestions = [
   {
     question: 'A student in your online class is clearly struggling to set up their camera and microphone. They seem frustrated and are falling behind. What do you do?',
-    options: [
-      'Wait for them to figure it out and move on',
-      'Take a moment to guide them through the setup step by step',
-      'Tell them to fix it before the next class',
-      'Ignore it and continue with the lesson'
-    ],
-    correct: 1,
-    explanation: 'Taking a moment to guide the student builds trust and ensures they can participate fully. Patience and support are key.'
+    options: ['Wait for them to figure it out and move on', 'Take a moment to guide them through the setup step by step', 'Tell them to fix it before the next class', 'Ignore it and continue with the lesson'],
+    correct: 1
   },
   {
     question: 'One of your students keeps muting themselves and turning off their camera during class. You suspect they are distracted or not paying attention. How do you handle this?',
-    options: [
-      'Call them out publicly and ask them to turn the camera on',
-      'Privately message them to check if everything is okay',
-      'Ignore it and continue teaching',
-      'Mark them absent for the session'
-    ],
-    correct: 1,
-    explanation: 'Privately checking in shows you care without embarrassing the student. There may be a valid reason for their behaviour.'
+    options: ['Call them out publicly and ask them to turn the camera on', 'Privately message them to check if everything is okay', 'Ignore it and continue teaching', 'Mark them absent for the session'],
+    correct: 1
   },
   {
     question: 'A student is being disruptive in the online class, making inappropriate comments and distracting others. What is your approach?',
-    options: [
-      'Ignore the behaviour and hope it stops',
-      'Address the student privately after class to discuss their behaviour',
-      'Kick them out of the class immediately',
-      'Shame them publicly to discourage others'
-    ],
-    correct: 1,
-    explanation: 'Addressing the student privately is the most respectful and effective way to correct behaviour. It maintains dignity and gives the student a chance to improve.'
+    options: ['Ignore the behaviour and hope it stops', 'Address the student privately after class to discuss their behaviour', 'Kick them out of the class immediately', 'Shame them publicly to discourage others'],
+    correct: 1
   },
   {
     question: 'A student tells you they are feeling overwhelmed with the workload and are considering dropping out. How do you respond?',
-    options: [
-      'Tell them to work harder and manage their time better',
-      'Listen to their concerns, offer support, and suggest manageable steps',
-      'Tell them that dropping out is their choice',
-      'Refer them to another tutor and stop teaching them'
-    ],
-    correct: 1,
-    explanation: 'Showing empathy and offering practical support can help the student feel heard and motivated to continue. Mental health matters.'
+    options: ['Tell them to work harder and manage their time better', 'Listen to their concerns, offer support, and suggest manageable steps', 'Tell them that dropping out is their choice', 'Refer them to another tutor and stop teaching them'],
+    correct: 1
   },
   {
     question: 'During a lesson, you notice a student is consistently getting answers wrong and seems to be struggling with the concept. What do you do?',
-    options: [
-      'Move on to the next topic to keep the pace',
-      'Pause and re-explain the concept in a different way',
-      'Tell the student to review the material on their own',
-      'Ignore it and hope they catch up later'
-    ],
-    correct: 1,
-    explanation: 'Pausing and re-explaining ensures the student understands before moving on. Every student learns at a different pace.'
+    options: ['Move on to the next topic to keep the pace', 'Pause and re-explain the concept in a different way', 'Tell the student to review the material on their own', 'Ignore it and hope they catch up later'],
+    correct: 1
   },
   {
     question: 'One of your students is showing signs of distress—they are withdrawn, not participating, and seem down. How do you approach this?',
-    options: [
-      'Do nothing and let them sort it out',
-      'Privately ask if everything is okay and offer a listening ear',
-      'Publicly ask them what is wrong in front of the class',
-      'Contact their parents immediately without speaking to the student'
-    ],
-    correct: 1,
-    explanation: 'A private, compassionate check-in can make a huge difference. It shows you care without putting the student on the spot.'
+    options: ['Do nothing and let them sort it out', 'Privately ask if everything is okay and offer a listening ear', 'Publicly ask them what is wrong in front of the class', 'Contact their parents immediately without speaking to the student'],
+    correct: 1
   },
   {
     question: 'A student argues with you about a grade they received on an assignment. They are persistent and confrontational. How do you handle this?',
-    options: [
-      'Apologise and change their grade to avoid conflict',
-      'Listen to their concerns, explain your marking clearly, and stand by your professional judgement',
-      'Argue back and tell them they are wrong',
-      'Refuse to discuss it and end the conversation'
-    ],
-    correct: 1,
-    explanation: 'Listening and explaining your marking shows professionalism and respect. Standing by your judgement when appropriate is important.'
+    options: ['Apologise and change their grade to avoid conflict', 'Listen to their concerns, explain your marking clearly, and stand by your professional judgement', 'Argue back and tell them they are wrong', 'Refuse to discuss it and end the conversation'],
+    correct: 1
   },
   {
     question: 'A student in your class has special educational needs and requires additional support. What is your approach?',
-    options: [
-      'Teach them the same way as all other students',
-      'Adapt your teaching approach to meet their specific needs',
-      'Refer them to another tutor who can handle it',
-      'Ignore their needs and focus on the rest of the class'
-    ],
-    correct: 1,
-    explanation: 'Adapting your teaching for students with SEN shows inclusivity and professionalism. Every student deserves support tailored to their needs.'
+    options: ['Teach them the same way as all other students', 'Adapt your teaching approach to meet their specific needs', 'Refer them to another tutor who can handle it', 'Ignore their needs and focus on the rest of the class'],
+    correct: 1
   }
 ];
 
 // ============================================================
-// RENDER QUIZ
+// RENDER QUIZ WITH TIMER
 // ============================================================
 function renderQuiz() {
   const container = document.getElementById('quizContainer');
@@ -2026,7 +1808,13 @@ function renderQuiz() {
   const shuffled = [...questions].sort(() => Math.random() - 0.5);
   const selected = shuffled.slice(0, 5);
 
-  let html = '';
+  let html = `
+    <div style="background:var(--brand-deep);color:#fff;border-radius:12px;padding:1rem;text-align:center;margin-bottom:1.5rem;">
+      <div style="font-size:1.5rem;font-weight:800;" id="quizTimerDisplay">05:00</div>
+      <div style="font-size:.7rem;opacity:0.7;">Time Remaining</div>
+    </div>
+  `;
+  
   selected.forEach((q, index) => {
     html += `
       <div class="quiz-question" data-q="${index}">
@@ -2035,7 +1823,7 @@ function renderQuiz() {
         <div class="options">
           ${q.options.map((opt, optIndex) => `
             <label>
-              <input type="radio" name="quiz_q${index}" value="${optIndex}" onchange="selectQuizAnswer(${index}, ${optIndex}, '${q.correct}')">
+              <input type="radio" name="quiz_q${index}" value="${optIndex}" onchange="selectQuizAnswer(${index}, ${optIndex})">
               ${opt}
             </label>
           `).join('')}
@@ -2048,66 +1836,92 @@ function renderQuiz() {
   container.innerHTML = html;
   quizAnswers = {};
   quizScore = 0;
+  quizSubmitted = false;
+  quizTimer = 300;
+  
+  // Store correct answers for grading later
+  quizCorrectAnswers = selected.map(q => q.correct);
+  
+  if (quizTimerInterval) clearInterval(quizTimerInterval);
+  quizTimerInterval = setInterval(() => {
+    quizTimer--;
+    const mins = Math.floor(quizTimer / 60);
+    const secs = quizTimer % 60;
+    const display = document.getElementById('quizTimerDisplay');
+    if (display) {
+      display.textContent = String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+      if (quizTimer <= 60) {
+        display.style.color = '#FF6B6B';
+      }
+    }
+    if (quizTimer <= 0) {
+      clearInterval(quizTimerInterval);
+      submitQuiz();
+    }
+  }, 1000);
 }
 
-function selectQuizAnswer(qIndex, selected, correct) {
+let quizCorrectAnswers = [];
+
+function selectQuizAnswer(qIndex, selected) {
+  if (quizSubmitted) return;
   const questionEl = document.querySelector(`.quiz-question[data-q="${qIndex}"]`);
   const labels = questionEl.querySelectorAll('.options label');
-  const feedback = document.getElementById(`quizFeedback${qIndex}`);
-
-  labels.forEach(label => {
-    label.classList.remove('selected', 'correct', 'incorrect');
-  });
-
+  labels.forEach(label => label.classList.remove('selected'));
   labels[selected].classList.add('selected');
-
-  const isCorrect = parseInt(selected) === parseInt(correct);
-  if (isCorrect) {
-    labels[selected].classList.add('correct');
-    feedback.className = 'feedback show correct';
-    const qText = questionEl.querySelector('.q-text').textContent;
-    const questions = subjectQuestions[document.getElementById('primarySubject').value] || defaultQuestions;
-    const foundQ = questions.find(q => q.question === qText);
-    feedback.textContent = '✓ Correct! ' + (foundQ ? foundQ.explanation : '');
-  } else {
-    labels[selected].classList.add('incorrect');
-    feedback.className = 'feedback show incorrect';
-    const qText = questionEl.querySelector('.q-text').textContent;
-    const questions = subjectQuestions[document.getElementById('primarySubject').value] || defaultQuestions;
-    const foundQ = questions.find(q => q.question === qText);
-    if (foundQ) {
-      feedback.textContent = '✗ Incorrect. The correct answer was: ' + foundQ.options[foundQ.correct] + '. ' + foundQ.explanation;
-    } else {
-      feedback.textContent = '✗ Incorrect. Please review the question.';
-    }
-  }
-
   quizAnswers[qIndex] = selected;
+}
+
+function submitQuiz() {
+  if (quizSubmitted) return;
+  quizSubmitted = true;
+  if (quizTimerInterval) clearInterval(quizTimerInterval);
   
   const total = document.querySelectorAll('#quizContainer .quiz-question').length;
   let correctCount = 0;
+  
   document.querySelectorAll('#quizContainer .quiz-question').forEach((q, idx) => {
     const selectedRadio = q.querySelector('input[type="radio"]:checked');
     if (selectedRadio) {
       const val = parseInt(selectedRadio.value);
-      const qText = q.querySelector('.q-text').textContent;
-      const questions = subjectQuestions[document.getElementById('primarySubject').value] || defaultQuestions;
-      const foundQ = questions.find(qq => qq.question === qText);
-      if (foundQ && val === foundQ.correct) correctCount++;
+      if (quizCorrectAnswers[idx] !== undefined && val === quizCorrectAnswers[idx]) {
+        correctCount++;
+      }
+    }
+    q.querySelectorAll('input[type="radio"]').forEach(r => r.disabled = true);
+  });
+  
+  quizScore = Math.round((correctCount / total) * 100);
+  
+  document.querySelectorAll('#quizContainer .quiz-question').forEach((q) => {
+    const feedback = q.querySelector('.feedback');
+    if (feedback) {
+      feedback.className = 'feedback show answered';
+      feedback.textContent = '✓ Answered';
     }
   });
-  quizScore = Math.round((correctCount / total) * 100);
+  
+  const display = document.getElementById('quizTimerDisplay');
+  if (display) display.textContent = '⏱ Time\'s Up!';
 }
 
 // ============================================================
-// RENDER PSYCHOLOGY QUIZ
+// RENDER PSYCHOLOGY QUIZ WITH TIMER
 // ============================================================
 function renderPsychologyQuiz() {
   const container = document.getElementById('psychologyQuiz');
   const shuffled = [...psychologyQuestions].sort(() => Math.random() - 0.5);
   const selected = shuffled.slice(0, 6);
 
-  let html = '';
+  let html = `
+    <div style="background:var(--brand-deep);color:#fff;border-radius:12px;padding:1rem;text-align:center;margin-bottom:1.5rem;">
+      <div style="font-size:1.5rem;font-weight:800;" id="psychTimerDisplay">05:00</div>
+      <div style="font-size:.7rem;opacity:0.7;">Time Remaining</div>
+    </div>
+  `;
+  
+  psychCorrectAnswers = selected.map(q => q.correct);
+  
   selected.forEach((q, index) => {
     html += `
       <div class="quiz-question" data-psych="${index}">
@@ -2116,7 +1930,7 @@ function renderPsychologyQuiz() {
         <div class="options">
           ${q.options.map((opt, optIndex) => `
             <label>
-              <input type="radio" name="psych_q${index}" value="${optIndex}" onchange="selectPsychAnswer(${index}, ${optIndex}, '${q.correct}')">
+              <input type="radio" name="psych_q${index}" value="${optIndex}" onchange="selectPsychAnswer(${index}, ${optIndex})">
               ${opt}
             </label>
           `).join('')}
@@ -2129,44 +1943,70 @@ function renderPsychologyQuiz() {
   container.innerHTML = html;
   psychAnswers = {};
   psychScore = 0;
+  psychSubmitted = false;
+  psychTimer = 300;
+  
+  if (psychTimerInterval) clearInterval(psychTimerInterval);
+  psychTimerInterval = setInterval(() => {
+    psychTimer--;
+    const mins = Math.floor(psychTimer / 60);
+    const secs = psychTimer % 60;
+    const display = document.getElementById('psychTimerDisplay');
+    if (display) {
+      display.textContent = String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+      if (psychTimer <= 60) {
+        display.style.color = '#FF6B6B';
+      }
+    }
+    if (psychTimer <= 0) {
+      clearInterval(psychTimerInterval);
+      submitPsychQuiz();
+    }
+  }, 1000);
 }
 
-function selectPsychAnswer(qIndex, selected, correct) {
+let psychCorrectAnswers = [];
+
+function selectPsychAnswer(qIndex, selected) {
+  if (psychSubmitted) return;
   const questionEl = document.querySelector(`.quiz-question[data-psych="${qIndex}"]`);
   const labels = questionEl.querySelectorAll('.options label');
-  const feedback = document.getElementById(`psychFeedback${qIndex}`);
-
-  labels.forEach(label => {
-    label.classList.remove('selected', 'correct', 'incorrect');
-  });
-
+  labels.forEach(label => label.classList.remove('selected'));
   labels[selected].classList.add('selected');
-
-  const isCorrect = parseInt(selected) === parseInt(correct);
-  if (isCorrect) {
-    labels[selected].classList.add('correct');
-    feedback.className = 'feedback show correct';
-    feedback.textContent = '✓ Good judgement! ' + (psychologyQuestions[qIndex]?.explanation || '');
-  } else {
-    labels[selected].classList.add('incorrect');
-    feedback.className = 'feedback show incorrect';
-    feedback.textContent = '✗ Consider this approach: ' + (psychologyQuestions[qIndex]?.explanation || '');
-  }
-
   psychAnswers[qIndex] = selected;
+}
 
+function submitPsychQuiz() {
+  if (psychSubmitted) return;
+  psychSubmitted = true;
+  if (psychTimerInterval) clearInterval(psychTimerInterval);
+  
   const total = document.querySelectorAll('#psychologyQuiz .quiz-question').length;
   let correctCount = 0;
+  
   document.querySelectorAll('#psychologyQuiz .quiz-question').forEach((q, idx) => {
     const selectedRadio = q.querySelector('input[type="radio"]:checked');
     if (selectedRadio) {
       const val = parseInt(selectedRadio.value);
-      const qText = q.querySelector('.q-text').textContent;
-      const foundQ = psychologyQuestions.find(qq => qq.question === qText);
-      if (foundQ && val === foundQ.correct) correctCount++;
+      if (psychCorrectAnswers[idx] !== undefined && val === psychCorrectAnswers[idx]) {
+        correctCount++;
+      }
+    }
+    q.querySelectorAll('input[type="radio"]').forEach(r => r.disabled = true);
+  });
+  
+  psychScore = Math.round((correctCount / total) * 100);
+  
+  document.querySelectorAll('#psychologyQuiz .quiz-question').forEach((q) => {
+    const feedback = q.querySelector('.feedback');
+    if (feedback) {
+      feedback.className = 'feedback show answered';
+      feedback.textContent = '✓ Answered';
     }
   });
-  psychScore = Math.round((correctCount / total) * 100);
+  
+  const display = document.getElementById('psychTimerDisplay');
+  if (display) display.textContent = '⏱ Time\'s Up!';
 }
 
 // ============================================================
