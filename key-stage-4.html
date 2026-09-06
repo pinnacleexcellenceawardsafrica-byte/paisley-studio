@@ -239,6 +239,7 @@
       display: flex;
       align-items: center;
       gap: .7rem;
+      flex-shrink: 0;
     }
     .logo-img {
       width: 100px;
@@ -265,6 +266,18 @@
       color: var(--muted);
       margin-top: -2px;
       text-transform: uppercase;
+    }
+    @media(max-width:768px) {
+      .logo-img { width: 55px; height: 35px; }
+      .logo-word { font-size: .8rem; }
+      .logo-word span { font-size: .4rem; }
+      .logo { gap: .4rem; }
+    }
+    @media(max-width:480px) {
+      .logo-img { width: 42px; height: 28px; }
+      .logo-word { font-size: .65rem; }
+      .logo-word span { font-size: .35rem; }
+      .logo { gap: .3rem; }
     }
 
     .main-nav { display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; }
@@ -430,6 +443,35 @@
       width: 1.5rem;
       text-align: center;
       flex-shrink: 0;
+    }
+
+    .learning-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+    @media(max-width: 768px) {
+      .learning-grid { grid-template-columns: 1fr; }
+    }
+    .learning-card {
+      border-radius: 12px;
+      padding: 1.5rem;
+      height: 100%;
+      transition: all .3s ease;
+    }
+    .learning-card:hover { transform: translateY(-4px); }
+    .learning-card .icon {
+      font-size: 1.8rem;
+      color: var(--brand-deep);
+      margin-bottom: .5rem;
+      display: block;
+    }
+    .learning-card h4 { font-size: 1.05rem; margin-bottom: .3rem; }
+    .learning-card p {
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.6;
     }
 
     .site-footer {
@@ -618,15 +660,11 @@
       <span class="logo-word">Paisley Studio<span>British Curriculum Online</span></span>
     </a>
     <nav class="main-nav" aria-label="Primary">
-      
-        
       <a href="how-it-works.html">How It Works</a>
       <a href="teach-with-us.html">Teach With Us</a>
       <a href="enrolment.html">Enrolment</a>
       <a href="academic-calendar.html">Academic Calendar</a>
       <a href="subjects.html">Subjects</a>
-      
-      
     </nav>
     <div class="header-cta">
       <a href="index.html#contact" class="link-underline">Contact</a>
@@ -776,6 +814,33 @@
             <h4>Pathway to A-Levels</h4>
             <p style="color:var(--muted);font-size:.9rem;line-height:1.6;">IGCSE results provide the foundation for A-Level study at Key Stage 5 and university entrance.</p>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LEARNING EXPERIENCE ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="reveal-left">
+        <span class="section-label"><i class="fas fa-chalkboard-user"></i> Learning Experience</span>
+        <h2 class="section-heading">How your child will learn.</h2>
+      </div>
+      <div class="learning-grid">
+        <div class="learning-card reveal" style="transition-delay:0.1s; background:var(--brand-soft);">
+          <span class="icon"><i class="fas fa-video"></i></span>
+          <h4>Live Online Classes</h4>
+          <p>Interactive video lessons with qualified tutors. Small class sizes ensure every pupil gets attention.</p>
+        </div>
+        <div class="learning-card reveal" style="transition-delay:0.2s; background:var(--sage);">
+          <span class="icon"><i class="fas fa-pencil-alt"></i></span>
+          <h4>Assignments &amp; Marking</h4>
+          <p>Regular homework and assignments marked by tutors with detailed feedback to support progress.</p>
+        </div>
+        <div class="learning-card reveal" style="transition-delay:0.3s; background:var(--paper); border:1px solid var(--line-soft);">
+          <span class="icon"><i class="fas fa-clock"></i></span>
+          <h4>Flexible Schedule</h4>
+          <p>Learning fits around your family's schedule. Lessons are recorded for revision and catch-up.</p>
         </div>
       </div>
     </div>

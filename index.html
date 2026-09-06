@@ -294,6 +294,8 @@
     .btn-primary:hover { background:var(--brand-deep); transform:translateY(-3px) scale(1.02); box-shadow:0 10px 30px rgba(85,191,179,.3); }
     .btn-ghost { background:transparent; border-color:var(--line); color:var(--ink); }
     .btn-ghost:hover { border-color:var(--brand); color:var(--brand); transform:translateY(-3px); }
+    .btn-outline { background:transparent; border:2px solid var(--brand); color:var(--brand); }
+    .btn-outline:hover { background:var(--brand); color:#fff; transform:translateY(-3px); }
 
     .link-underline {
       position:relative; font-weight:700; font-size:.85rem; color:var(--brand-deep);
@@ -334,8 +336,8 @@
       flex-shrink: 0;
     }
     .logo-img {
-      width: 100px;
-      height: 55px;
+      width: 90px;
+      height: 50px;
       border-radius: 10px;
       object-fit: cover;
       flex-shrink: 0;
@@ -346,18 +348,51 @@
     }
     .logo-word {
       font-weight: 800;
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       letter-spacing: -.01em;
       color: var(--ink);
     }
     .logo-word span {
       display: block;
-      font-size: .58rem;
+      font-size: .5rem;
       font-weight: 600;
-      letter-spacing: .1em;
+      letter-spacing: .08em;
       color: var(--muted);
       margin-top: -2px;
       text-transform: uppercase;
+    }
+
+    /* Responsive Logo */
+    @media(max-width: 768px) {
+      .logo-img {
+        width: 55px;
+        height: 35px;
+      }
+      .logo-word {
+        font-size: .8rem;
+      }
+      .logo-word span {
+        font-size: .4rem;
+      }
+      .logo {
+        gap: .4rem;
+      }
+    }
+    @media(max-width: 480px) {
+      .logo-img {
+        width: 42px;
+        height: 28px;
+      }
+      .logo-word {
+        font-size: .65rem;
+      }
+      .logo-word span {
+        font-size: .35rem;
+        letter-spacing: .05em;
+      }
+      .logo {
+        gap: .3rem;
+      }
     }
 
     /* ===== DESKTOP NAV ===== */
@@ -1045,6 +1080,34 @@
       padding:0.5rem 0 1rem;
     }
 
+    /* ===== TUTOR CTA SECTION ===== */
+    .tutor-cta-section {
+      background: var(--brand-deep);
+      padding: 3rem 0;
+      text-align: center;
+    }
+    .tutor-cta-section h2 {
+      color: #fff;
+      font-size: clamp(1.5rem, 2.6vw, 2rem);
+      max-width: 34rem;
+      margin: 0 auto;
+    }
+    .tutor-cta-section p {
+      color: rgba(255,255,255,0.8);
+      font-size: 1.02rem;
+      max-width: 32rem;
+      margin: 0.6rem auto 1.5rem;
+    }
+    .tutor-cta-section .btn {
+      background: var(--gold);
+      color: var(--brand-deep);
+    }
+    .tutor-cta-section .btn:hover {
+      background: var(--gold-soft);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(245,200,66,.3);
+    }
+
     /* ===== FINAL CTA ===== */
     .final-cta {
       background:var(--brand-deep);
@@ -1251,6 +1314,7 @@
       .req-item { padding:1rem; }
       .term-card { padding:1rem 0.9rem; }
       .contact-form-wrapper { padding:1.4rem; }
+      .tutor-cta-section { padding: 2rem 0; }
     }
     @media(max-width:400px){
       .hero-actions { flex-direction:column; }
@@ -1274,14 +1338,12 @@
       <span class="logo-word">Paisley Studio<span>British Curriculum Online</span></span>
     </a>
     <nav class="main-nav" aria-label="Primary">
-      
       <a href="how-it-works.html">How It Works</a>
       <a href="teach-with-us.html">Teach With Us</a>
       <a href="enrolment.html">Enrolment</a>
       <a href="academic-calendar.html">Academic Calendar</a>
       <a href="subjects.html">Subjects</a>
       <a href="#why-us">Why Paisley</a>
-      
     </nav>
     <div class="header-cta">
       <a href="#contact" class="link-underline">Contact</a>
@@ -1328,8 +1390,8 @@
         </h1>
         <p class="hero-text anim-fade-up" style="animation-delay:0.25s;">Paisley Studio delivers the National Curriculum for England online, instructor-led or self-paced, for pupils from Key Stage 2 through Key Stage 5, with coursework, assignments, IGCSE and A-Level examinations marked by our tutors.</p>
         <div class="hero-actions">
-          <a href="#key-stages" class="btn btn-primary anim-fade-up" style="animation-delay:0.4s;"><i class="fas fa-arrow-right"></i> Explore Key Stages</a>
-          <a href="#requirements" class="btn btn-ghost anim-fade-up" style="animation-delay:0.5s;"><i class="fas fa-list-check"></i> What You'll Need</a>
+          <a href="enrolment.html" class="btn btn-primary anim-fade-up" style="animation-delay:0.4s;"><i class="fas fa-arrow-right"></i> Start Learning Today</a>
+          <a href="teach-with-us.html" class="btn btn-ghost anim-fade-up" style="animation-delay:0.5s;"><i class="fas fa-chalkboard-teacher"></i> Become A Tutor</a>
         </div>
         <div class="hero-stats">
           <div class="hero-stat anim-fade-up" style="animation-delay:0.6s;">
@@ -1468,6 +1530,15 @@
           <a href="key-stage-5.html" class="link-underline">Learn more about KS5 <i class="fas fa-arrow-right" style="font-size:0.6rem;"></i></a>
         </article>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== TUTOR CTA ===== -->
+  <section class="tutor-cta-section reveal">
+    <div class="container">
+      <h2>Passionate about teaching?</h2>
+      <p>Join Paisley Studio as a qualified British Curriculum tutor and make a difference in students' lives.</p>
+      <a href="teach-with-us.html" class="btn btn-primary" style="background:var(--gold);color:var(--brand-deep);"><i class="fas fa-chalkboard-teacher"></i> Become A Tutor</a>
     </div>
   </section>
 
