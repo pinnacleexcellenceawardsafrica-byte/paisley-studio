@@ -351,6 +351,7 @@
       font-size: 1.05rem;
       letter-spacing: -.01em;
       color: var(--ink);
+      line-height: 1.2;
     }
     .logo-word span {
       display: block;
@@ -358,47 +359,47 @@
       font-weight: 600;
       letter-spacing: .08em;
       color: var(--muted);
-      margin-top: -2px;
+      margin-top: -1px;
       text-transform: uppercase;
     }
 
-    /* Responsive Logo */
+    /* Responsive Logo - NOT TOO SMALL */
     @media(max-width: 768px) {
       .logo-img {
-        width: 55px;
+        width: 70px;
+        height: 40px;
+      }
+      .logo-word {
+        font-size: .95rem;
+      }
+      .logo-word span {
+        font-size: .45rem;
+      }
+      .logo {
+        gap: .5rem;
+      }
+    }
+    @media(max-width: 480px) {
+      .logo-img {
+        width: 60px;
         height: 35px;
       }
       .logo-word {
         font-size: .8rem;
       }
       .logo-word span {
-        font-size: .4rem;
+        font-size: .38rem;
+        letter-spacing: .04em;
       }
       .logo {
         gap: .4rem;
       }
     }
-    @media(max-width: 480px) {
-      .logo-img {
-        width: 42px;
-        height: 28px;
-      }
-      .logo-word {
-        font-size: .65rem;
-      }
-      .logo-word span {
-        font-size: .35rem;
-        letter-spacing: .05em;
-      }
-      .logo {
-        gap: .3rem;
-      }
-    }
 
     /* ===== DESKTOP NAV ===== */
-    .main-nav { display:flex; align-items:center; gap:1.2rem; flex-wrap:wrap; }
+    .main-nav { display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
     .main-nav a {
-      font-weight:700; font-size:.72rem; color:var(--ink); position:relative; padding:.3rem 0;
+      font-weight:700; font-size:.7rem; color:var(--ink); position:relative; padding:.3rem 0;
       text-transform:uppercase;
       letter-spacing:.06em;
       transition:all .3s ease;
@@ -410,9 +411,9 @@
     }
     .main-nav a:hover::after { width:100%; }
     .main-nav a:hover { color:var(--brand); }
-    .header-cta { display:flex; align-items:center; gap:0.8rem; flex-shrink:0; }
-    .header-cta .link-underline { font-size:.75rem; }
-    .header-cta .btn { padding:.6rem 1.4rem; font-size:.75rem; }
+    .header-cta { display:flex; align-items:center; gap:0.6rem; flex-shrink:0; }
+    .header-cta .link-underline { font-size:.7rem; }
+    .header-cta .btn { padding:.5rem 1.2rem; font-size:.7rem; }
     .nav-toggle { display:none; background:none; border:none; font-size:1.4rem; color:var(--ink); cursor:pointer; }
 
     /* ===== MOBILE NAV ===== */
