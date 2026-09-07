@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Teach With Paisley Studio — Tutor Application</title>
-  <meta name="description" content="Apply to teach with Paisley Studio. Complete your tutor application, subject quiz, and upload your credentials." />
+  <meta name="description" content="Apply to teach with Paisley Studio. Complete your tutor application in 2 simple steps." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://paisleystudio.online/teach-with-us.html" />
 
   <meta property="og:title" content="Teach With Paisley Studio — Tutor Application" />
-  <meta property="og:description" content="Apply to teach with Paisley Studio. Complete your tutor application and subject quiz." />
+  <meta property="og:description" content="Apply to teach with Paisley Studio. Complete your tutor application in 2 simple steps." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://paisleystudio.online/teach-with-us.html" />
 
@@ -21,9 +21,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
+ <link rel="icon" href="https://paisleystudio.online/wp-content/uploads/2026/05/cropped-Paisely-logo-Resized.png" sizes="32x32" />
   <style>
-    /* ===== BRAND COLORS ===== */
     :root {
       --brand: #55BFB3;
       --brand-deep: #245F5A;
@@ -43,10 +42,39 @@
       --container: 1160px;
       --pad: 7rem;
       --pad-sm: 3.4rem;
+      --header-h: 68px;
       --success: #2EB872;
       --error: #E74C3C;
-      --warning: #F39C12;
-      --header-h: 68px;
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      background: var(--sage);
+      border-radius: 16px;
+      border: 2px solid var(--success);
+      margin-top: 1.5rem;
+    }
+    .form-success.show {
+      display: block;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    .form-success i {
+      font-size: 3.5rem;
+      color: var(--success);
+      margin-bottom: 1rem;
+    }
+    .form-success h3 {
+      color: var(--success);
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .form-success p {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 30rem;
+      margin: 0 auto;
     }
 
     @keyframes fadeInUp {
@@ -75,13 +103,6 @@
     .anim-slide-left { animation: slideInLeft 0.6s cubic-bezier(.16,1,.3,1) forwards; }
     .anim-slide-right { animation: slideInRight 0.6s cubic-bezier(.16,1,.3,1) forwards; }
     .anim-scale { animation: scaleIn 0.6s cubic-bezier(.16,1,.3,1) forwards; }
-
-    .stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
-    .stagger-children > *:nth-child(2) { animation-delay: 0.15s; }
-    .stagger-children > *:nth-child(3) { animation-delay: 0.25s; }
-    .stagger-children > *:nth-child(4) { animation-delay: 0.35s; }
-    .stagger-children > *:nth-child(5) { animation-delay: 0.45s; }
-    .stagger-children > *:nth-child(6) { animation-delay: 0.55s; }
 
     .reveal {
       opacity: 0;
@@ -172,8 +193,6 @@
     .btn-ghost:hover { border-color:var(--brand); color:var(--brand); transform:translateY(-3px); }
     .btn-success { background:var(--success); color:#fff; }
     .btn-success:hover { background:#239B5E; transform:translateY(-3px); box-shadow:0 10px 30px rgba(46,184,114,.3); }
-    .btn-outline { background:transparent; border:2px solid var(--brand); color:var(--brand); }
-    .btn-outline:hover { background:var(--brand); color:#fff; }
 
     .link-underline {
       position:relative; font-weight:700; font-size:.85rem; color:var(--brand-deep);
@@ -192,7 +211,6 @@
     .link-underline:hover::after { transform:scaleX(0); }
     .link-underline:hover { color:var(--brand); }
 
-    /* ===== HEADER ===== */
     .site-header {
       position:fixed; top:0; left:0; right:0; z-index:1000;
       width:100%;
@@ -343,7 +361,6 @@
       .nav-toggle { display:flex; }
     }
 
-    /* ===== PAGE HERO ===== */
     .page-hero {
       padding-top: 8rem;
       padding-bottom: 4rem;
@@ -402,51 +419,7 @@
       flex-wrap: wrap;
     }
 
-    /* ===== REQUIREMENTS - Responsive Grid ===== */
-    .requirements-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    @media(max-width: 992px) {
-      .requirements-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media(max-width: 600px) {
-      .requirements-grid { grid-template-columns: 1fr; }
-    }
-
-    .req-card {
-      background: var(--surface);
-      border-radius: 12px;
-      padding: 1.5rem;
-      border: 1px solid var(--line-soft);
-      height: 100%;
-      transition: all .3s ease;
-    }
-    .req-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 25px rgba(85,191,179,.08);
-      border-color: var(--brand-soft);
-    }
-    .req-card .icon {
-      font-size: 1.8rem;
-      color: var(--brand);
-      margin-bottom: .5rem;
-      display: block;
-    }
-    .req-card h4 {
-      font-size: 1.05rem;
-      margin-bottom: .3rem;
-    }
-    .req-card p {
-      color: var(--muted);
-      font-size: .9rem;
-      line-height: 1.6;
-    }
-
-    /* ===== APPLICATION STEPS ===== */
-    .application-container {
+    .form-container {
       background: var(--surface);
       border-radius: 16px;
       border: 1px solid var(--line);
@@ -455,22 +428,22 @@
       box-shadow: 0 4px 20px rgba(0,0,0,.04);
     }
     @media(max-width:600px){
-      .application-container { padding: 1.2rem; }
+      .form-container { padding: 1.2rem; }
     }
 
     .step-indicators {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
+      gap: 2rem;
       margin-bottom: 2.5rem;
       position: relative;
-      padding: 0 0.5rem;
     }
     .step-indicators::before {
       content: '';
       position: absolute;
       top: 20px;
-      left: 30px;
-      right: 30px;
+      left: 40px;
+      right: 40px;
       height: 2px;
       background: var(--line);
       z-index: 0;
@@ -482,7 +455,6 @@
       gap: 0.4rem;
       position: relative;
       z-index: 1;
-      flex: 1;
     }
     .step-dot .circle {
       width: 40px;
@@ -521,11 +493,10 @@
     .step-dot.completed .label { color: var(--success); }
 
     @media(max-width:768px){
-      .step-indicators { flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+      .step-indicators { gap: 0.5rem; flex-wrap: wrap; }
       .step-indicators::before { display: none; }
-      .step-dot { flex: none; }
-      .step-dot .label { font-size: .5rem; }
       .step-dot .circle { width: 32px; height: 32px; font-size: .7rem; }
+      .step-dot .label { font-size: .5rem; }
     }
 
     .step-content {
@@ -594,12 +565,9 @@
 
     .checkbox-group {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
       gap: 0.5rem;
       margin-top: 0.5rem;
-    }
-    @media(max-width:480px){
-      .checkbox-group { grid-template-columns: 1fr 1fr; }
     }
     .checkbox-group label {
       display: flex;
@@ -621,85 +589,32 @@
       border-color: var(--brand);
       background: rgba(85,191,179,0.05);
     }
-    .checkbox-group input[type="checkbox"],
-    .checkbox-group input[type="radio"] {
+    .checkbox-group input[type="checkbox"] {
       width: 16px;
       height: 16px;
       accent-color: var(--brand);
       flex-shrink: 0;
     }
 
-    /* ===== QUIZ STYLES ===== */
-    .quiz-question {
-      background: var(--paper);
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      border: 1px solid var(--line-soft);
-      transition: all .3s ease;
-    }
-    .quiz-question:hover {
-      border-color: var(--brand-soft);
-    }
-    .quiz-question .q-number {
-      display: inline-block;
-      font-size: .7rem;
-      font-weight: 700;
-      color: #fff;
-      background: var(--brand);
-      padding: .15rem .7rem;
-      border-radius: 20px;
-      margin-bottom: .5rem;
-    }
-    .quiz-question .q-text {
-      font-weight: 600;
-      font-size: .95rem;
-      margin-bottom: .8rem;
-    }
-    .quiz-question .options {
+    .radio-group {
       display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
     }
-    .quiz-question .options label {
+    .radio-group label {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.5rem;
       font-weight: 500;
       font-size: .9rem;
-      padding: 0.5rem 0.8rem;
-      border-radius: 8px;
-      background: var(--surface);
-      border: 1px solid var(--line-soft);
+      color: var(--ink);
       cursor: pointer;
-      transition: all .3s ease;
     }
-    .quiz-question .options label:hover {
-      border-color: var(--brand);
-      background: rgba(85,191,179,0.05);
-    }
-    .quiz-question .options input[type="radio"] {
+    .radio-group input[type="radio"] {
       width: 16px;
       height: 16px;
       accent-color: var(--brand);
-      flex-shrink: 0;
-    }
-    .quiz-question .options label.selected {
-      border-color: var(--brand);
-      background: rgba(85,191,179,0.08);
-    }
-    .quiz-question .feedback {
-      margin-top: .6rem;
-      padding: .6rem .8rem;
-      border-radius: 8px;
-      font-size: .85rem;
-      display: none;
-    }
-    .quiz-question .feedback.show { display: block; }
-    .quiz-question .feedback.answered {
-      background: rgba(46,184,114,0.08);
-      color: var(--success);
-      border: 1px solid rgba(46,184,114,0.15);
     }
 
     .step-nav {
@@ -715,7 +630,6 @@
       .step-nav .btn { width: 100%; justify-content: center; }
     }
 
-    /* ===== PROGRESS BAR ===== */
     .progress-bar-wrap {
       width: 100%;
       height: 6px;
@@ -732,113 +646,42 @@
       width: 0%;
     }
 
-    /* ===== SCORE DISPLAY ===== */
-    .score-display {
-      background: var(--brand-deep);
-      color: #fff;
+    .compensation-card {
+      background: var(--sage);
       border-radius: 12px;
       padding: 1.5rem;
-      text-align: center;
-      margin-bottom: 2rem;
+      border: 1px solid var(--brand-soft);
+      margin: 1rem 0 1.5rem 0;
     }
-    .score-display .score-num {
-      font-size: 3rem;
-      font-weight: 800;
-      line-height: 1;
+    .compensation-card h4 {
+      color: var(--brand-deep);
+      margin-bottom: 0.5rem;
     }
-    .score-display .score-label {
-      font-size: .85rem;
-      opacity: 0.7;
-      margin-top: .3rem;
+    .compensation-card ul {
+      list-style: none;
+      padding: 0;
     }
-    .score-display .score-result {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-top: .5rem;
-    }
-    .score-display .score-result.pass { color: var(--gold); }
-    .score-display .score-result.fail { color: #FF6B6B; }
-
-    /* ===== DOCUMENT UPLOAD ===== */
-    .upload-area {
-      border: 2px dashed var(--line);
-      border-radius: 12px;
-      padding: 2rem;
-      text-align: center;
-      transition: all .3s ease;
-      cursor: pointer;
-      background: var(--paper);
-    }
-    .upload-area:hover {
-      border-color: var(--brand);
-      background: rgba(85,191,179,0.03);
-    }
-    .upload-area.dragover {
-      border-color: var(--brand);
-      background: rgba(85,191,179,0.08);
-    }
-    .upload-area .icon {
-      font-size: 2.5rem;
-      color: var(--brand-soft);
-      margin-bottom: .5rem;
-      display: block;
-    }
-    .upload-area p {
-      color: var(--muted);
+    .compensation-card ul li {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.3rem 0;
       font-size: .9rem;
+      color: var(--ink);
     }
-    .upload-area .file-types {
-      font-size: .7rem;
+    .compensation-card ul li i {
+      color: var(--brand);
+      width: 1.2rem;
+    }
+
+    /* Subject filter message */
+    .subject-filter-message {
       color: var(--muted);
-      opacity: 0.6;
-      margin-top: .3rem;
-    }
-    .file-list {
-      margin-top: 1rem;
-    }
-    .file-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: .6rem .8rem;
-      background: var(--paper);
-      border-radius: 8px;
-      border: 1px solid var(--line-soft);
-      margin-bottom: .4rem;
-    }
-    .file-item .name {
-      display: flex;
-      align-items: center;
-      gap: .5rem;
       font-size: .85rem;
-    }
-    .file-item .name i { color: var(--brand); }
-    .file-item .remove {
-      background: none;
-      border: none;
-      color: var(--error);
-      cursor: pointer;
-      font-size: 1rem;
-      padding: 0.2rem;
+      margin-top: .3rem;
+      font-style: italic;
     }
 
-    /* ===== ID UPLOAD GROUP ===== */
-    .id-upload-group {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-    @media(max-width: 600px){
-      .id-upload-group { grid-template-columns: 1fr; }
-    }
-    .id-upload-group .upload-area {
-      padding: 1.5rem;
-    }
-    .id-upload-group .upload-area .icon {
-      font-size: 2rem;
-    }
-
-    /* ===== FOOTER ===== */
     .site-footer {
       background:#0A1410;
       color:var(--dark-muted);
@@ -980,13 +823,44 @@
     @media(max-width:480px){
       .scroll-top-btn { width:40px; height:40px; font-size:.95rem; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); right: calc(14px + env(safe-area-inset-right, 0px)); }
     }
+
+    .final-cta {
+      background:var(--brand-deep);
+      color:#fff;
+      border-radius:14px;
+      padding:3.4rem 2.5rem;
+      margin:0 auto;
+      max-width:var(--container);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:2rem;
+      flex-wrap:wrap;
+      border:1px solid rgba(85,191,179,.2);
+      position:relative;
+      overflow:hidden;
+    }
+    .final-cta::before {
+      content:'';
+      position:absolute;
+      top:-50%;
+      right:-20%;
+      width:400px;
+      height:400px;
+      background:radial-gradient(circle,rgba(85,191,179,0.06),transparent);
+      border-radius:50%;
+      pointer-events:none;
+    }
+    .final-cta h2 { color:#fff; font-size:clamp(1.5rem,2.6vw,2rem); max-width:26rem; position:relative; z-index:1; }
+    .final-cta p { color:rgba(255,255,255,.78); margin-top:.6rem; max-width:26rem; font-size:.96rem; position:relative; z-index:1; }
+    .final-cta .btn-primary { background:var(--brand); color:#fff; position:relative; z-index:1; }
+    .final-cta .btn-primary:hover { background:var(--brand-soft); transform:translateY(-3px); box-shadow:0 10px 30px rgba(85,191,179,.3); }
   </style>
 </head>
 <body>
 
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<!-- ===== HEADER ===== -->
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
     <a href="index.html" class="logo" aria-label="Paisley Studio home">
@@ -995,14 +869,14 @@
            class="logo-img"
            width="38" 
            height="38">
-      <span class="logo-word">Paisley Studio<span>British Curriculum Online</span></span>
+      <span class="logo-word">Paisley Studio<span>Online Homeschool Solution</span></span>
     </a>
     <nav class="main-nav" aria-label="Primary">
-      <a href="how-it-works.html">How It Works</a>
-      <a href="teach-with-us.html">Teach With Us</a>
-      <a href="enrolment.html">Enrolment</a>
-      <a href="academic-calendar.html">Academic Calendar</a>
-      <a href="subjects.html">Subjects</a>
+      <a href="key-stage-2.html">Key Stage 2</a>
+      <a href="key-stage-3.html">Key Stage 3</a>
+      <a href="key-stage-4.html">Key Stage 4</a>
+      <a href="key-stage-5.html">Key Stage 5</a>
+      <a href="index.html#why-us">Why Paisley</a>
     </nav>
     <div class="header-cta">
       <a href="index.html#contact" class="link-underline">Contact</a>
@@ -1014,17 +888,13 @@
   </div>
 </header>
 
-<!-- ===== MOBILE NAV ===== -->
 <div class="mobile-nav" id="mobileNav">
   <button class="close-btn" id="navClose" aria-label="Close menu"><i class="fas fa-times"></i></button>
-  <a href="index.html#key-stages">Key Stages</a>
+  <a href="key-stage-2.html">Key Stage 2</a>
+  <a href="key-stage-3.html">Key Stage 3</a>
+  <a href="key-stage-4.html">Key Stage 4</a>
   <a href="key-stage-5.html">Key Stage 5</a>
-  <a href="how-it-works.html">How It Works</a>
-  <a href="teach-with-us.html">Teach With Us</a>
-  <a href="enrolment.html">Enrolment</a>
-  <a href="academic-calendar.html">Academic Calendar</a>
-  <a href="subjects.html">Subjects</a>
-  <a href="index.html#why-us">Why Paisley</a>
+  <a href="why-paisley.html">Why Paisley</a>
   <a href="index.html#faq">FAQs</a>
   <div class="mobile-cta-group">
     <a href="index.html#contact" class="link-underline">Contact</a>
@@ -1034,91 +904,42 @@
 
 <main id="main-content">
 
-  <!-- ===== PAGE HERO ===== -->
   <section class="page-hero">
     <div class="container page-hero-content">
       <span class="section-label"><i class="fas fa-chalkboard-teacher"></i> Teach With Paisley Studio</span>
       <h1>Teach. Inspire. <span class="highlight">Make an Impact.</span></h1>
-      <p>Join Paisley Studio as a qualified British Curriculum tutor. Complete your application, subject quiz, and upload your credentials. We'll review your application and get back to you within 48 hours.</p>
+      <p>Join Paisley Studio as a qualified British Curriculum tutor. Complete your application in 2 simple steps. We'll review your application and get back to you within 48 hours.</p>
       <div class="hero-actions">
-        <a href="#application" class="btn btn-primary"><i class="fas fa-arrow-down"></i> Start Application</a>
-        <a href="#requirements" class="btn btn-ghost"><i class="fas fa-list-check"></i> View Requirements</a>
+        <a href="#form" class="btn btn-primary"><i class="fas fa-arrow-down"></i> Start Application</a>
       </div>
     </div>
   </section>
 
-  <!-- ===== REQUIREMENTS ===== -->
-  <section class="section" id="requirements" style="padding-bottom:0;">
+  <section class="section" id="form">
     <div class="container">
       <div class="reveal">
-        <span class="section-label"><i class="fas fa-clipboard-list"></i> Requirements</span>
-        <h2 class="section-heading">What we're looking for.</h2>
-        <p class="section-sub">Before you apply, make sure you meet our requirements.</p>
-      </div>
-      <div class="requirements-grid">
-        <div class="req-card reveal" style="transition-delay:0.1s;">
-          <span class="icon"><i class="fas fa-user-graduate"></i></span>
-          <h4>Qualified Teacher</h4>
-          <p>Qualified teacher with experience in the British Curriculum. TSC certification or equivalent required.</p>
-        </div>
-        <div class="req-card reveal" style="transition-delay:0.2s;">
-          <span class="icon"><i class="fas fa-certificate"></i></span>
-          <h4>Cambridge Experience</h4>
-          <p>Experience with Cambridge curriculum and IGCSE/A-Level examinations.</p>
-        </div>
-        <div class="req-card reveal" style="transition-delay:0.3s;">
-          <span class="icon"><i class="fas fa-laptop"></i></span>
-          <h4>Tech-Ready</h4>
-          <p>Reliable internet, computer with camera, headphones, and a quiet teaching space.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== APPLICATION FORM ===== -->
-  <section class="section" id="application">
-    <div class="container">
-      <div class="reveal">
-        <span class="section-label"><i class="fas fa-pen"></i> Application</span>
-        <h2 class="section-heading">Complete your tutor application.</h2>
-        <p class="section-sub">Fill in your details, complete the subject quiz, and upload your credentials.</p>
+        <span class="section-label"><i class="fas fa-pen"></i> Tutor Application</span>
+        <h2 class="section-heading">Complete your application in 2 steps.</h2>
+        <p class="section-sub">Fill in your details, select your subjects, and submit your application.</p>
       </div>
 
-      <div class="application-container">
-        <!-- Progress Bar -->
+      <div class="form-container">
         <div class="progress-bar-wrap">
           <div class="progress-fill" id="progressFill"></div>
         </div>
 
-        <!-- Step Indicators -->
         <div class="step-indicators">
           <div class="step-dot active" data-step="1">
             <div class="circle">1</div>
-            <span class="label">Profile</span>
+            <span class="label">Personal Info</span>
           </div>
           <div class="step-dot" data-step="2">
             <div class="circle">2</div>
-            <span class="label">Subjects</span>
-          </div>
-          <div class="step-dot" data-step="3">
-            <div class="circle">3</div>
-            <span class="label">Quiz</span>
-          </div>
-          <div class="step-dot" data-step="4">
-            <div class="circle">4</div>
-            <span class="label">Psychology</span>
-          </div>
-          <div class="step-dot" data-step="5">
-            <div class="circle">5</div>
-            <span class="label">Documents</span>
-          </div>
-          <div class="step-dot" data-step="6">
-            <div class="circle">6</div>
-            <span class="label">Review</span>
+            <span class="label">Subjects &amp; Key Stages</span>
           </div>
         </div>
 
-        <!-- ===== STEP 1: PROFILE ===== -->
+        <!-- STEP 1: Personal Information -->
         <div class="step-content active" data-step="1">
           <h3 style="margin-bottom:.5rem;">Personal Information</h3>
           <p style="color:var(--muted);margin-bottom:1.5rem;">Tell us about yourself and your teaching experience.</p>
@@ -1126,41 +947,129 @@
           <div class="form-row">
             <div class="form-group">
               <label>Full Name <span class="required">*</span></label>
-              <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required>
+              <input type="text" class="form-control" id="fullName" name="Full Name" placeholder="Enter your full name" required>
             </div>
             <div class="form-group">
               <label>Email Address <span class="required">*</span></label>
-              <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+              <input type="email" class="form-control" id="email" name="Email" placeholder="you@example.com" required>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label>Phone Number <span class="required">*</span></label>
-              <input type="tel" class="form-control" id="phone" placeholder="+254 700 123 456" required>
+              <input type="tel" class="form-control" id="phone" name="Phone" placeholder="+254 700 123 456" required>
             </div>
             <div class="form-group">
               <label>Location</label>
-              <input type="text" class="form-control" id="location" placeholder="City, Country">
+              <input type="text" class="form-control" id="location" name="Location" placeholder="City, Country">
             </div>
           </div>
+
           <div class="form-group">
             <label>Teaching Experience <span class="required">*</span></label>
-            <select class="form-control" id="experience" required>
+            <select class="form-control" id="experience" name="Teaching Experience" required>
               <option value="">Select years of experience</option>
-              <option value="0-1">0-1 years</option>
-              <option value="1-3">1-3 years</option>
-              <option value="3-5">3-5 years</option>
-              <option value="5-10">5-10 years</option>
-              <option value="10+">10+ years</option>
+              <option value="0-1 years">0-1 years</option>
+              <option value="1-3 years">1-3 years</option>
+              <option value="3-5 years">3-5 years</option>
+              <option value="5-10 years">5-10 years</option>
+              <option value="10+ years">10+ years</option>
             </select>
           </div>
+
           <div class="form-group">
             <label>Qualifications <span class="required">*</span></label>
-            <textarea class="form-control" id="qualifications" placeholder="List your qualifications (e.g., B.Ed, PGCE, TSC certification...)" required></textarea>
+            <textarea class="form-control" id="qualifications" name="Qualifications" placeholder="List your qualifications (e.g., B.Ed, PGCE, TSC certification...)" required></textarea>
           </div>
+
           <div class="form-group">
             <label>Brief Bio <span class="required">*</span></label>
-            <textarea class="form-control" id="bio" placeholder="Tell us about yourself, your teaching philosophy, and why you want to teach with Paisley Studio..." required></textarea>
+            <textarea class="form-control" id="bio" name="Bio" placeholder="Tell us about yourself, your teaching philosophy, and why you want to teach with Paisley Studio..." required></textarea>
+          </div>
+
+          <!-- Additional Questions from PDF -->
+          <div class="form-row">
+            <div class="form-group">
+              <label>Do you have experience teaching online? <span class="required">*</span></label>
+              <div class="radio-group">
+                <label><input type="radio" name="Online Teaching Experience" value="Yes"> Yes</label>
+                <label><input type="radio" name="Online Teaching Experience" value="No"> No</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Do you have experience teaching the British curriculum? <span class="required">*</span></label>
+              <div class="radio-group">
+                <label><input type="radio" name="British Curriculum Experience" value="Yes"> Yes</label>
+                <label><input type="radio" name="British Curriculum Experience" value="No"> No</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Are you ready to do a class presentation? <span class="required">*</span></label>
+              <div class="radio-group">
+                <label><input type="radio" name="Class Presentation" value="Yes"> Yes</label>
+                <label><input type="radio" name="Class Presentation" value="No"> No</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>How soon can you start? <span class="required">*</span></label>
+              <select class="form-control" id="startDate" name="Start Date" required>
+                <option value="">Select</option>
+                <option value="Immediately">Immediately</option>
+                <option value="In 1 week">In 1 week</option>
+                <option value="In 1 month">In 1 month</option>
+              </select>
+            </div>
+          </div>
+
+          <h3 style="margin-top:2rem;margin-bottom:.5rem;">Availability</h3>
+          <p style="color:var(--muted);margin-bottom:1rem;">Please indicate your availability for teaching.</p>
+
+          <div class="form-group">
+            <label>Are you available between Monday and Thursday? (8:30 am - 3:45 pm for Key Stage 4) <span class="required">*</span></label>
+            <div class="radio-group">
+              <label><input type="radio" name="Availability KS4 (8:30am-3:45pm)" value="Yes"> Yes</label>
+              <label><input type="radio" name="Availability KS4 (8:30am-3:45pm)" value="No"> No</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Are you available between Monday and Thursday? (8:30 am - 12:15 pm for Key Stage 2 and 3) <span class="required">*</span></label>
+            <div class="radio-group">
+              <label><input type="radio" name="Availability KS2/3 (8:30am-12:15pm)" value="Yes"> Yes</label>
+              <label><input type="radio" name="Availability KS2/3 (8:30am-12:15pm)" value="No"> No</label>
+            </div>
+          </div>
+
+          <!-- Compensation -->
+          <h3 style="margin-top:2rem;margin-bottom:.5rem;">Compensation</h3>
+          <p style="color:var(--muted);margin-bottom:1rem;">Please review the compensation package below.</p>
+
+          <div class="compensation-card">
+            <h4><i class="fas fa-coins" style="color:var(--brand);"></i> Compensation Package</h4>
+            <ul>
+              <li><i class="fas fa-check-circle"></i> <strong>KSh 20,000</strong> per month</li>
+              <li><i class="fas fa-check-circle"></i> Paid monthly or bi-monthly</li>
+              <li><i class="fas fa-check-circle"></i> Maximum <strong>7 hours</strong> per week</li>
+              <li><i class="fas fa-check-circle"></i> Classes: Mix of <strong>5 students</strong></li>
+              <li><i class="fas fa-check-circle"></i> All teaching materials provided:
+                <ul style="margin-left:1.8rem;margin-top:0.3rem;list-style:disc;color:var(--muted);">
+                  <li>Homework and assignments</li>
+                  <li>Class notes</li>
+                  <li>Exams and marking schemes</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+          <div class="form-group">
+            <label>Do you accept this compensation package? <span class="required">*</span></label>
+            <div class="radio-group">
+              <label><input type="radio" name="Accept Compensation" value="Yes"> Yes</label>
+              <label><input type="radio" name="Accept Compensation" value="No"> No</label>
+            </div>
           </div>
 
           <div class="step-nav">
@@ -1169,214 +1078,77 @@
           </div>
         </div>
 
-        <!-- ===== STEP 2: SUBJECTS & KEY STAGES ===== -->
+        <!-- STEP 2: Subjects & Key Stages -->
         <div class="step-content" data-step="2">
           <h3 style="margin-bottom:.5rem;">Subjects &amp; Key Stages</h3>
-          <p style="color:var(--muted);margin-bottom:1.5rem;">Select the Key Stages and subjects you can teach.</p>
+          <p style="color:var(--muted);margin-bottom:1.5rem;">Select the Key Stages and subjects you can teach. <span class="subject-filter-message">The available subjects will update based on your Key Stage selection.</span></p>
 
           <div class="form-group">
             <label>Key Stages You Can Teach <span class="required">*</span></label>
             <div class="checkbox-group" id="keyStages">
-              <label><input type="checkbox" value="ks2"> Key Stage 2 (Years 3-6)</label>
-              <label><input type="checkbox" value="ks3"> Key Stage 3 (Years 7-9)</label>
-              <label><input type="checkbox" value="ks4"> Key Stage 4 (Years 10-11) — IGCSE</label>
-              <label><input type="checkbox" value="ks5"> Key Stage 5 (Years 12-13) — A-Level</label>
+              <label><input type="checkbox" value="Key Stage 2 (Years 3-6)" name="Key Stages" onchange="filterSubjects()"> Key Stage 2 (Years 3-6)</label>
+              <label><input type="checkbox" value="Key Stage 3 (Years 7-9)" name="Key Stages" onchange="filterSubjects()"> Key Stage 3 (Years 7-9)</label>
+              <label><input type="checkbox" value="Key Stage 4 (Years 10-11) — IGCSE" name="Key Stages" onchange="filterSubjects()"> Key Stage 4 (Years 10-11) — IGCSE</label>
+              <label><input type="checkbox" value="Key Stage 5 (Years 12-13) — A-Level" name="Key Stages" onchange="filterSubjects()"> Key Stage 5 (Years 12-13) — A-Level</label>
             </div>
           </div>
 
           <div class="form-group">
             <label>Subjects You Can Teach <span class="required">*</span></label>
-            <div class="checkbox-group" id="subjects">
-              <label><input type="checkbox" value="english"> English</label>
-              <label><input type="checkbox" value="english-lit"> English Literature</label>
-              <label><input type="checkbox" value="maths"> Mathematics</label>
-              <label><input type="checkbox" value="further-maths"> Further Mathematics</label>
-              <label><input type="checkbox" value="physics"> Physics</label>
-              <label><input type="checkbox" value="chemistry"> Chemistry</label>
-              <label><input type="checkbox" value="biology"> Biology</label>
-              <label><input type="checkbox" value="history"> History</label>
-              <label><input type="checkbox" value="geography"> Geography</label>
-              <label><input type="checkbox" value="economics"> Economics</label>
-              <label><input type="checkbox" value="business"> Business Studies</label>
-              <label><input type="checkbox" value="psychology"> Psychology</label>
-              <label><input type="checkbox" value="languages"> Modern Languages</label>
-              <label><input type="checkbox" value="art"> Art & Design</label>
-              <label><input type="checkbox" value="computing"> Computing</label>
+            <div id="subjectContainer">
+              <p style="color:var(--muted);font-size:.9rem;">Please select at least one Key Stage above to see available subjects.</p>
             </div>
           </div>
 
           <div class="form-group">
             <label>Primary Subject Specialism <span class="required">*</span></label>
-            <select class="form-control" id="primarySubject" required>
+            <select class="form-control" id="primarySubject" name="Primary Subject Specialism" required>
               <option value="">Select your primary subject</option>
-              <option value="english">English</option>
-              <option value="english-lit">English Literature</option>
-              <option value="maths">Mathematics</option>
-              <option value="further-maths">Further Mathematics</option>
-              <option value="physics">Physics</option>
-              <option value="chemistry">Chemistry</option>
-              <option value="biology">Biology</option>
-              <option value="history">History</option>
-              <option value="geography">Geography</option>
-              <option value="economics">Economics</option>
-              <option value="business">Business Studies</option>
-              <option value="psychology">Psychology</option>
-              <option value="languages">Modern Languages</option>
-              <option value="art">Art & Design</option>
-              <option value="computing">Computing</option>
+              <option value="English">English</option>
+              <option value="English Literature">English Literature</option>
+              <option value="Mathematics">Mathematics</option>
+              <option value="Further Mathematics">Further Mathematics</option>
+              <option value="Physics">Physics</option>
+              <option value="Chemistry">Chemistry</option>
+              <option value="Biology">Biology</option>
+              <option value="History">History</option>
+              <option value="Geography">Geography</option>
+              <option value="Economics">Economics</option>
+              <option value="Business Studies">Business Studies</option>
+              <option value="Psychology">Psychology</option>
+              <option value="Modern Languages">Modern Languages</option>
+              <option value="Art & Design">Art & Design</option>
+              <option value="Computing">Computing</option>
+              <option value="Music">Music</option>
+              <option value="Physical Education">Physical Education</option>
+              <option value="Drama">Drama</option>
+              <option value="Design & Technology">Design & Technology</option>
+              <option value="Religious Education">Religious Education</option>
+              <option value="Global Perspective">Global Perspective</option>
             </select>
+          </div>
+
+          <div id="tutorSuccess" class="form-success">
+            <i class="fas fa-check-circle"></i>
+            <h3>Application Submitted Successfully!</h3>
+            <p>Thank you for applying to teach with Paisley Studio. We'll review your application and get back to you within 48 hours.</p>
           </div>
 
           <div class="step-nav">
             <button class="btn btn-ghost" onclick="goToStep(1)"><i class="fas fa-arrow-left"></i> Previous</button>
-            <button class="btn btn-primary" onclick="goToStep(3)">Next Step <i class="fas fa-arrow-right"></i></button>
+            <button class="btn btn-success" id="tutorSubmitBtn"><i class="fas fa-paper-plane"></i> Submit Application</button>
           </div>
         </div>
-
-        <!-- ===== STEP 3: SUBJECT QUIZ ===== -->
-        <div class="step-content" data-step="3">
-          <h3 style="margin-bottom:.5rem;">Subject Knowledge Quiz</h3>
-          <p style="color:var(--muted);margin-bottom:1.5rem;">Answer these questions based on your primary subject specialism. This helps us assess your subject knowledge.</p>
-
-          <div id="quizContainer">
-            <!-- Questions will be rendered by JavaScript -->
-          </div>
-
-          <div class="step-nav">
-            <button class="btn btn-ghost" onclick="goToStep(2)"><i class="fas fa-arrow-left"></i> Previous</button>
-            <button class="btn btn-primary" onclick="goToStep(4)">Next Step <i class="fas fa-arrow-right"></i></button>
-          </div>
-        </div>
-
-        <!-- ===== STEP 4: PSYCHOLOGY / SCENARIO QUIZ ===== -->
-        <div class="step-content" data-step="4">
-          <h3 style="margin-bottom:.5rem;">Classroom Management &amp; Psychology</h3>
-          <p style="color:var(--muted);margin-bottom:1.5rem;">These scenarios help us understand your approach to teaching, student support, and classroom management.</p>
-
-          <div id="psychologyQuiz">
-            <!-- Psychology questions rendered by JavaScript -->
-          </div>
-
-          <div class="step-nav">
-            <button class="btn btn-ghost" onclick="goToStep(3)"><i class="fas fa-arrow-left"></i> Previous</button>
-            <button class="btn btn-primary" onclick="goToStep(5)">Next Step <i class="fas fa-arrow-right"></i></button>
-          </div>
-        </div>
-
-        <!-- ===== STEP 5: DOCUMENTS ===== -->
-        <div class="step-content" data-step="5">
-          <h3 style="margin-bottom:.5rem;">Upload Documents</h3>
-          <p style="color:var(--muted);margin-bottom:1.5rem;">Upload your credentials and supporting documents.</p>
-
-          <div class="form-group">
-            <label>Professional Photo <span class="required">*</span></label>
-            <div class="upload-area" id="photoUpload">
-              <span class="icon"><i class="fas fa-camera"></i></span>
-              <p>Upload a professional photo</p>
-              <span class="file-types">JPG, PNG (max 5MB)</span>
-              <input type="file" accept="image/*" style="display:none;" id="photoInput">
-            </div>
-            <div class="file-list" id="photoList"></div>
-          </div>
-
-          <div class="form-group">
-            <label>CV / Resume <span class="required">*</span></label>
-            <div class="upload-area" id="cvUpload">
-              <span class="icon"><i class="fas fa-file-alt"></i></span>
-              <p>Upload your CV or resume</p>
-              <span class="file-types">PDF, DOC, DOCX (max 10MB)</span>
-              <input type="file" accept=".pdf,.doc,.docx" style="display:none;" id="cvInput">
-            </div>
-            <div class="file-list" id="cvList"></div>
-          </div>
-
-          <div class="form-group">
-            <label>TSC Certificate / Teaching License <span class="required">*</span></label>
-            <div class="upload-area" id="tscUpload">
-              <span class="icon"><i class="fas fa-certificate"></i></span>
-              <p>Upload your TSC certificate or teaching license</p>
-              <span class="file-types">PDF, JPG, PNG (max 5MB)</span>
-              <input type="file" accept=".pdf,.jpg,.jpeg,.png" style="display:none;" id="tscInput">
-            </div>
-            <div class="file-list" id="tscList"></div>
-          </div>
-
-          <div class="form-group">
-            <label>National ID / Passport <span class="required">*</span></label>
-            <div class="id-upload-group">
-              <div>
-                <p style="font-size:.7rem;font-weight:600;color:var(--muted);margin-bottom:.3rem;">Front Side</p>
-                <div class="upload-area" id="idFrontUpload">
-                  <span class="icon"><i class="fas fa-id-card"></i></span>
-                  <p>Upload front of ID</p>
-                  <span class="file-types">PDF, JPG, PNG (max 5MB)</span>
-                  <input type="file" accept=".pdf,.jpg,.jpeg,.png" style="display:none;" id="idFrontInput">
-                </div>
-                <div class="file-list" id="idFrontList"></div>
-              </div>
-              <div>
-                <p style="font-size:.7rem;font-weight:600;color:var(--muted);margin-bottom:.3rem;">Back Side</p>
-                <div class="upload-area" id="idBackUpload">
-                  <span class="icon"><i class="fas fa-id-card"></i></span>
-                  <p>Upload back of ID</p>
-                  <span class="file-types">PDF, JPG, PNG (max 5MB)</span>
-                  <input type="file" accept=".pdf,.jpg,.jpeg,.png" style="display:none;" id="idBackInput">
-                </div>
-                <div class="file-list" id="idBackList"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Additional Documents (Optional)</label>
-            <div class="upload-area" id="extraUpload">
-              <span class="icon"><i class="fas fa-plus-circle"></i></span>
-              <p>Upload additional supporting documents</p>
-              <span class="file-types">PDF, JPG, PNG (max 10MB)</span>
-              <input type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" style="display:none;" id="extraInput" multiple>
-            </div>
-            <div class="file-list" id="extraList"></div>
-          </div>
-
-          <div class="step-nav">
-            <button class="btn btn-ghost" onclick="goToStep(4)"><i class="fas fa-arrow-left"></i> Previous</button>
-            <button class="btn btn-primary" onclick="goToStep(6)">Next Step <i class="fas fa-arrow-right"></i></button>
-          </div>
-        </div>
-
-        <!-- ===== STEP 6: REVIEW & SUBMIT ===== -->
-        <div class="step-content" data-step="6">
-          <h3 style="margin-bottom:.5rem;">Review &amp; Submit</h3>
-          <p style="color:var(--muted);margin-bottom:1.5rem;">Review your application before submitting. You can go back to edit any section.</p>
-
-          <div id="reviewContainer" style="background:var(--paper);border-radius:12px;padding:1.5rem;border:1px solid var(--line-soft);margin-bottom:1.5rem;">
-            <!-- Review content rendered by JavaScript -->
-          </div>
-
-          <div class="score-display" id="finalScore">
-            <div class="score-num" id="finalScoreNum">0%</div>
-            <div class="score-label">Overall Score</div>
-            <div class="score-result" id="finalScoreResult">—</div>
-          </div>
-
-          <div class="step-nav">
-            <button class="btn btn-ghost" onclick="goToStep(5)"><i class="fas fa-arrow-left"></i> Previous</button>
-            <button class="btn btn-success" id="submitBtn" onclick="submitApplication()"><i class="fas fa-paper-plane"></i> Submit Application</button>
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
-
 </main>
 
-<!-- ===== FOOTER ===== -->
 <footer class="site-footer">
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <span class="logo-word">Paisley Studio<span>British Curriculum Online</span></span>
+        <span class="logo-word">Paisley Studio<span>Online Homeschool Solution</span></span>
         <p>An online homeschooling solution delivering the National Curriculum for England from Key Stage 2 through Key Stage 5, with IGCSE and A-Level preparation.</p>
         <div class="contact-info">
           <a href="mailto:info@paisleystudio.online"><i class="fas fa-envelope"></i> info@paisleystudio.online</a>
@@ -1393,11 +1165,12 @@
       </div>
       <div class="footer-col">
         <h6>Site</h6>
-        <a href="how-it-works.html">How It Works</a>
-        <a href="teach-with-us.html">Teach With Us</a>
-        <a href="enrolment.html">Enrolment</a>
-        <a href="academic-calendar.html">Academic Calendar</a>
-        <a href="subjects.html">Subjects</a>
+        <a href="key-stage-2.html">Key Stage 2</a>
+        <a href="key-stage-3.html">Key Stage 3</a>
+        <a href="key-stage-4.html">Key Stage 4</a>
+        <a href="key-stage-5.html">Key Stage 5</a>
+        <a href="index.html#why-us">Why Paisley</a>
+        <a href="index.html#faq">FAQs</a>
       </div>
       <div class="footer-col">
         <h6>Connect</h6>
@@ -1425,14 +1198,8 @@
 </button>
 
 <script>
-// ============================================================
-// YEAR
-// ============================================================
 document.getElementById('yearNow').textContent = new Date().getFullYear();
 
-// ============================================================
-// HEADER SCROLL
-// ============================================================
 const header = document.getElementById('siteHeader');
 window.addEventListener('scroll', () => {
   header.classList.toggle('scrolled', window.scrollY > 20);
@@ -1443,9 +1210,6 @@ document.getElementById('scrollTopBtn').addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// ============================================================
-// MOBILE NAV
-// ============================================================
 const navToggle = document.getElementById('navToggle');
 const navClose = document.getElementById('navClose');
 const mobileNav = document.getElementById('mobileNav');
@@ -1471,9 +1235,6 @@ window.addEventListener('resize', () => {
   }
 });
 
-// ============================================================
-// SCROLL REVEAL
-// ============================================================
 const revealElements = document.querySelectorAll('.reveal');
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -1482,42 +1243,84 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 revealElements.forEach(el => revealObserver.observe(el));
 
-// ============================================================
-// APPLICATION STATE
-// ============================================================
 let currentStep = 1;
-const totalSteps = 6;
-let quizAnswers = {};
-let psychAnswers = {};
-let uploadedFiles = {
-  photo: null,
-  cv: null,
-  tsc: null,
-  idFront: null,
-  idBack: null,
-  extra: []
+const totalSteps = 2;
+
+// ============================================================
+// SUBJECT FILTERING - Based on Key Stage Selection
+// ============================================================
+const subjectMap = {
+  'Key Stage 2 (Years 3-6)': [
+    'English', 'Mathematics', 'Science', 'Computing'
+  ],
+  'Key Stage 3 (Years 7-9)': [
+    'English', 'Mathematics', 'Science', 'Computing'
+  ],
+  'Key Stage 4 (Years 10-11) — IGCSE': [
+    'English', 'English Literature', 'Mathematics', 'Physics', 'Chemistry', 'Biology', 
+    'History', 'Geography', 'Economics', 'Business Studies', 'Modern Languages', 
+    'Art & Design', 'Computing', 'Music', 'Physical Education', 'Drama', 
+    'Design & Technology', 'Religious Education', 'Global Perspective'
+  ],
+  'Key Stage 5 (Years 12-13) — A-Level': [
+    'English Literature', 'Mathematics', 'Further Mathematics', 'Physics', 'Chemistry', 
+    'Biology', 'History', 'Geography', 'Economics', 'Business Studies', 'Psychology', 
+    'Modern Languages', 'Art & Design'
+  ]
 };
-let quizScore = 0;
-let psychScore = 0;
-let quizSubmitted = false;
-let psychSubmitted = false;
-let quizTimer = 300;
-let psychTimer = 300;
-let quizTimerInterval = null;
-let psychTimerInterval = null;
 
-// ============================================================
-// STEP NAVIGATION
-// ============================================================
+// Subject value mapping for checkbox values
+const subjectValueMap = {
+  'English': 'english',
+  'English Literature': 'english-lit',
+  'Mathematics': 'maths',
+  'Further Mathematics': 'further-maths',
+  'Physics': 'physics',
+  'Chemistry': 'chemistry',
+  'Biology': 'biology',
+  'History': 'history',
+  'Geography': 'geography',
+  'Economics': 'economics',
+  'Business Studies': 'business',
+  'Psychology': 'psychology',
+  'Modern Languages': 'languages',
+  'Art & Design': 'art',
+  'Computing': 'computing',
+  'Music': 'music',
+  'Physical Education': 'pe',
+  'Drama': 'drama',
+  'Design & Technology': 'design-tech',
+  'Religious Education': 'religious-ed',
+  'Global Perspective': 'global-perspective',
+  'Science': 'science'
+};
+
+function filterSubjects() {
+  const checkedKeyStages = document.querySelectorAll('#keyStages input:checked');
+  const selectedSubjects = new Set();
+  
+  checkedKeyStages.forEach(ks => {
+    const subjects = subjectMap[ks.value] || [];
+    subjects.forEach(s => selectedSubjects.add(s));
+  });
+
+  const container = document.getElementById('subjectContainer');
+  
+  if (checkedKeyStages.length === 0) {
+    container.innerHTML = `<p style="color:var(--muted);font-size:.9rem;">Please select at least one Key Stage above to see available subjects.</p>`;
+    return;
+  }
+
+  let html = `<div class="checkbox-group" id="subjectCheckboxes">`;
+  selectedSubjects.forEach(subject => {
+    const value = subjectValueMap[subject] || subject.toLowerCase().replace(/ /g, '-');
+    html += `<label><input type="checkbox" value="${subject}" name="Subjects"> ${subject}</label>`;
+  });
+  html += `</div>`;
+  container.innerHTML = html;
+}
+
 function goToStep(step) {
-  // Clear timers when leaving quiz steps
-  if (currentStep === 3 && step !== 3) {
-    if (quizTimerInterval) clearInterval(quizTimerInterval);
-  }
-  if (currentStep === 4 && step !== 4) {
-    if (psychTimerInterval) clearInterval(psychTimerInterval);
-  }
-
   if (step > currentStep) {
     if (!validateStep(currentStep)) return;
   }
@@ -1535,12 +1338,7 @@ function goToStep(step) {
 
   currentStep = step;
   updateProgress();
-
-  if (step === 3) renderQuiz();
-  if (step === 4) renderPsychologyQuiz();
-  if (step === 6) renderReview();
-
-  document.querySelector('.application-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.querySelector('.form-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function updateProgress() {
@@ -1556,6 +1354,14 @@ function validateStep(step) {
     const exp = document.getElementById('experience').value;
     const qual = document.getElementById('qualifications').value.trim();
     const bio = document.getElementById('bio').value.trim();
+    const onlineExp = document.querySelector('input[name="Online Teaching Experience"]:checked');
+    const britishExp = document.querySelector('input[name="British Curriculum Experience"]:checked');
+    const presentation = document.querySelector('input[name="Class Presentation"]:checked');
+    const startDate = document.getElementById('startDate').value;
+    const availKS4 = document.querySelector('input[name="Availability KS4 (8:30am-3:45pm)"]:checked');
+    const availKS23 = document.querySelector('input[name="Availability KS2/3 (8:30am-12:15pm)"]:checked');
+    const acceptComp = document.querySelector('input[name="Accept Compensation"]:checked');
+    
     if (!name || !email || !phone || !exp || !qual || !bio) {
       alert('Please fill in all required fields.');
       return false;
@@ -1564,43 +1370,20 @@ function validateStep(step) {
       alert('Please enter a valid email address.');
       return false;
     }
-  }
-  if (step === 2) {
-    const ksChecked = document.querySelectorAll('#keyStages input:checked').length;
-    const subChecked = document.querySelectorAll('#subjects input:checked').length;
-    const primary = document.getElementById('primarySubject').value;
-    if (ksChecked === 0 || subChecked === 0 || !primary) {
-      alert('Please select at least one Key Stage, one subject, and your primary subject.');
+    if (!onlineExp || !britishExp || !presentation || !startDate) {
+      alert('Please answer all the additional questions.');
       return false;
     }
-  }
-  if (step === 3) {
-    const questions = document.querySelectorAll('#quizContainer .quiz-question');
-    let allAnswered = true;
-    questions.forEach(q => {
-      const selected = q.querySelector('input[type="radio"]:checked');
-      if (!selected) allAnswered = false;
-    });
-    if (!allAnswered) {
-      alert('Please answer all quiz questions before proceeding.');
+    if (!availKS4 || !availKS23) {
+      alert('Please indicate your availability for both Key Stage 4 and Key Stage 2/3.');
       return false;
     }
-  }
-  if (step === 4) {
-    const questions = document.querySelectorAll('#psychologyQuiz .quiz-question');
-    let allAnswered = true;
-    questions.forEach(q => {
-      const selected = q.querySelector('input[type="radio"]:checked');
-      if (!selected) allAnswered = false;
-    });
-    if (!allAnswered) {
-      alert('Please answer all psychology questions before proceeding.');
+    if (!acceptComp) {
+      alert('Please indicate whether you accept the compensation package.');
       return false;
     }
-  }
-  if (step === 5) {
-    if (!uploadedFiles.photo || !uploadedFiles.cv || !uploadedFiles.tsc || !uploadedFiles.idFront || !uploadedFiles.idBack) {
-      alert('Please upload your photo, CV, TSC certificate, and both sides of your ID before proceeding.');
+    if (acceptComp.value === 'No') {
+      alert('We understand. Please note that the compensation package is fixed at KSh 20,000 per month.');
       return false;
     }
   }
@@ -1608,487 +1391,126 @@ function validateStep(step) {
 }
 
 // ============================================================
-// FILE UPLOAD HANDLERS
+// TUTOR APPLICATION - AJAX Submission with FormSubmit
 // ============================================================
-function setupUpload(areaId, inputId, listId, key) {
-  const area = document.getElementById(areaId);
-  const input = document.getElementById(inputId);
-  const list = document.getElementById(listId);
-
-  area.addEventListener('click', () => input.click());
-
-  area.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    area.classList.add('dragover');
-  });
-  area.addEventListener('dragleave', () => area.classList.remove('dragover'));
-  area.addEventListener('drop', (e) => {
-    e.preventDefault();
-    area.classList.remove('dragover');
-    if (e.dataTransfer.files.length) {
-      input.files = e.dataTransfer.files;
-      handleFile(input, list, key);
-    }
-  });
-
-  input.addEventListener('change', () => {
-    if (input.files.length) {
-      handleFile(input, list, key);
-    }
-  });
-}
-
-function handleFile(input, list, key) {
-  const file = input.files[0];
-  if (!file) return;
-
-  const maxSize = key === 'cv' || key === 'extra' ? 10 * 1024 * 1024 : 5 * 1024 * 1024;
-  if (file.size > maxSize) {
-    alert(`File too large. Maximum size is ${maxSize / 1024 / 1024}MB.`);
-    input.value = '';
-    return;
-  }
-
-  const fileItem = document.createElement('div');
-  fileItem.className = 'file-item';
-  fileItem.innerHTML = `
-    <span class="name"><i class="fas fa-file"></i> ${file.name} (${(file.size / 1024).toFixed(1)}KB)</span>
-    <button class="remove" onclick="removeFile('${key}')"><i class="fas fa-times"></i></button>
-  `;
-  list.innerHTML = '';
-  list.appendChild(fileItem);
-
-  if (key === 'extra') {
-    if (!uploadedFiles.extra) uploadedFiles.extra = [];
-    uploadedFiles.extra.push(file);
-  } else {
-    uploadedFiles[key] = file;
-  }
-}
-
-function removeFile(key) {
-  if (key === 'extra') {
-    uploadedFiles.extra = [];
-    document.getElementById('extraList').innerHTML = '';
-    document.getElementById('extraInput').value = '';
-    return;
-  }
-  uploadedFiles[key] = null;
-  const listId = key + 'List';
-  document.getElementById(listId).innerHTML = '';
-  const inputId = key + 'Input';
-  document.getElementById(inputId).value = '';
-}
-
-setupUpload('photoUpload', 'photoInput', 'photoList', 'photo');
-setupUpload('cvUpload', 'cvInput', 'cvList', 'cv');
-setupUpload('tscUpload', 'tscInput', 'tscList', 'tsc');
-setupUpload('idFrontUpload', 'idFrontInput', 'idFrontList', 'idFront');
-setupUpload('idBackUpload', 'idBackInput', 'idBackList', 'idBack');
-setupUpload('extraUpload', 'extraInput', 'extraList', 'extra');
-
-// ============================================================
-// SUBJECT QUIZ - REAL IGCSE/A-LEVEL QUESTIONS
-// ============================================================
-const subjectQuestions = {
-  maths: [
-    { question: 'Solve for x: 2x + 5 = 13', options: ['x = 3', 'x = 4', 'x = 5', 'x = 6'], correct: 1 },
-    { question: 'What is the gradient of the line y = 3x - 7?', options: ['-7', '3', '7', '-3'], correct: 1 },
-    { question: 'Simplify: (x³ × x⁴) / x²', options: ['x⁵', 'x⁶', 'x⁷', 'x⁹'], correct: 0 },
-    { question: 'What is the area of a circle with radius 5cm? (Use π = 3.14)', options: ['78.5 cm²', '31.4 cm²', '157 cm²', '25 cm²'], correct: 0 },
-    { question: 'Solve: 3(x - 2) = 5x - 10', options: ['x = 2', 'x = 4', 'x = 6', 'x = 8'], correct: 1 }
-  ],
-  english: [
-    { question: 'Which of the following is a complex sentence?', options: ['She ran to the shop.', 'She ran to the shop because she needed milk.', 'She ran to the shop and bought milk.', 'Running to the shop, she bought milk.'], correct: 1 },
-    { question: 'What is the correct spelling?', options: ['Necessary', 'Neccessary', 'Necesary', 'Necassary'], correct: 0 },
-    { question: 'Identify the simile: "Her eyes were like stars."', options: ['Her eyes', 'like stars', 'were like', 'stars'], correct: 1 },
-    { question: 'What does "benevolent" mean?', options: ['Kind and generous', 'Cruel and harsh', 'Indifferent', 'Confused'], correct: 0 },
-    { question: 'Which is the correct past tense of "lie" (meaning to recline)?', options: ['Layed', 'Lied', 'Laid', 'Lay'], correct: 3 }
-  ],
-  physics: [
-    { question: 'What is the SI unit of force?', options: ['Joule', 'Newton', 'Watt', 'Pascal'], correct: 1 },
-    { question: 'What is the speed of light in a vacuum? (approximately)', options: ['3 × 10⁶ m/s', '3 × 10⁸ m/s', '3 × 10¹⁰ m/s', '3 × 10⁴ m/s'], correct: 1 },
-    { question: 'Which law states that energy cannot be created or destroyed?', options: ['Newton\'s First Law', 'Law of Conservation of Energy', 'Ohm\'s Law', 'Hooke\'s Law'], correct: 1 },
-    { question: 'What is the formula for kinetic energy?', options: ['E = mc²', 'E = ½mv²', 'E = mgh', 'E = Fd'], correct: 1 },
-    { question: 'What is the unit of electrical resistance?', options: ['Ohm', 'Volt', 'Ampere', 'Watt'], correct: 0 }
-  ],
-  chemistry: [
-    { question: 'What is the chemical symbol for gold?', options: ['Au', 'Ag', 'Go', 'Gd'], correct: 0 },
-    { question: 'What is the pH of a neutral solution?', options: ['0', '7', '14', '1'], correct: 1 },
-    { question: 'What is the formula for sodium chloride?', options: ['NaCl', 'Na₂Cl', 'NaCl₂', 'Na₂Cl₂'], correct: 0 },
-    { question: 'What type of bond exists between two non-metals?', options: ['Ionic bond', 'Covalent bond', 'Metallic bond', 'Hydrogen bond'], correct: 1 },
-    { question: 'What is the molar mass of water (H₂O)? (H=1, O=16)', options: ['16 g/mol', '18 g/mol', '20 g/mol', '22 g/mol'], correct: 1 }
-  ],
-  biology: [
-    { question: 'What is the powerhouse of the cell?', options: ['Nucleus', 'Mitochondria', 'Ribosome', 'Golgi body'], correct: 1 },
-    { question: 'What is the function of the human heart?', options: ['Filter blood', 'Pump blood around the body', 'Produce hormones', 'Store nutrients'], correct: 1 },
-    { question: 'What is photosynthesis?', options: ['The process of cell division', 'The process by which plants make food using sunlight', 'The process of respiration', 'The process of digestion'], correct: 1 },
-    { question: 'What is the largest organ in the human body?', options: ['Liver', 'Skin', 'Brain', 'Heart'], correct: 1 },
-    { question: 'What is the function of red blood cells?', options: ['Fight infection', 'Carry oxygen', 'Produce antibodies', 'Carry hormones'], correct: 1 }
-  ],
-  history: [
-    { question: 'In which year did World War II end?', options: ['1944', '1945', '1946', '1947'], correct: 1 },
-    { question: 'Who was the first President of the United States?', options: ['Thomas Jefferson', 'George Washington', 'Abraham Lincoln', 'John Adams'], correct: 1 },
-    { question: 'What was the Industrial Revolution?', options: ['A political revolution', 'A period of industrialisation and technological change', 'A religious movement', 'A military conflict'], correct: 1 },
-    { question: 'When was the Magna Carta signed?', options: ['1066', '1215', '1500', '1600'], correct: 1 },
-    { question: 'What was the Cold War?', options: ['A physical war between the US and USSR', 'A period of geopolitical tension between the US and USSR', 'A war in Antarctica', 'A trade war'], correct: 1 }
-  ],
-  geography: [
-    { question: 'What is the longest river in the world?', options: ['Amazon', 'Nile', 'Mississippi', 'Yangtze'], correct: 1 },
-    { question: 'What is the largest continent by land area?', options: ['Africa', 'Asia', 'North America', 'Europe'], correct: 1 },
-    { question: 'What is a biome?', options: ['A small ecosystem', 'A large geographical area with distinct climate and life', 'A type of weather', 'A population of animals'], correct: 1 },
-    { question: 'What is the capital of Australia?', options: ['Sydney', 'Melbourne', 'Canberra', 'Brisbane'], correct: 2 },
-    { question: 'What is the greenhouse effect?', options: ['The trapping of heat in the Earth\'s atmosphere', 'The cooling of the Earth', 'The effect of plants on the atmosphere', 'The movement of tectonic plates'], correct: 0 }
-  ]
-};
-
-const defaultQuestions = [
-  { question: 'What is 2 + 2?', options: ['3', '4', '5', '6'], correct: 1 },
-  { question: 'What is the capital of Kenya?', options: ['Mombasa', 'Nairobi', 'Kisumu', 'Nakuru'], correct: 1 }
-];
-
-// ============================================================
-// PSYCHOLOGY / SCENARIO QUESTIONS
-// ============================================================
-const psychologyQuestions = [
-  {
-    question: 'A student in your online class is clearly struggling to set up their camera and microphone. They seem frustrated and are falling behind. What do you do?',
-    options: ['Wait for them to figure it out and move on', 'Take a moment to guide them through the setup step by step', 'Tell them to fix it before the next class', 'Ignore it and continue with the lesson'],
-    correct: 1
-  },
-  {
-    question: 'One of your students keeps muting themselves and turning off their camera during class. You suspect they are distracted or not paying attention. How do you handle this?',
-    options: ['Call them out publicly and ask them to turn the camera on', 'Privately message them to check if everything is okay', 'Ignore it and continue teaching', 'Mark them absent for the session'],
-    correct: 1
-  },
-  {
-    question: 'A student is being disruptive in the online class, making inappropriate comments and distracting others. What is your approach?',
-    options: ['Ignore the behaviour and hope it stops', 'Address the student privately after class to discuss their behaviour', 'Kick them out of the class immediately', 'Shame them publicly to discourage others'],
-    correct: 1
-  },
-  {
-    question: 'A student tells you they are feeling overwhelmed with the workload and are considering dropping out. How do you respond?',
-    options: ['Tell them to work harder and manage their time better', 'Listen to their concerns, offer support, and suggest manageable steps', 'Tell them that dropping out is their choice', 'Refer them to another tutor and stop teaching them'],
-    correct: 1
-  },
-  {
-    question: 'During a lesson, you notice a student is consistently getting answers wrong and seems to be struggling with the concept. What do you do?',
-    options: ['Move on to the next topic to keep the pace', 'Pause and re-explain the concept in a different way', 'Tell the student to review the material on their own', 'Ignore it and hope they catch up later'],
-    correct: 1
-  },
-  {
-    question: 'One of your students is showing signs of distress—they are withdrawn, not participating, and seem down. How do you approach this?',
-    options: ['Do nothing and let them sort it out', 'Privately ask if everything is okay and offer a listening ear', 'Publicly ask them what is wrong in front of the class', 'Contact their parents immediately without speaking to the student'],
-    correct: 1
-  },
-  {
-    question: 'A student argues with you about a grade they received on an assignment. They are persistent and confrontational. How do you handle this?',
-    options: ['Apologise and change their grade to avoid conflict', 'Listen to their concerns, explain your marking clearly, and stand by your professional judgement', 'Argue back and tell them they are wrong', 'Refuse to discuss it and end the conversation'],
-    correct: 1
-  },
-  {
-    question: 'A student in your class has special educational needs and requires additional support. What is your approach?',
-    options: ['Teach them the same way as all other students', 'Adapt your teaching approach to meet their specific needs', 'Refer them to another tutor who can handle it', 'Ignore their needs and focus on the rest of the class'],
-    correct: 1
-  }
-];
-
-// ============================================================
-// RENDER QUIZ WITH TIMER
-// ============================================================
-function renderQuiz() {
-  const container = document.getElementById('quizContainer');
+document.getElementById('tutorSubmitBtn').addEventListener('click', function(e) {
+  e.preventDefault();
+  
+  const btn = this;
+  const successDiv = document.getElementById('tutorSuccess');
+  const formGroups = document.querySelector('.step-content[data-step="2"]').querySelectorAll('.form-group, .step-nav');
+  const originalText = btn.innerHTML;
+  
+  // Validate Step 2
+  const ksChecked = document.querySelectorAll('#keyStages input:checked').length;
+  const subChecked = document.querySelectorAll('#subjectCheckboxes input:checked').length;
   const primarySubject = document.getElementById('primarySubject').value;
-  let questions = defaultQuestions;
-
-  if (primarySubject && subjectQuestions[primarySubject]) {
-    questions = subjectQuestions[primarySubject];
+  
+  if (ksChecked === 0 || subChecked === 0 || !primarySubject) {
+    alert('Please select at least one Key Stage, one subject, and your primary subject.');
+    return;
   }
-
-  const shuffled = [...questions].sort(() => Math.random() - 0.5);
-  const selected = shuffled.slice(0, 5);
-
-  let html = `
-    <div style="background:var(--brand-deep);color:#fff;border-radius:12px;padding:1rem;text-align:center;margin-bottom:1.5rem;">
-      <div style="font-size:1.5rem;font-weight:800;" id="quizTimerDisplay">05:00</div>
-      <div style="font-size:.7rem;opacity:0.7;">Time Remaining</div>
-    </div>
-  `;
   
-  selected.forEach((q, index) => {
-    html += `
-      <div class="quiz-question" data-q="${index}">
-        <div class="q-number">Question ${index + 1}</div>
-        <div class="q-text">${q.question}</div>
-        <div class="options">
-          ${q.options.map((opt, optIndex) => `
-            <label>
-              <input type="radio" name="quiz_q${index}" value="${optIndex}" onchange="selectQuizAnswer(${index}, ${optIndex})">
-              ${opt}
-            </label>
-          `).join('')}
-        </div>
-        <div class="feedback" id="quizFeedback${index}"></div>
-      </div>
-    `;
-  });
-
-  container.innerHTML = html;
-  quizAnswers = {};
-  quizScore = 0;
-  quizSubmitted = false;
-  quizTimer = 300;
+  // Collect all form data
+  const formData = new FormData();
+  formData.append('_subject', '[TUTOR APPLICATION] New Tutor - Paisley Studio');
+  formData.append('_captcha', 'false');
+  formData.append('_template', 'table');
   
-  // Store correct answers for grading later
-  quizCorrectAnswers = selected.map(q => q.correct);
+  // Step 1 fields
+  const fields = {
+    'Full Name': document.getElementById('fullName').value,
+    'Email': document.getElementById('email').value,
+    'Phone': document.getElementById('phone').value,
+    'Location': document.getElementById('location').value,
+    'Teaching Experience': document.getElementById('experience').value,
+    'Qualifications': document.getElementById('qualifications').value,
+    'Bio': document.getElementById('bio').value,
+    'Online Teaching Experience': document.querySelector('input[name="Online Teaching Experience"]:checked')?.value || '',
+    'British Curriculum Experience': document.querySelector('input[name="British Curriculum Experience"]:checked')?.value || '',
+    'Class Presentation': document.querySelector('input[name="Class Presentation"]:checked')?.value || '',
+    'Start Date': document.getElementById('startDate').value,
+    'Availability KS4 (8:30am-3:45pm)': document.querySelector('input[name="Availability KS4 (8:30am-3:45pm)"]:checked')?.value || '',
+    'Availability KS2/3 (8:30am-12:15pm)': document.querySelector('input[name="Availability KS2/3 (8:30am-12:15pm)"]:checked')?.value || '',
+    'Accept Compensation': document.querySelector('input[name="Accept Compensation"]:checked')?.value || '',
+    'Primary Subject Specialism': document.getElementById('primarySubject').value
+  };
   
-  if (quizTimerInterval) clearInterval(quizTimerInterval);
-  quizTimerInterval = setInterval(() => {
-    quizTimer--;
-    const mins = Math.floor(quizTimer / 60);
-    const secs = quizTimer % 60;
-    const display = document.getElementById('quizTimerDisplay');
-    if (display) {
-      display.textContent = String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
-      if (quizTimer <= 60) {
-        display.style.color = '#FF6B6B';
-      }
-    }
-    if (quizTimer <= 0) {
-      clearInterval(quizTimerInterval);
-      submitQuiz();
-    }
-  }, 1000);
-}
-
-let quizCorrectAnswers = [];
-
-function selectQuizAnswer(qIndex, selected) {
-  if (quizSubmitted) return;
-  const questionEl = document.querySelector(`.quiz-question[data-q="${qIndex}"]`);
-  const labels = questionEl.querySelectorAll('.options label');
-  labels.forEach(label => label.classList.remove('selected'));
-  labels[selected].classList.add('selected');
-  quizAnswers[qIndex] = selected;
-}
-
-function submitQuiz() {
-  if (quizSubmitted) return;
-  quizSubmitted = true;
-  if (quizTimerInterval) clearInterval(quizTimerInterval);
-  
-  const total = document.querySelectorAll('#quizContainer .quiz-question').length;
-  let correctCount = 0;
-  
-  document.querySelectorAll('#quizContainer .quiz-question').forEach((q, idx) => {
-    const selectedRadio = q.querySelector('input[type="radio"]:checked');
-    if (selectedRadio) {
-      const val = parseInt(selectedRadio.value);
-      if (quizCorrectAnswers[idx] !== undefined && val === quizCorrectAnswers[idx]) {
-        correctCount++;
-      }
-    }
-    q.querySelectorAll('input[type="radio"]').forEach(r => r.disabled = true);
+  Object.keys(fields).forEach(key => {
+    formData.append(key, fields[key]);
   });
   
-  quizScore = Math.round((correctCount / total) * 100);
-  
-  document.querySelectorAll('#quizContainer .quiz-question').forEach((q) => {
-    const feedback = q.querySelector('.feedback');
-    if (feedback) {
-      feedback.className = 'feedback show answered';
-      feedback.textContent = '✓ Answered';
-    }
+  // Key Stages
+  document.querySelectorAll('#keyStages input:checked').forEach(cb => {
+    formData.append('Key Stages', cb.value);
   });
   
-  const display = document.getElementById('quizTimerDisplay');
-  if (display) display.textContent = '⏱ Time\'s Up!';
-}
-
-// ============================================================
-// RENDER PSYCHOLOGY QUIZ WITH TIMER
-// ============================================================
-function renderPsychologyQuiz() {
-  const container = document.getElementById('psychologyQuiz');
-  const shuffled = [...psychologyQuestions].sort(() => Math.random() - 0.5);
-  const selected = shuffled.slice(0, 6);
-
-  let html = `
-    <div style="background:var(--brand-deep);color:#fff;border-radius:12px;padding:1rem;text-align:center;margin-bottom:1.5rem;">
-      <div style="font-size:1.5rem;font-weight:800;" id="psychTimerDisplay">05:00</div>
-      <div style="font-size:.7rem;opacity:0.7;">Time Remaining</div>
-    </div>
-  `;
-  
-  psychCorrectAnswers = selected.map(q => q.correct);
-  
-  selected.forEach((q, index) => {
-    html += `
-      <div class="quiz-question" data-psych="${index}">
-        <div class="q-number">Scenario ${index + 1}</div>
-        <div class="q-text">${q.question}</div>
-        <div class="options">
-          ${q.options.map((opt, optIndex) => `
-            <label>
-              <input type="radio" name="psych_q${index}" value="${optIndex}" onchange="selectPsychAnswer(${index}, ${optIndex})">
-              ${opt}
-            </label>
-          `).join('')}
-        </div>
-        <div class="feedback" id="psychFeedback${index}"></div>
-      </div>
-    `;
-  });
-
-  container.innerHTML = html;
-  psychAnswers = {};
-  psychScore = 0;
-  psychSubmitted = false;
-  psychTimer = 300;
-  
-  if (psychTimerInterval) clearInterval(psychTimerInterval);
-  psychTimerInterval = setInterval(() => {
-    psychTimer--;
-    const mins = Math.floor(psychTimer / 60);
-    const secs = psychTimer % 60;
-    const display = document.getElementById('psychTimerDisplay');
-    if (display) {
-      display.textContent = String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
-      if (psychTimer <= 60) {
-        display.style.color = '#FF6B6B';
-      }
-    }
-    if (psychTimer <= 0) {
-      clearInterval(psychTimerInterval);
-      submitPsychQuiz();
-    }
-  }, 1000);
-}
-
-let psychCorrectAnswers = [];
-
-function selectPsychAnswer(qIndex, selected) {
-  if (psychSubmitted) return;
-  const questionEl = document.querySelector(`.quiz-question[data-psych="${qIndex}"]`);
-  const labels = questionEl.querySelectorAll('.options label');
-  labels.forEach(label => label.classList.remove('selected'));
-  labels[selected].classList.add('selected');
-  psychAnswers[qIndex] = selected;
-}
-
-function submitPsychQuiz() {
-  if (psychSubmitted) return;
-  psychSubmitted = true;
-  if (psychTimerInterval) clearInterval(psychTimerInterval);
-  
-  const total = document.querySelectorAll('#psychologyQuiz .quiz-question').length;
-  let correctCount = 0;
-  
-  document.querySelectorAll('#psychologyQuiz .quiz-question').forEach((q, idx) => {
-    const selectedRadio = q.querySelector('input[type="radio"]:checked');
-    if (selectedRadio) {
-      const val = parseInt(selectedRadio.value);
-      if (psychCorrectAnswers[idx] !== undefined && val === psychCorrectAnswers[idx]) {
-        correctCount++;
-      }
-    }
-    q.querySelectorAll('input[type="radio"]').forEach(r => r.disabled = true);
+  // Subjects (from filtered checkboxes)
+  document.querySelectorAll('#subjectCheckboxes input:checked').forEach(cb => {
+    formData.append('Subjects', cb.value);
   });
   
-  psychScore = Math.round((correctCount / total) * 100);
-  
-  document.querySelectorAll('#psychologyQuiz .quiz-question').forEach((q) => {
-    const feedback = q.querySelector('.feedback');
-    if (feedback) {
-      feedback.className = 'feedback show answered';
-      feedback.textContent = '✓ Answered';
-    }
-  });
-  
-  const display = document.getElementById('psychTimerDisplay');
-  if (display) display.textContent = '⏱ Time\'s Up!';
-}
-
-// ============================================================
-// RENDER REVIEW
-// ============================================================
-function renderReview() {
-  const container = document.getElementById('reviewContainer');
-  const name = document.getElementById('fullName').value || 'Not provided';
-  const email = document.getElementById('email').value || 'Not provided';
-  const phone = document.getElementById('phone').value || 'Not provided';
-  const experience = document.getElementById('experience').value || 'Not provided';
-  const qualifications = document.getElementById('qualifications').value || 'Not provided';
-  const bio = document.getElementById('bio').value || 'Not provided';
-  const primarySubject = document.getElementById('primarySubject').value || 'Not selected';
-
-  const ksSelected = [];
-  document.querySelectorAll('#keyStages input:checked').forEach(cb => ksSelected.push(cb.value));
-  const subjectsSelected = [];
-  document.querySelectorAll('#subjects input:checked').forEach(cb => subjectsSelected.push(cb.value));
-
-  const finalScore = Math.round((quizScore + psychScore) / 2);
-
-  document.getElementById('finalScoreNum').textContent = finalScore + '%';
-  const resultEl = document.getElementById('finalScoreResult');
-  if (finalScore >= 70) {
-    resultEl.textContent = '✅ Pass — Strong candidate';
-    resultEl.className = 'score-result pass';
-  } else if (finalScore >= 50) {
-    resultEl.textContent = '⚠️ Review — Needs improvement in some areas';
-    resultEl.className = 'score-result';
-    resultEl.style.color = '#F39C12';
-  } else {
-    resultEl.textContent = '❌ Needs significant improvement';
-    resultEl.className = 'score-result fail';
-  }
-
-  let html = `
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-      <div><strong>Full Name:</strong> ${name}</div>
-      <div><strong>Email:</strong> ${email}</div>
-      <div><strong>Phone:</strong> ${phone}</div>
-      <div><strong>Experience:</strong> ${experience} years</div>
-      <div style="grid-column:1/-1;"><strong>Qualifications:</strong> ${qualifications}</div>
-      <div style="grid-column:1/-1;"><strong>Bio:</strong> ${bio}</div>
-      <div><strong>Primary Subject:</strong> ${primarySubject}</div>
-      <div><strong>Key Stages:</strong> ${ksSelected.join(', ') || 'None selected'}</div>
-      <div style="grid-column:1/-1;"><strong>Subjects:</strong> ${subjectsSelected.join(', ') || 'None selected'}</div>
-      <div><strong>Quiz Score:</strong> ${quizScore}%</div>
-      <div><strong>Psychology Score:</strong> ${psychScore}%</div>
-    </div>
-  `;
-
-  container.innerHTML = html;
-}
-
-// ============================================================
-// SUBMIT APPLICATION
-// ============================================================
-function submitApplication() {
-  const btn = document.getElementById('submitBtn');
+  // Show loading
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
   btn.disabled = true;
-
-  setTimeout(() => {
-    btn.innerHTML = '<i class="fas fa-check"></i> Application Submitted!';
-    btn.style.background = '#2EB872';
+  
+  // Send to FormSubmit AJAX endpoint
+  fetch('https://formsubmit.co/ajax/90d6bea814211aa12823b48e46f127da', {
+    method: 'POST',
+    headers: { 'Accept': 'application/json' },
+    body: formData
+  })
+  .then(response => {
+    if (response.ok) {
+      // Hide form fields, show success
+      formGroups.forEach(el => {
+        el.style.display = 'none';
+      });
+      successDiv.classList.add('show');
+      
+      btn.innerHTML = originalText;
+      btn.disabled = false;
+      
+      // Reset form after 5 seconds
+      setTimeout(() => {
+        document.getElementById('fullName').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('phone').value = '';
+        document.getElementById('location').value = '';
+        document.getElementById('experience').value = '';
+        document.getElementById('qualifications').value = '';
+        document.getElementById('bio').value = '';
+        document.getElementById('startDate').value = '';
+        document.getElementById('primarySubject').value = '';
+        document.querySelectorAll('#keyStages input:checked').forEach(cb => cb.checked = false);
+        document.querySelectorAll('#subjectCheckboxes input:checked').forEach(cb => cb.checked = false);
+        document.querySelectorAll('input[name="Online Teaching Experience"]:checked').forEach(cb => cb.checked = false);
+        document.querySelectorAll('input[name="British Curriculum Experience"]:checked').forEach(cb => cb.checked = false);
+        document.querySelectorAll('input[name="Class Presentation"]:checked').forEach(cb => cb.checked = false);
+        document.querySelectorAll('input[name="Availability KS4 (8:30am-3:45pm)"]:checked').forEach(cb => cb.checked = false);
+        document.querySelectorAll('input[name="Availability KS2/3 (8:30am-12:15pm)"]:checked').forEach(cb => cb.checked = false);
+        document.querySelectorAll('input[name="Accept Compensation"]:checked').forEach(cb => cb.checked = false);
+        
+        // Reset subject container
+        document.getElementById('subjectContainer').innerHTML = `<p style="color:var(--muted);font-size:.9rem;">Please select at least one Key Stage above to see available subjects.</p>`;
+        
+        formGroups.forEach(el => {
+          el.style.display = '';
+        });
+        successDiv.classList.remove('show');
+      }, 5000);
+    } else {
+      alert('Something went wrong. Please try again.');
+      btn.innerHTML = originalText;
+      btn.disabled = false;
+    }
+  })
+  .catch(error => {
+    alert('Network error. Please check your connection and try again.');
+    btn.innerHTML = originalText;
     btn.disabled = false;
-
-    const reviewContainer = document.getElementById('reviewContainer');
-    reviewContainer.innerHTML = `
-      <div style="text-align:center;padding:2rem;">
-        <i class="fas fa-check-circle" style="font-size:4rem;color:var(--success);margin-bottom:1rem;"></i>
-        <h3>Application Submitted Successfully!</h3>
-        <p style="color:var(--muted);">Thank you for applying to teach with Paisley Studio. We'll review your application and get back to you within 48 hours.</p>
-        <p style="color:var(--muted);margin-top:.5rem;">Check your email for a confirmation message.</p>
-        <a href="index.html" class="btn btn-primary" style="margin-top:1.5rem;"><i class="fas fa-home"></i> Return to Home</a>
-      </div>
-    `;
-    document.getElementById('finalScore').style.display = 'none';
-    document.querySelector('.step-nav').style.display = 'none';
-  }, 2500);
-}
+  });
+});
 
 // ============================================================
 // NEWSLETTER SUBSCRIBE
@@ -2106,25 +1528,34 @@ document.querySelector('.footer-newsletter .btn')?.addEventListener('click', fun
     }, 2000);
     return;
   }
-  const originalText = this.innerHTML;
-  this.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-  this.disabled = true;
-  setTimeout(() => {
+  
+  const formData = new FormData();
+  formData.append('_subject', '[NEWSLETTER] New Subscription - Paisley Studio');
+  formData.append('_captcha', 'false');
+  formData.append('Email', email);
+  
+  fetch('https://formsubmit.co/ajax/90d6bea814211aa12823b48e46f127da', {
+    method: 'POST',
+    headers: { 'Accept': 'application/json' },
+    body: formData
+  })
+  .then(response => {
+    const originalText = this.innerHTML;
     this.innerHTML = '<i class="fas fa-check"></i> Subscribed!';
     this.style.background = '#2EB872';
     input.value = '';
+    this.disabled = true;
+    
     setTimeout(() => {
       this.innerHTML = originalText;
       this.style.background = '';
       this.disabled = false;
     }, 3000);
-  }, 1200);
+  })
+  .catch(error => {
+    alert('Something went wrong. Please try again.');
+  });
 });
-
-// ============================================================
-// INITIALIZATION
-// ============================================================
-updateProgress();
 </script>
 
 </body>

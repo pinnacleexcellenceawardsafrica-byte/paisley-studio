@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Key Stage 2 — Years 3-6 | Paisley Studio</title>
-  <meta name="description" content="Key Stage 2 British Curriculum for Years 3-6 (ages 7-11). English, Mathematics, Science, Computing and more. Online homeschooling with qualified tutors." />
+  <meta name="description" content="Key Stage 2 British Curriculum for Years 3-6 (ages 7-11). English, Mathematics, Science and Computing. Online homeschooling with qualified tutors." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://paisleystudio.online/key-stage-2.html" />
   
   <meta property="og:title" content="Key Stage 2 — Years 3-6 | Paisley Studio" />
-  <meta property="og:description" content="Key Stage 2 British Curriculum for Years 3-6. Online homeschooling with qualified tutors. English, Mathematics, Science, Computing." />
+  <meta property="og:description" content="Key Stage 2 British Curriculum for Years 3-6. English, Mathematics, Science and Computing. Online homeschooling with qualified tutors." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://paisleystudio.online/key-stage-2.html" />
   
@@ -21,9 +21,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  
+   <link rel="icon" href="https://paisleystudio.online/wp-content/uploads/2026/05/cropped-Paisely-logo-Resized.png" sizes="32x32" />
   <style>
-    /* ===== BRAND COLORS ===== */
     :root {
       --brand: #55BFB3;
       --brand-deep: #245F5A;
@@ -43,6 +42,8 @@
       --container: 1160px;
       --pad: 7rem;
       --pad-sm: 3.4rem;
+      --header-h: 68px;
+      --kes-usd: 129;
     }
 
     @keyframes fadeInUp {
@@ -80,8 +81,6 @@
     .stagger-children > *:nth-child(2) { animation-delay: 0.15s; }
     .stagger-children > *:nth-child(3) { animation-delay: 0.25s; }
     .stagger-children > *:nth-child(4) { animation-delay: 0.35s; }
-    .stagger-children > *:nth-child(5) { animation-delay: 0.45s; }
-    .stagger-children > *:nth-child(6) { animation-delay: 0.55s; }
 
     .reveal {
       opacity: 0;
@@ -133,7 +132,7 @@
     }
 
     * { box-sizing:border-box; margin:0; padding:0; }
-    html { scroll-behavior:smooth; }
+    html { scroll-behavior:smooth; overflow-x:hidden; width:100%; }
     body {
       font-family: 'Quicksand', sans-serif;
       color: var(--ink);
@@ -141,6 +140,8 @@
       -webkit-font-smoothing: antialiased;
       line-height: 1.6;
       overflow-x: hidden;
+      width: 100%;
+      position: relative;
     }
     img { max-width:100%; display:block; }
     a { color:inherit; text-decoration:none; }
@@ -149,7 +150,7 @@
 
     h1,h2,h3,h4 { font-family:'Quicksand', sans-serif; font-weight:800; letter-spacing:-.02em; color:var(--ink); }
 
-    .container { max-width:var(--container); margin:0 auto; padding:0 1.75rem; }
+    .container { max-width:var(--container); margin:0 auto; padding:0 1.75rem; width:100%; }
     .section { padding:var(--pad) 0; position:relative; overflow:hidden; }
     @media(max-width:900px){ .section { padding:var(--pad-sm) 0; } }
 
@@ -219,9 +220,9 @@
     .link-underline:hover::after { transform:scaleX(0); }
     .link-underline:hover { color:var(--brand); }
 
-    /* Header */
     .site-header {
       position:fixed; top:0; left:0; right:0; z-index:1000;
+      width:100%;
       background:rgba(241,249,247,.92);
       backdrop-filter:blur(12px);
       border-bottom:1px solid transparent;
@@ -230,18 +231,21 @@
     .site-header.scrolled { border-bottom-color:var(--line); box-shadow:0 4px 20px rgba(0,0,0,.04); }
     .header-inner {
       display:flex; align-items:center; justify-content:space-between;
-      padding:1.15rem 0;
+      gap:.5rem;
+      padding:.85rem 0;
+      min-height:var(--header-h);
     }
 
     .logo {
       display: flex;
       align-items: center;
-      gap: .7rem;
-      flex-shrink: 0;
+      gap: .6rem;
+      flex-shrink: 1;
+      min-width: 0;
     }
     .logo-img {
-      width: 100px;
-      height: 55px;
+      width: 90px;
+      height: 50px;
       border-radius: 10px;
       object-fit: cover;
       flex-shrink: 0;
@@ -252,35 +256,40 @@
     }
     .logo-word {
       font-weight: 800;
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       letter-spacing: -.01em;
       color: var(--ink);
+      line-height: 1.2;
+      white-space: nowrap;
     }
     .logo-word span {
       display: block;
-      font-size: .58rem;
+      font-size: .5rem;
       font-weight: 600;
-      letter-spacing: .1em;
+      letter-spacing: .08em;
       color: var(--muted);
-      margin-top: -2px;
+      margin-top: -1px;
       text-transform: uppercase;
-    }
-    @media(max-width:768px) {
-      .logo-img { width: 55px; height: 35px; }
-      .logo-word { font-size: .8rem; }
-      .logo-word span { font-size: .4rem; }
-      .logo { gap: .4rem; }
-    }
-    @media(max-width:480px) {
-      .logo-img { width: 42px; height: 28px; }
-      .logo-word { font-size: .65rem; }
-      .logo-word span { font-size: .35rem; }
-      .logo { gap: .3rem; }
+      white-space: nowrap;
     }
 
-    .main-nav { display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; }
+    @media(max-width: 768px) {
+      .logo-img { width: clamp(56px, 16vw, 78px); height: clamp(34px, 9vw, 44px); }
+      .logo-word { font-size: clamp(.85rem, 3.6vw, .98rem); }
+      .logo-word span { font-size: clamp(.46rem, 2vw, .5rem); }
+      .logo { gap: .5rem; }
+    }
+    @media(max-width: 420px) {
+      .logo-img { width: clamp(50px, 17vw, 62px); height: clamp(30px, 10vw, 38px); }
+      .logo-word { font-size: clamp(.74rem, 4vw, .86rem); }
+      .logo-word span { font-size: clamp(.4rem, 2.2vw, .46rem); letter-spacing:.05em; }
+      .logo { gap: .4rem; }
+    }
+    @media(max-width: 340px) { .logo-word span { display:none; } }
+
+    .main-nav { display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
     .main-nav a {
-      font-weight:700; font-size:.78rem; color:var(--ink); position:relative; padding:.3rem 0;
+      font-weight:700; font-size:.7rem; color:var(--ink); position:relative; padding:.3rem 0;
       text-transform:uppercase;
       letter-spacing:.06em;
       transition:all .3s ease;
@@ -292,24 +301,75 @@
     }
     .main-nav a:hover::after { width:100%; }
     .main-nav a:hover { color:var(--brand); }
-    .header-cta { display:flex; align-items:center; gap:1rem; flex-shrink:0; }
-    .nav-toggle { display:none; background:none; border:none; font-size:1.4rem; color:var(--ink); cursor:pointer; }
+    .header-cta { display:flex; align-items:center; gap:0.6rem; flex-shrink:0; }
+    .header-cta .link-underline { font-size:.7rem; }
+    .header-cta .btn { padding:.5rem 1.2rem; font-size:.7rem; }
+    .nav-toggle {
+      display:none;
+      background:none;
+      border:none;
+      font-size:1.4rem;
+      color:var(--ink);
+      cursor:pointer;
+      flex-shrink:0;
+      width:44px;
+      height:44px;
+      align-items:center;
+      justify-content:center;
+      -webkit-tap-highlight-color: transparent;
+    }
 
     .mobile-nav {
-      position:fixed; inset:0; background:var(--paper); z-index:1100;
-      display:flex; flex-direction:column; padding:1.5rem 1.75rem;
-      transform:translateX(100%); transition:transform .32s cubic-bezier(.4,0,.2,1);
+      position:fixed;
+      top:0; left:0; right:0; bottom:0;
+      width:100%;
+      height:100%;
+      background:var(--paper);
+      z-index:1100;
+      display:flex; flex-direction:column; padding:1.4rem 1.5rem;
+      padding-top: calc(1.4rem + env(safe-area-inset-top, 0px));
+      padding-bottom: calc(1.4rem + env(safe-area-inset-bottom, 0px));
+      transform:translateX(100%);
+      transition:transform .32s cubic-bezier(.4,0,.2,1);
+      overflow-y:auto;
+      -webkit-overflow-scrolling:touch;
+      visibility:hidden;
     }
-    .mobile-nav.open { transform:translateX(0); }
-    .mobile-nav .close-btn { align-self:flex-end; background:none; border:none; font-size:1.6rem; color:var(--ink); cursor:pointer; }
-    .mobile-nav a { font-size:1.1rem; font-weight:600; padding:.8rem 0; border-bottom:1px solid var(--line); color:var(--ink); }
+    .mobile-nav.open { transform:translateX(0); visibility:visible; }
+    .mobile-nav .close-btn {
+      align-self:flex-end; background:none; border:none; font-size:1.8rem; color:var(--ink); cursor:pointer; padding:0.5rem;
+      flex-shrink:0;
+    }
+    .mobile-nav a {
+      font-size:1.1rem; font-weight:600; padding:.8rem 0; border-bottom:1px solid var(--line); color:var(--ink);
+    }
+    .mobile-nav .mobile-cta-group {
+      margin-top:1.8rem;
+      padding-top:1.2rem;
+      border-top:1px solid var(--line);
+      display:flex;
+      flex-direction:column;
+      gap:0.8rem;
+    }
+    .mobile-nav .mobile-cta-group .btn {
+      justify-content:center;
+      width:100%;
+      padding:.9rem;
+      font-size:.85rem;
+    }
+    .mobile-nav .mobile-cta-group .link-underline {
+      text-align:center;
+      justify-content:center;
+      font-size:.9rem;
+    }
+
+    body.nav-open { overflow:hidden; height:100%; }
 
     @media(max-width:960px){
       .main-nav, .header-cta { display:none; }
-      .nav-toggle { display:block; }
+      .nav-toggle { display:flex; }
     }
 
-    /* Page Hero */
     .page-hero {
       padding-top: 8rem;
       padding-bottom: 4rem;
@@ -374,7 +434,6 @@
       flex-wrap: wrap;
     }
 
-    /* Subject Grid */
     .subject-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -412,7 +471,6 @@
       line-height: 1.5;
     }
 
-    /* Feature List */
     .feature-list {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -435,37 +493,126 @@
       flex-shrink: 0;
     }
 
-    /* Learning Experience - Responsive */
-    .learning-grid {
+    .calendar-section {
+      background: var(--brand-deep);
+      color: #fff;
+      padding: 3rem 0;
+    }
+    .calendar-section .section-heading {
+      color: #fff;
+    }
+    .calendar-section .section-sub {
+      color: rgba(255,255,255,0.7);
+    }
+    .calendar-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      margin-top: 2.5rem;
+      gap: 1rem;
+      margin: 2rem auto 0;
+      max-width: 840px;
     }
-    @media(max-width: 768px) {
-      .learning-grid { grid-template-columns: 1fr; }
+    @media(max-width: 900px){ .calendar-grid { grid-template-columns: 1fr; max-width: 420px; } }
+    .term-card {
+      border: 1.5px solid var(--brand-soft);
+      border-radius: 10px;
+      padding: 1.1rem 1rem;
+      transition: all .4s ease;
+      background: rgba(85,191,179,0.05);
+      text-align: center;
+      position: relative;
+      box-shadow: 0 6px 20px rgba(85,191,179,0.05);
     }
-    .learning-card {
-      border-radius: 12px;
-      padding: 1.5rem;
-      height: 100%;
-      transition: all .3s ease;
+    .term-card::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 13px;
+      border: 1px solid rgba(255,255,255,0.06);
+      pointer-events: none;
     }
-    .learning-card:hover { transform: translateY(-4px); }
-    .learning-card .icon {
-      font-size: 1.8rem;
-      color: var(--brand-deep);
-      margin-bottom: .5rem;
+    .term-card:hover { transform: translateY(-3px); }
+    .term-card .term-icon {
+      font-size: 1.3rem;
+      color: var(--brand-soft);
+      margin-bottom: 0.3rem;
       display: block;
+      transition: all .4s ease;
     }
-    .learning-card h4 { font-size: 1.05rem; margin-bottom: .3rem; }
-    .learning-card p {
-      color: var(--muted);
-      font-size: .9rem;
-      line-height: 1.6;
+    .term-card:hover .term-icon { transform: scale(1.1) rotate(8deg); }
+    .term-card .term-name {
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: .88rem;
+      letter-spacing: -.01em;
+    }
+    .term-card .term-dates {
+      color: rgba(255,255,255,0.5);
+      font-size: .72rem;
+      margin-top: .35rem;
+      line-height: 1.5;
+    }
+    .term-card .term-dates strong {
+      color: var(--brand-soft);
+      font-weight: 600;
     }
 
-    /* Footer */
+    .fee-section {
+      background: var(--paper);
+      padding: 3rem 0;
+    }
+    .fee-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    @media(max-width: 700px){ .fee-grid { grid-template-columns: 1fr; } }
+    .fee-card {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid var(--line-soft);
+      text-align: center;
+      transition: all .4s ease;
+    }
+    .fee-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(85,191,179,.1);
+      border-color: var(--brand);
+    }
+    .fee-card .fee-label {
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+    }
+    .fee-card .fee-amount-kes {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--brand-deep);
+      margin: .2rem 0;
+    }
+    .fee-card .fee-amount-kes span {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .fee-card .fee-amount-usd {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: .5rem;
+    }
+    .fee-card p {
+      color: var(--muted);
+      font-size: .85rem;
+      line-height: 1.5;
+    }
+    .fee-card .btn {
+      margin-top: 1rem;
+    }
+
     .site-footer {
       background:#0A1410;
       color:var(--dark-muted);
@@ -528,9 +675,11 @@
     .footer-newsletter .newsletter-box {
       display:flex;
       gap:0.5rem;
+      flex-wrap:wrap;
     }
     .footer-newsletter .newsletter-box input {
-      flex:1;
+      flex:1 1 140px;
+      min-width:0;
       padding:.6rem .8rem;
       border:1px solid var(--dark-line);
       border-radius:8px;
@@ -553,6 +702,7 @@
       padding:.6rem 1.2rem;
       font-size:.7rem;
       white-space:nowrap;
+      flex-shrink:0;
     }
     .footer-bottom {
       display:flex;
@@ -566,8 +716,8 @@
 
     .scroll-top-btn {
       position:fixed;
-      bottom:24px;
-      right:24px;
+      bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+      right: calc(24px + env(safe-area-inset-right, 0px));
       z-index:999;
       width:48px;
       height:48px;
@@ -601,6 +751,12 @@
       .page-hero { padding-top: 6rem; }
       .page-hero h1 { font-size: clamp(1.8rem, 6vw, 2.4rem); }
       .subject-grid { grid-template-columns: 1fr; }
+      .fee-grid { grid-template-columns: 1fr; }
+      .calendar-grid { grid-template-columns: 1fr; }
+      .scroll-top-btn { width:44px; height:44px; font-size:1.05rem; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); right: calc(18px + env(safe-area-inset-right, 0px)); }
+    }
+    @media(max-width:480px){
+      .scroll-top-btn { width:40px; height:40px; font-size:.95rem; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); right: calc(14px + env(safe-area-inset-right, 0px)); }
     }
 
     .final-cta {
@@ -640,7 +796,6 @@
 
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<!-- ===== HEADER ===== -->
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
     <a href="index.html" class="logo" aria-label="Paisley Studio home">
@@ -649,14 +804,14 @@
            class="logo-img"
            width="38" 
            height="38">
-      <span class="logo-word">Paisley Studio<span>British Curriculum Online</span></span>
+      <span class="logo-word">Paisley Studio<span>Online Homeschool Solution</span></span>
     </a>
     <nav class="main-nav" aria-label="Primary">
-      <a href="how-it-works.html">How It Works</a>
-      <a href="teach-with-us.html">Teach With Us</a>
-      <a href="enrolment.html">Enrolment</a>
-      <a href="academic-calendar.html">Academic Calendar</a>
-      <a href="subjects.html">Subjects</a>
+      <a href="key-stage-2.html">Key Stage 2</a>
+      <a href="key-stage-3.html">Key Stage 3</a>
+      <a href="key-stage-4.html">Key Stage 4</a>
+      <a href="key-stage-5.html">Key Stage 5</a>
+      <a href="why-paisley.html">Why Paisley</a>
     </nav>
     <div class="header-cta">
       <a href="index.html#contact" class="link-underline">Contact</a>
@@ -668,29 +823,28 @@
   </div>
 </header>
 
-<!-- ===== MOBILE NAV ===== -->
 <div class="mobile-nav" id="mobileNav">
   <button class="close-btn" id="navClose" aria-label="Close menu"><i class="fas fa-times"></i></button>
-  <a href="index.html#key-stages">Key Stages</a>
+  <a href="key-stage-2.html">Key Stage 2</a>
+  <a href="key-stage-3.html">Key Stage 3</a>
+  <a href="key-stage-4.html">Key Stage 4</a>
   <a href="key-stage-5.html">Key Stage 5</a>
-  <a href="how-it-works.html">How It Works</a>
-  <a href="teach-with-us.html">Teach With Us</a>
-  <a href="enrolment.html">Enrolment</a>
-  <a href="academic-calendar.html">Academic Calendar</a>
-  <a href="subjects.html">Subjects</a>
   <a href="index.html#why-us">Why Paisley</a>
-  <a href="index.html#contact">Contact</a>
+  <a href="index.html#faq">FAQs</a>
+  <div class="mobile-cta-group">
+    <a href="index.html#contact" class="link-underline">Contact</a>
+    <a href="enrolment.html" class="btn btn-primary">Enrol Now</a>
+  </div>
 </div>
 
 <main id="main-content">
 
-  <!-- ===== PAGE HERO ===== -->
   <section class="page-hero">
     <div class="container page-hero-content">
       <span class="section-label"><i class="fas fa-child"></i> Key Stage 2</span>
-      <h1>Building a <span class="highlight">strong foundation</span> for learning.</h1>
+      <h1>Building confident, <span class="highlight">independent learners</span>.</h1>
       <p class="subtitle">Years 3-6 • Ages 7-11</p>
-      <p>Key Stage 2 builds confident, independent reading and writing, mathematical problem-solving, and early scientific enquiry. Pupils develop the skills and knowledge they need for the step up to Key Stage 3.</p>
+      <p>Key Stage 2 is typically for pupils aged 7 to 11 years. The curriculum aims to develop pupils' knowledge, skills, and understanding across a broad range of subjects while preparing them for secondary education.</p>
       <div class="hero-actions">
         <a href="#subjects" class="btn btn-primary"><i class="fas fa-book-open"></i> Explore Subjects</a>
         <a href="enrolment.html" class="btn btn-ghost"><i class="fas fa-user-plus"></i> Enrol Now</a>
@@ -698,117 +852,134 @@
     </div>
   </section>
 
-  <!-- ===== OVERVIEW ===== -->
   <section class="section">
     <div class="container">
       <div class="reveal">
         <span class="section-label"><i class="fas fa-info-circle"></i> Overview</span>
         <h2 class="section-heading">What is Key Stage 2?</h2>
-        <p class="section-sub">Key Stage 2 covers Years 3 to 6 of the British National Curriculum, typically for children aged 7 to 11. It builds on the foundations laid in Key Stage 1 and prepares pupils for the more challenging curriculum of Key Stage 3.</p>
+        <p class="section-sub">Key Stage 2 covers Years 3 to 6 of the British National Curriculum, typically for children aged 7 to 11. It builds on the foundations laid in Key Stage 1 and prepares pupils for the transition to secondary education.</p>
       </div>
       <div class="feature-list" style="margin-top:2rem;">
         <li><i class="fas fa-check-circle"></i> Years 3, 4, 5 and 6</li>
         <li><i class="fas fa-check-circle"></i> Ages 7 to 11</li>
-        <li><i class="fas fa-check-circle"></i> Core subjects: English, Maths, Science</li>
-        <li><i class="fas fa-check-circle"></i> Foundation subjects: Computing, History, Geography, Art, Music, PE</li>
+        <li><i class="fas fa-check-circle"></i> Core subjects: English, Mathematics, Science, Computing</li>
+        <li><i class="fas fa-check-circle"></i> Foundation subjects: History, Geography, Art, Music, PE</li>
         <li><i class="fas fa-check-circle"></i> National Curriculum for England</li>
-        <li><i class="fas fa-check-circle"></i> Online learning with qualified tutors</li>
+        <li><i class="fas fa-check-circle"></i> Preparation for Key Stage 3</li>
       </div>
     </div>
   </section>
 
-  <!-- ===== SUBJECTS ===== -->
   <section class="section" id="subjects" style="background:var(--sage);">
     <div class="container">
       <div class="reveal">
-        <span class="section-label"><i class="fas fa-book"></i> Subjects</span>
-        <h2 class="section-heading">What your child will learn.</h2>
-        <p class="section-sub">A broad and balanced curriculum covering all National Curriculum subjects.</p>
+        <span class="section-label"><i class="fas fa-book"></i> Subjects Offered</span>
+        <h2 class="section-heading">Core subjects for a strong foundation.</h2>
+        <p class="section-sub">Key Stage 2 focuses on core subjects that build essential skills and knowledge.</p>
       </div>
       <div class="subject-grid stagger-children">
         <div class="subject-card animate-slide-up" style="animation-delay:0.05s;">
           <span class="icon"><i class="fas fa-book-open"></i></span>
           <h4>English</h4>
-          <p>Reading, writing, grammar, punctuation, spelling, speaking and listening. Pupils develop fluency and comprehension skills.</p>
+          <p>Reading, writing, grammar, vocabulary, spoken English. Developing confident, independent reading and writing skills.</p>
         </div>
         <div class="subject-card animate-slide-up" style="animation-delay:0.15s;">
           <span class="icon"><i class="fas fa-calculator"></i></span>
           <h4>Mathematics</h4>
-          <p>Number, calculation, fractions, decimals, percentages, measurement, geometry, statistics, and problem-solving.</p>
+          <p>Number, geometry, measure, statistics, algebra. Developing mathematical problem-solving and reasoning skills.</p>
         </div>
         <div class="subject-card animate-slide-up" style="animation-delay:0.25s;">
           <span class="icon"><i class="fas fa-flask"></i></span>
           <h4>Science</h4>
-          <p>Plants, animals, humans, materials, forces, light, sound, electricity, Earth and space, and scientific enquiry skills.</p>
+          <p>Biology, Chemistry, Physics. Developing scientific enquiry skills and understanding of the natural world.</p>
         </div>
         <div class="subject-card animate-slide-up" style="animation-delay:0.35s;">
           <span class="icon"><i class="fas fa-laptop"></i></span>
           <h4>Computing</h4>
-          <p>Programming, digital literacy, online safety, using technology responsibly and creatively.</p>
-        </div>
-        <div class="subject-card animate-slide-up" style="animation-delay:0.45s;">
-          <span class="icon"><i class="fas fa-landmark"></i></span>
-          <h4>History</h4>
-          <p>British history from Stone Age to present day, ancient civilisations, and significant historical figures and events.</p>
-        </div>
-        <div class="subject-card animate-slide-up" style="animation-delay:0.55s;">
-          <span class="icon"><i class="fas fa-globe-africa"></i></span>
-          <h4>Geography</h4>
-          <p>Locational knowledge, place knowledge, human and physical geography, map skills, and fieldwork.</p>
-        </div>
-        <div class="subject-card animate-slide-up" style="animation-delay:0.65s;">
-          <span class="icon"><i class="fas fa-palette"></i></span>
-          <h4>Art &amp; Design</h4>
-          <p>Drawing, painting, sculpture, printing, collage, and exploring the work of great artists and designers.</p>
-        </div>
-        <div class="subject-card animate-slide-up" style="animation-delay:0.75s;">
-          <span class="icon"><i class="fas fa-music"></i></span>
-          <h4>Music</h4>
-          <p>Singing, playing instruments, composition, listening to and appraising music from different cultures and traditions.</p>
-        </div>
-        <div class="subject-card animate-slide-up" style="animation-delay:0.85s;">
-          <span class="icon"><i class="fas fa-running"></i></span>
-          <h4>Physical Education</h4>
-          <p>Games, gymnastics, dance, athletics, swimming, and developing coordination, control and teamwork.</p>
+          <p>Programming, digital literacy, online safety. Developing competence in computing and safe use of technology.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== LEARNING EXPERIENCE ===== -->
   <section class="section">
     <div class="container">
       <div class="reveal-left">
-        <span class="section-label"><i class="fas fa-chalkboard-user"></i> Learning Experience</span>
-        <h2 class="section-heading">How your child will learn.</h2>
+        <span class="section-label"><i class="fas fa-flag-checkered"></i> Learning Outcomes</span>
+        <h2 class="section-heading">By the end of Key Stage 2, pupils should:</h2>
       </div>
-      <div class="learning-grid">
-        <div class="learning-card reveal" style="transition-delay:0.1s; background:var(--brand-soft);">
-          <span class="icon"><i class="fas fa-video"></i></span>
-          <h4>Live Online Classes</h4>
-          <p>Interactive video lessons with qualified tutors. Small class sizes ensure every pupil gets attention.</p>
+      <div class="feature-list" style="margin-top:1.5rem;">
+        <li><i class="fas fa-check-circle"></i> Read confidently and independently</li>
+        <li><i class="fas fa-check-circle"></i> Write effectively for a range of purposes</li>
+        <li><i class="fas fa-check-circle"></i> Use mathematical knowledge to solve problems</li>
+        <li><i class="fas fa-check-circle"></i> Apply scientific enquiry skills</li>
+        <li><i class="fas fa-check-circle"></i> Demonstrate competence in computing</li>
+        <li><i class="fas fa-check-circle"></i> Show understanding of historical and geographical concepts</li>
+        <li><i class="fas fa-check-circle"></i> Participate actively in creative and physical activities</li>
+        <li><i class="fas fa-check-circle"></i> Be prepared for the challenges of Key Stage 3</li>
+      </div>
+    </div>
+  </section>
+
+  <section class="calendar-section">
+    <div class="container">
+      <div class="reveal-right">
+        <span class="section-label" style="color:var(--brand-soft);"><i class="fas fa-calendar"></i> Academic Calendar · 2025/26</span>
+        <h2 class="section-heading" style="color:#fff;">Three terms, published in advance.</h2>
+        <p class="section-sub" style="color:rgba(255,255,255,0.7);">Key Stage 2 follows the same academic calendar as all other Key Stages.</p>
+      </div>
+      <div class="calendar-grid">
+        <div class="term-card reveal-scale" style="transition-delay:0.05s;">
+          <span class="term-icon"><i class="fas fa-leaf"></i></span>
+          <div class="term-name">Term 1 — Michaelmas</div>
+          <div class="term-dates"><strong>08 Sept 2025</strong> to <strong>04 Dec 2025</strong></div>
         </div>
-        <div class="learning-card reveal" style="transition-delay:0.2s; background:var(--sage);">
-          <span class="icon"><i class="fas fa-pencil-alt"></i></span>
-          <h4>Assignments &amp; Marking</h4>
-          <p>Regular homework and assignments marked by tutors with detailed feedback to support progress.</p>
+        <div class="term-card reveal-scale" style="transition-delay:0.15s;">
+          <span class="term-icon"><i class="fas fa-snowflake"></i></span>
+          <div class="term-name">Term 2 — Lenten</div>
+          <div class="term-dates"><strong>05 Jan 2026</strong> to <strong>27 Mar 2026</strong></div>
         </div>
-        <div class="learning-card reveal" style="transition-delay:0.3s; background:var(--paper); border:1px solid var(--line-soft);">
-          <span class="icon"><i class="fas fa-clock"></i></span>
-          <h4>Flexible Schedule</h4>
-          <p>Learning fits around your family's schedule. Lessons are recorded for revision and catch-up.</p>
+        <div class="term-card reveal-scale" style="transition-delay:0.25s;">
+          <span class="term-icon"><i class="fas fa-seedling"></i></span>
+          <div class="term-name">Term 3 — Easter</div>
+          <div class="term-dates"><strong>27 Apr 2026</strong> to <strong>03 Jul 2026</strong></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== CTA ===== -->
+  <section class="fee-section" id="fees">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-label"><i class="fas fa-coins"></i> Fee Structure</span>
+        <h2 class="section-heading">Choose the learning model that fits your family.</h2>
+        <p class="section-sub">We offer two flexible learning options for Key Stage 2.</p>
+      </div>
+      <div class="fee-grid">
+        <div class="fee-card reveal" style="transition-delay:0.1s;">
+          <div class="fee-label">Instructor-Led</div>
+          <div class="fee-amount-kes">KSh 67,000 <span>/ term</span></div>
+          <div class="fee-amount-usd">≈ $519 USD / term</div>
+          <p>Live interactive classes with qualified tutors. Small class sizes. Regular assignments and feedback.</p>
+          <a href="enrolment.html" class="btn btn-primary">Enrol Now</a>
+        </div>
+        <div class="fee-card reveal" style="transition-delay:0.2s;">
+          <div class="fee-label">Student-Led (Self-Paced)</div>
+          <div class="fee-amount-kes">KSh 35,000 <span>/ term</span></div>
+          <div class="fee-amount-usd">≈ $271 USD / term</div>
+          <p>Flexible self-paced learning with recorded lessons. Access to resources and assignments. Tutor support available.</p>
+          <a href="enrolment.html" class="btn btn-primary">Enrol Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section style="padding:0 0 var(--pad) 0;">
     <div class="container">
       <div class="final-cta reveal-scale">
         <div>
           <h2>Ready to start Key Stage 2?</h2>
-          <p>Enrol your child today and give them a strong foundation for their educational journey.</p>
+          <p>Give your child a strong foundation with qualified tutors and a flexible schedule.</p>
         </div>
         <a href="enrolment.html" class="btn btn-primary"><i class="fas fa-arrow-right"></i> Enrol Now</a>
       </div>
@@ -817,12 +988,11 @@
 
 </main>
 
-<!-- ===== FOOTER ===== -->
 <footer class="site-footer">
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <span class="logo-word">Paisley Studio<span>British Curriculum Online</span></span>
+        <span class="logo-word">Paisley Studio<span>Online Homeschool Solution</span></span>
         <p>An online homeschooling solution delivering the National Curriculum for England from Key Stage 2 through Key Stage 5, with IGCSE and A-Level preparation.</p>
         <div class="contact-info">
           <a href="mailto:info@paisleystudio.online"><i class="fas fa-envelope"></i> info@paisleystudio.online</a>
@@ -839,11 +1009,12 @@
       </div>
       <div class="footer-col">
         <h6>Site</h6>
-        <a href="how-it-works.html">How It Works</a>
-        <a href="teach-with-us.html">Teach With Us</a>
-        <a href="enrolment.html">Enrolment</a>
-        <a href="academic-calendar.html">Academic Calendar</a>
-        <a href="subjects.html">Subjects</a>
+        <a href="key-stage-2.html">Key Stage 2</a>
+        <a href="key-stage-3.html">Key Stage 3</a>
+        <a href="key-stage-4.html">Key Stage 4</a>
+        <a href="key-stage-5.html">Key Stage 5</a>
+        <a href="index.html#why-us">Why Paisley</a>
+        <a href="index.html#faq">FAQs</a>
       </div>
       <div class="footer-col">
         <h6>Connect</h6>
@@ -889,16 +1060,24 @@ const mobileNav = document.getElementById('mobileNav');
 
 function openNav() {
   mobileNav.classList.add('open');
+  document.body.classList.add('nav-open');
   navToggle.setAttribute('aria-expanded', 'true');
 }
 function closeNav() {
   mobileNav.classList.remove('open');
+  document.body.classList.remove('nav-open');
   navToggle.setAttribute('aria-expanded', 'false');
 }
 
 navToggle.addEventListener('click', openNav);
 navClose.addEventListener('click', closeNav);
-mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+mobileNav.querySelectorAll('a:not(.mobile-cta-group a)').forEach(a => a.addEventListener('click', closeNav));
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 960 && mobileNav.classList.contains('open')) {
+    closeNav();
+  }
+});
 
 const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
 const revealObserver = new IntersectionObserver((entries) => {
