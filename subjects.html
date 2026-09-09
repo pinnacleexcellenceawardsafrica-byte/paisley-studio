@@ -23,8 +23,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="icon" href="https://aws-filez.s3.eu-north-1.amazonaws.com/cropped-Paisely-logo-Resized.png" sizes="32x32" />
   <style>
-    /* ===== COPY ALL STYLES FROM HOW-IT-WORKS.HTML ===== */
-    /* (Same styles - paste them here) */
     :root {
       --brand: #55BFB3;
       --brand-deep: #245F5A;
@@ -84,13 +82,23 @@
     .animate-float { animation: floatY 3s ease-in-out infinite; }
 
     .stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
-    .stagger-children > *:nth-child(2) { animation-delay: 0.15s; }
-    .stagger-children > *:nth-child(3) { animation-delay: 0.25s; }
-    .stagger-children > *:nth-child(4) { animation-delay: 0.35s; }
-    .stagger-children > *:nth-child(5) { animation-delay: 0.45s; }
-    .stagger-children > *:nth-child(6) { animation-delay: 0.55s; }
-    .stagger-children > *:nth-child(7) { animation-delay: 0.65s; }
-    .stagger-children > *:nth-child(8) { animation-delay: 0.75s; }
+    .stagger-children > *:nth-child(2) { animation-delay: 0.10s; }
+    .stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
+    .stagger-children > *:nth-child(4) { animation-delay: 0.20s; }
+    .stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
+    .stagger-children > *:nth-child(6) { animation-delay: 0.30s; }
+    .stagger-children > *:nth-child(7) { animation-delay: 0.35s; }
+    .stagger-children > *:nth-child(8) { animation-delay: 0.40s; }
+    .stagger-children > *:nth-child(9) { animation-delay: 0.45s; }
+    .stagger-children > *:nth-child(10) { animation-delay: 0.50s; }
+    .stagger-children > *:nth-child(11) { animation-delay: 0.55s; }
+    .stagger-children > *:nth-child(12) { animation-delay: 0.60s; }
+    .stagger-children > *:nth-child(13) { animation-delay: 0.65s; }
+    .stagger-children > *:nth-child(14) { animation-delay: 0.70s; }
+    .stagger-children > *:nth-child(15) { animation-delay: 0.75s; }
+    .stagger-children > *:nth-child(16) { animation-delay: 0.80s; }
+    .stagger-children > *:nth-child(17) { animation-delay: 0.85s; }
+    .stagger-children > *:nth-child(18) { animation-delay: 0.90s; }
 
     .reveal {
       opacity: 0;
@@ -238,17 +246,20 @@
     .site-header.scrolled { border-bottom-color:var(--line); box-shadow:0 4px 20px rgba(0,0,0,.04); }
     .header-inner {
       display:flex; align-items:center; justify-content:space-between;
-      padding:1.15rem 0;
+      padding:.85rem 0;
+      min-height:68px;
     }
 
     .logo {
       display: flex;
       align-items: center;
-      gap: .7rem;
+      gap: .6rem;
+      flex-shrink: 1;
+      min-width: 0;
     }
     .logo-img {
-      width: 100px;
-      height: 55px;
+      width: 90px;
+      height: 50px;
       border-radius: 10px;
       object-fit: cover;
       flex-shrink: 0;
@@ -259,23 +270,40 @@
     }
     .logo-word {
       font-weight: 800;
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       letter-spacing: -.01em;
       color: var(--ink);
+      line-height: 1.2;
+      white-space: nowrap;
     }
     .logo-word span {
       display: block;
-      font-size: .58rem;
+      font-size: .5rem;
       font-weight: 600;
-      letter-spacing: .1em;
+      letter-spacing: .08em;
       color: var(--muted);
-      margin-top: -2px;
+      margin-top: -1px;
       text-transform: uppercase;
+      white-space: nowrap;
     }
 
-    .main-nav { display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; }
+    @media(max-width: 768px) {
+      .logo-img { width: clamp(56px, 16vw, 78px); height: clamp(34px, 9vw, 44px); }
+      .logo-word { font-size: clamp(.85rem, 3.6vw, .98rem); }
+      .logo-word span { font-size: clamp(.46rem, 2vw, .5rem); }
+      .logo { gap: .5rem; }
+    }
+    @media(max-width: 420px) {
+      .logo-img { width: clamp(50px, 17vw, 62px); height: clamp(30px, 10vw, 38px); }
+      .logo-word { font-size: clamp(.74rem, 4vw, .86rem); }
+      .logo-word span { font-size: clamp(.4rem, 2.2vw, .46rem); letter-spacing:.05em; }
+      .logo { gap: .4rem; }
+    }
+    @media(max-width: 340px) { .logo-word span { display:none; } }
+
+    .main-nav { display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
     .main-nav a {
-      font-weight:700; font-size:.78rem; color:var(--ink); position:relative; padding:.3rem 0;
+      font-weight:700; font-size:.7rem; color:var(--ink); position:relative; padding:.3rem 0;
       text-transform:uppercase;
       letter-spacing:.06em;
       transition:all .3s ease;
@@ -287,21 +315,73 @@
     }
     .main-nav a:hover::after { width:100%; }
     .main-nav a:hover { color:var(--brand); }
-    .header-cta { display:flex; align-items:center; gap:1rem; flex-shrink:0; }
-    .nav-toggle { display:none; background:none; border:none; font-size:1.4rem; color:var(--ink); cursor:pointer; }
+    .header-cta { display:flex; align-items:center; gap:0.6rem; flex-shrink:0; }
+    .header-cta .link-underline { font-size:.7rem; }
+    .header-cta .btn { padding:.5rem 1.2rem; font-size:.7rem; }
+    .nav-toggle {
+      display:none;
+      background:none;
+      border:none;
+      font-size:1.4rem;
+      color:var(--ink);
+      cursor:pointer;
+      flex-shrink:0;
+      width:44px;
+      height:44px;
+      align-items:center;
+      justify-content:center;
+      -webkit-tap-highlight-color: transparent;
+    }
 
     .mobile-nav {
-      position:fixed; inset:0; background:var(--paper); z-index:1100;
-      display:flex; flex-direction:column; padding:1.5rem 1.75rem;
-      transform:translateX(100%); transition:transform .32s cubic-bezier(.4,0,.2,1);
+      position:fixed;
+      top:0; left:0; right:0; bottom:0;
+      width:100%;
+      height:100%;
+      background:var(--paper);
+      z-index:1100;
+      display:flex; flex-direction:column; padding:1.4rem 1.5rem;
+      padding-top: calc(1.4rem + env(safe-area-inset-top, 0px));
+      padding-bottom: calc(1.4rem + env(safe-area-inset-bottom, 0px));
+      transform:translateX(100%);
+      transition:transform .32s cubic-bezier(.4,0,.2,1);
+      overflow-y:auto;
+      -webkit-overflow-scrolling:touch;
+      visibility:hidden;
     }
-    .mobile-nav.open { transform:translateX(0); }
-    .mobile-nav .close-btn { align-self:flex-end; background:none; border:none; font-size:1.6rem; color:var(--ink); cursor:pointer; }
-    .mobile-nav a { font-size:1.1rem; font-weight:600; padding:.8rem 0; border-bottom:1px solid var(--line); color:var(--ink); }
+    .mobile-nav.open { transform:translateX(0); visibility:visible; }
+    .mobile-nav .close-btn {
+      align-self:flex-end; background:none; border:none; font-size:1.8rem; color:var(--ink); cursor:pointer; padding:0.5rem;
+      flex-shrink:0;
+    }
+    .mobile-nav a {
+      font-size:1.1rem; font-weight:600; padding:.8rem 0; border-bottom:1px solid var(--line); color:var(--ink);
+    }
+    .mobile-nav .mobile-cta-group {
+      margin-top:1.8rem;
+      padding-top:1.2rem;
+      border-top:1px solid var(--line);
+      display:flex;
+      flex-direction:column;
+      gap:0.8rem;
+    }
+    .mobile-nav .mobile-cta-group .btn {
+      justify-content:center;
+      width:100%;
+      padding:.9rem;
+      font-size:.85rem;
+    }
+    .mobile-nav .mobile-cta-group .link-underline {
+      text-align:center;
+      justify-content:center;
+      font-size:.9rem;
+    }
+
+    body.nav-open { overflow:hidden; height:100%; }
 
     @media(max-width:960px){
       .main-nav, .header-cta { display:none; }
-      .nav-toggle { display:block; }
+      .nav-toggle { display:flex; }
     }
 
     .page-hero {
@@ -364,21 +444,23 @@
 
     .filter-bar {
       display: flex;
-      gap: 1rem;
+      gap: .6rem;
       flex-wrap: wrap;
       margin-top: 2rem;
     }
     .filter-btn {
-      padding: .5rem 1.2rem;
+      padding: .45rem 1.1rem;
       border-radius: 30px;
       border: 1px solid var(--line);
       background: var(--surface);
       font-family: 'Quicksand', sans-serif;
       font-weight: 600;
-      font-size: .78rem;
+      font-size: .72rem;
       color: var(--muted);
       cursor: pointer;
       transition: all .3s ease;
+      text-transform: uppercase;
+      letter-spacing: .04em;
     }
     .filter-btn:hover {
       border-color: var(--brand);
@@ -407,6 +489,7 @@
       border: 1px solid var(--line-soft);
       transition: all .4s ease;
       position: relative;
+      display: block;
     }
     .subject-card:hover {
       transform: translateY(-4px);
@@ -415,18 +498,36 @@
     }
     .subject-card .icon {
       font-size: 1.6rem;
-      margin-bottom: .5rem;
+      margin-bottom: .4rem;
       display: block;
+    }
+    .subject-card .category-tag {
+      display: inline-block;
+      font-size: .6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--muted);
+      background: var(--paper);
+      padding: .15rem .6rem;
+      border-radius: 10px;
+      border: 1px solid var(--line-soft);
+      margin-bottom: .3rem;
     }
     .subject-card h4 {
       font-size: 1rem;
-      margin-bottom: .2rem;
+      margin-bottom: .15rem;
+    }
+    .subject-card .desc {
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.4;
     }
     .subject-card .stages {
       display: flex;
       flex-wrap: wrap;
       gap: .3rem;
-      margin-top: .5rem;
+      margin-top: .6rem;
     }
     .subject-card .stages span {
       font-size: .6rem;
@@ -437,14 +538,16 @@
       border-radius: 12px;
       border: 1px solid var(--line-soft);
     }
-    .subject-card .category {
+    .subject-card .exam-badge {
       display: inline-block;
-      font-size: .6rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      color: var(--muted);
-      margin-bottom: .3rem;
+      margin-top: .5rem;
+      font-size: .65rem;
+      font-weight: 700;
+      color: var(--brand-deep);
+      background: var(--sage);
+      padding: .15rem .7rem;
+      border-radius: 12px;
+      border: 1px solid var(--brand-soft);
     }
 
     .site-footer {
@@ -509,9 +612,11 @@
     .footer-newsletter .newsletter-box {
       display:flex;
       gap:0.5rem;
+      flex-wrap:wrap;
     }
     .footer-newsletter .newsletter-box input {
-      flex:1;
+      flex:1 1 140px;
+      min-width:0;
       padding:.6rem .8rem;
       border:1px solid var(--dark-line);
       border-radius:8px;
@@ -534,6 +639,7 @@
       padding:.6rem 1.2rem;
       font-size:.7rem;
       white-space:nowrap;
+      flex-shrink:0;
     }
     .footer-bottom {
       display:flex;
@@ -547,8 +653,8 @@
 
     .scroll-top-btn {
       position:fixed;
-      bottom:24px;
-      right:24px;
+      bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+      right: calc(24px + env(safe-area-inset-right, 0px));
       z-index:999;
       width:48px;
       height:48px;
@@ -582,8 +688,12 @@
       .page-hero { padding-top: 6rem; }
       .page-hero h1 { font-size: clamp(1.8rem, 6vw, 2.4rem); }
       .subject-grid { grid-template-columns: 1fr; }
-      .filter-bar { gap: .5rem; }
-      .filter-btn { padding: .35rem .8rem; font-size: .7rem; }
+      .filter-bar { gap: .4rem; }
+      .filter-btn { padding: .3rem .7rem; font-size: .65rem; }
+      .scroll-top-btn { width:44px; height:44px; font-size:1.05rem; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); right: calc(18px + env(safe-area-inset-right, 0px)); }
+    }
+    @media(max-width:480px){
+      .scroll-top-btn { width:40px; height:40px; font-size:.95rem; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); right: calc(14px + env(safe-area-inset-right, 0px)); }
     }
 
     .final-cta {
@@ -617,6 +727,21 @@
     .final-cta p { color:rgba(255,255,255,.78); margin-top:.6rem; max-width:26rem; font-size:.96rem; position:relative; z-index:1; }
     .final-cta .btn-primary { background:var(--brand); color:#fff; position:relative; z-index:1; }
     .final-cta .btn-primary:hover { background:var(--brand-soft); transform:translateY(-3px); box-shadow:0 10px 30px rgba(85,191,179,.3); }
+
+    .no-results {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 1.1rem;
+      width: 100%;
+    }
+    .no-results i {
+      font-size: 2.5rem;
+      color: var(--brand-soft);
+      display: block;
+      margin-bottom: .5rem;
+    }
   </style>
 </head>
 <body>
@@ -635,15 +760,12 @@
       <span class="logo-word">Paisley Studio<span>Online Homeschooling Solution</span></span>
     </a>
     <nav class="main-nav" aria-label="Primary">
-      
-         <a href="subjects.html">Subjects</a>
-      <a href="how-it-works.html">How It Works</a>
-      <a href="teach-with-us.html">Teach With Us</a>
-      <a href="enrolment.html">Enrolment</a>
-      <a href="academic-calendar.html">Academic Calendar</a>
-      
-      
-      
+      <a href="subjects.html">Subjects</a>
+      <a href="key-stage-2.html">Key Stage 2</a>
+      <a href="key-stage-3.html">Key Stage 3</a>
+      <a href="key-stage-4.html">Key Stage 4</a>
+      <a href="key-stage-5.html">Key Stage 5</a>
+      <a href="why-paisley.html">Why Paisley</a>
     </nav>
     <div class="header-cta">
       <a href="index.html#contact" class="link-underline">Contact</a>
@@ -658,15 +780,17 @@
 <!-- ===== MOBILE NAV ===== -->
 <div class="mobile-nav" id="mobileNav">
   <button class="close-btn" id="navClose" aria-label="Close menu"><i class="fas fa-times"></i></button>
-  <a href="index.html#key-stages">Key Stages</a>
-  <a href="key-stage-5.html">Key Stage 5</a>
-  <a href="how-it-works.html">How It Works</a>
-  <a href="teach-with-us.html">Teach With Us</a>
-  <a href="enrolment.html">Enrolment</a>
-  <a href="academic-calendar.html">Academic Calendar</a>
   <a href="subjects.html">Subjects</a>
-  <a href="why-paisley.html">Why Paisley</a>
-  <a href="index.html#contact">Contact</a>
+  <a href="key-stage-2.html">Key Stage 2</a>
+  <a href="key-stage-3.html">Key Stage 3</a>
+  <a href="key-stage-4.html">Key Stage 4</a>
+  <a href="key-stage-5.html">Key Stage 5</a>
+  <a href="index.html#why-us">Why Paisley</a>
+  <a href="index.html#faq">FAQs</a>
+  <div class="mobile-cta-group">
+    <a href="index.html#contact" class="link-underline">Contact</a>
+    <a href="enrolment.html" class="btn btn-primary">Enrol Now</a>
+  </div>
 </div>
 
 <main id="main-content">
@@ -702,138 +826,188 @@
         <button class="filter-btn" data-filter="core">Core</button>
         <button class="filter-btn" data-filter="humanities">Humanities</button>
         <button class="filter-btn" data-filter="sciences">Sciences</button>
-        <button class="filter-btn" data-filter="languages">Languages</button>
-        <button class="filter-btn" data-filter="arts">Arts</button>
       </div>
 
       <div class="subject-grid stagger-children" id="subjectGrid">
-        <div class="subject-card animate-slide-up" data-category="core" data-stage="ks2" style="animation-delay:0.05s;">
+
+        <!-- ===== KEY STAGE 2 - 4 SUBJECTS ===== -->
+        <!-- English (KS2, KS3, KS4) -->
+        <div class="subject-card" data-category="core" data-stage="ks2 ks3 ks4">
           <span class="icon" style="color:var(--subject-english);"><i class="fas fa-book-open"></i></span>
-          <span class="category">Core</span>
+          <span class="category-tag">Core</span>
           <h4>English</h4>
-          <p style="font-size:.82rem;color:var(--muted);line-height:1.4;">Reading, writing, grammar, punctuation, spelling, speaking and listening.</p>
+          <p class="desc">Reading, writing, grammar, punctuation, spelling, speaking and listening.</p>
           <div class="stages"><span>KS2</span><span>KS3</span><span>KS4</span></div>
+          <span class="exam-badge">IGCSE</span>
         </div>
 
-        <div class="subject-card animate-slide-up" data-category="core" data-stage="ks4 ks5" style="animation-delay:0.15s;">
-          <span class="icon" style="color:var(--subject-english);"><i class="fas fa-book"></i></span>
-          <span class="category">Core</span>
-          <h4>English Literature</h4>
-          <p style="font-size:.82rem;color:var(--muted);line-height:1.4;">Study of prose, poetry and drama. Critical analysis and essay writing.</p>
-          <div class="stages"><span>KS4</span><span>KS5</span></div>
-        </div>
-
-        <div class="subject-card animate-slide-up" data-category="core" data-stage="ks2 ks3 ks4 ks5" style="animation-delay:0.25s;">
+        <!-- Mathematics (KS2, KS3, KS4, KS5) -->
+        <div class="subject-card" data-category="core" data-stage="ks2 ks3 ks4 ks5">
           <span class="icon" style="color:var(--subject-maths);"><i class="fas fa-calculator"></i></span>
-          <span class="category">Core</span>
+          <span class="category-tag">Core</span>
           <h4>Mathematics</h4>
-          <p style="font-size:.82rem;color:var(--muted);line-height:1.4;">Number, algebra, geometry, statistics, probability. Problem-solving skills.</p>
+          <p class="desc">Number, algebra, geometry, statistics, probability. Problem-solving skills.</p>
           <div class="stages"><span>KS2</span><span>KS3</span><span>KS4</span><span>KS5</span></div>
+          <span class="exam-badge">IGCSE / A-Level</span>
         </div>
 
-        <div class="subject-card animate-slide-up" data-category="core" data-stage="ks5" style="animation-delay:0.35s;">
-          <span class="icon" style="color:var(--subject-maths);"><i class="fas fa-square-root-variable"></i></span>
-          <span class="category">Core</span>
-          <h4>Further Mathematics</h4>
-          <p style="font-size:.82rem;color:var(--muted);line-height:1.4;">Advanced pure mathematics, further mechanics, further statistics.</p>
-          <div class="stages"><span>KS5</span></div>
-        </div>
-
-        <div class="subject-card animate-slide-up" data-category="sciences" data-stage="ks2 ks3" style="animation-delay:0.45s;">
+        <!-- Science (KS2, KS3 ONLY) -->
+        <div class="subject-card" data-category="sciences" data-stage="ks2 ks3">
           <span class="icon" style="color:var(--subject-science);"><i class="fas fa-flask"></i></span>
-          <span class="category">Sciences</span>
+          <span class="category-tag">Sciences</span>
           <h4>Science</h4>
-          <p style="font-size:.82rem;color:var(--muted);line-height:1.4;">Plants, animals, materials, forces, light, sound, electricity, Earth and space.</p>
+          <p class="desc">Plants, animals, materials, forces, light, sound, electricity, Earth and space.</p>
           <div class="stages"><span>KS2</span><span>KS3</span></div>
         </div>
 
-        <div class="subject-card animate-slide-up" data-category="sciences" data-stage="ks4 ks5" style="animation-delay:0.55s;">
-          <span class="icon" style="color:var(--subject-science);"><i class="fas fa-atom"></i></span>
-          <span class="category">Sciences</span>
-          <h4>Physics</h4>
-          <p style="font-size:.82rem;color:var(--muted);line-height:1.4;">Mechanics, waves, electricity, quantum physics, astrophysics.</p>
-          <div class="stages"><span>KS4</span><span>KS5</span></div>
-        </div>
-
-        <div class="subject-card animate-slide-up" data-category="sciences" data-stage="ks4 ks5" style="animation-delay:0.65s;">
-          <span class="icon" style="color:var(--subject-science);"><i class="fas fa-flask"></i></span>
-          <span class="category">Sciences</span>
-          <h4>Chemistry</h4>
-          <p style="font-size:.82rem;color:var(--muted);line-height:1.4;">Organic, inorganic, and physical chemistry. Practical skills.</p>
-          <div class="stages"><span>KS4</span><span>KS5</span></div>
-        </div>
-
-        <div class="subject-card animate-slide-up" data-category="sciences" data-stage="ks4 ks5" style="animation-delay:0.75s;">
-          <span class="icon" style="color:var(--subject-science);"><i class="fas fa-dna"></i></span>
-          <span class="category">Sciences</span>
-          <h4>Biology</h4>
-          <p style="font-size:.82rem;color:var(--muted);line-height:1.4;">Cell biology, genetics, evolution, ecology, human biology.</p>
-          <div class="stages"><span>KS4</span><span>KS5</span></div>
-        </div>
-
-        <div class="subject-card animate-slide-up" data-category="humanities" data-stage="ks3 ks4 ks5" style="animation-delay:0.85s;">
-          <span class="icon" style="color:var(--subject-humanities);"><i class="fas fa-landmark"></i></span>
-          <span class="category">Humanities</span>
-          <h4>History</h4>
-          <p style="font-size:.82rem;color:var(--muted);line-height:1.4;">British and world history, significant events, historical enquiry.</p>
-          <div class="stages"><span>KS3</span><span>KS4</span><span>KS5</span></div>
-        </div>
-
-        <div class="subject-card animate-slide-up" data-category="humanities" data-stage="ks3 ks4 ks5" style="animation-delay:0.95s;">
-          <span class="icon" style="color:var(--subject-humanities);"><i class="fas fa-globe-africa"></i></span>
-          <span class="category">Humanities</span>
-          <h4>Geography</h4>
-          <p style="font-size:.82rem;color:var(--muted);line-height:1.4;">Physical and human geography. Map skills, fieldwork, global issues.</p>
-          <div class="stages"><span>KS3</span><span>KS4</span><span>KS5</span></div>
-        </div>
-
-        <div class="subject-card animate-slide-up" data-category="core" data-stage="ks2 ks3" style="animation-delay:1.05s;">
+        <!-- Computing (KS2, KS3 ONLY) -->
+        <div class="subject-card" data-category="core" data-stage="ks2 ks3">
           <span class="icon" style="color:var(--brand);"><i class="fas fa-laptop"></i></span>
-          <span class="category">Core</span>
+          <span class="category-tag">Core</span>
           <h4>Computing</h4>
-          <p style="font-size:.82rem;color:var(--muted);line-height:1.4;">Programming, digital literacy, online safety, using technology responsibly.</p>
+          <p class="desc">Programming, digital literacy, online safety, using technology responsibly.</p>
           <div class="stages"><span>KS2</span><span>KS3</span></div>
         </div>
 
-        <div class="subject-card animate-slide-up" data-category="languages" data-stage="ks3 ks4 ks5" style="animation-delay:1.15s;">
-          <span class="icon" style="color:var(--subject-languages);"><i class="fas fa-language"></i></span>
-          <span class="category">Languages</span>
-          <h4>Modern Foreign Languages</h4>
-          <p style="font-size:.82rem;color:var(--muted);line-height:1.4;">French, Spanish, or other languages. Speaking, listening, reading, writing.</p>
-          <div class="stages"><span>KS3</span><span>KS4</span><span>KS5</span></div>
-        </div>
-
-        <div class="subject-card animate-slide-up" data-category="core" data-stage="ks4 ks5" style="animation-delay:1.25s;">
-          <span class="icon" style="color:var(--subject-maths);"><i class="fas fa-chart-line"></i></span>
-          <span class="category">Core</span>
-          <h4>Business Studies</h4>
-          <p style="font-size:.82rem;color:var(--muted);line-height:1.4;">Business operations, marketing, finance, entrepreneurship.</p>
+        <!-- ===== KEY STAGE 4 - IGCSE (CORE 6) ===== -->
+        <!-- Physics (KS4, KS5) -->
+        <div class="subject-card" data-category="sciences" data-stage="ks4 ks5">
+          <span class="icon" style="color:var(--subject-science);"><i class="fas fa-atom"></i></span>
+          <span class="category-tag">Sciences</span>
+          <h4>Physics</h4>
+          <p class="desc">Mechanics, waves, electricity, quantum physics, astrophysics.</p>
           <div class="stages"><span>KS4</span><span>KS5</span></div>
+          <span class="exam-badge">IGCSE / A-Level</span>
         </div>
 
-        <div class="subject-card animate-slide-up" data-category="core" data-stage="ks5" style="animation-delay:1.35s;">
+        <!-- Chemistry (KS4, KS5) -->
+        <div class="subject-card" data-category="sciences" data-stage="ks4 ks5">
+          <span class="icon" style="color:var(--subject-science);"><i class="fas fa-flask"></i></span>
+          <span class="category-tag">Sciences</span>
+          <h4>Chemistry</h4>
+          <p class="desc">Organic, inorganic, and physical chemistry. Practical skills.</p>
+          <div class="stages"><span>KS4</span><span>KS5</span></div>
+          <span class="exam-badge">IGCSE / A-Level</span>
+        </div>
+
+        <!-- Biology (KS4, KS5) -->
+        <div class="subject-card" data-category="sciences" data-stage="ks4 ks5">
+          <span class="icon" style="color:var(--subject-science);"><i class="fas fa-dna"></i></span>
+          <span class="category-tag">Sciences</span>
+          <h4>Biology</h4>
+          <p class="desc">Cell biology, genetics, evolution, ecology, human biology.</p>
+          <div class="stages"><span>KS4</span><span>KS5</span></div>
+          <span class="exam-badge">IGCSE / A-Level</span>
+        </div>
+
+        <!-- Computer Science (KS4, KS5) -->
+        <div class="subject-card" data-category="core" data-stage="ks4 ks5">
+          <span class="icon" style="color:var(--brand);"><i class="fas fa-code"></i></span>
+          <span class="category-tag">Core</span>
+          <h4>Computer Science</h4>
+          <p class="desc">Programming, algorithms, data structures, networking, cybersecurity.</p>
+          <div class="stages"><span>KS4</span><span>KS5</span></div>
+          <span class="exam-badge">IGCSE / A-Level</span>
+        </div>
+
+        <!-- ===== KEY STAGE 4 - IGCSE (OPTIONAL 5) ===== -->
+        <!-- History (KS4, KS5 ONLY - NOT KS3) -->
+        <div class="subject-card" data-category="humanities" data-stage="ks4 ks5">
+          <span class="icon" style="color:var(--subject-humanities);"><i class="fas fa-landmark"></i></span>
+          <span class="category-tag">Humanities</span>
+          <h4>History</h4>
+          <p class="desc">Modern world history, 20th century conflicts, Cold War, international relations.</p>
+          <div class="stages"><span>KS4</span><span>KS5</span></div>
+          <span class="exam-badge">IGCSE / A-Level</span>
+        </div>
+
+        <!-- Geography (KS4, KS5 ONLY - NOT KS3) -->
+        <div class="subject-card" data-category="humanities" data-stage="ks4 ks5">
+          <span class="icon" style="color:var(--subject-humanities);"><i class="fas fa-globe-africa"></i></span>
+          <span class="category-tag">Humanities</span>
+          <h4>Geography</h4>
+          <p class="desc">Physical and human geography. Map skills, fieldwork, global issues.</p>
+          <div class="stages"><span>KS4</span><span>KS5</span></div>
+          <span class="exam-badge">IGCSE / A-Level</span>
+        </div>
+
+        <!-- Business Studies (KS4, KS5) -->
+        <div class="subject-card" data-category="core" data-stage="ks4 ks5">
+          <span class="icon" style="color:var(--subject-maths);"><i class="fas fa-chart-line"></i></span>
+          <span class="category-tag">Core</span>
+          <h4>Business Studies</h4>
+          <p class="desc">Business operations, marketing, finance, entrepreneurship.</p>
+          <div class="stages"><span>KS4</span><span>KS5</span></div>
+          <span class="exam-badge">IGCSE / A-Level</span>
+        </div>
+
+        <!-- Economics (KS5 ONLY) -->
+        <div class="subject-card" data-category="core" data-stage="ks5">
           <span class="icon" style="color:var(--subject-maths);"><i class="fas fa-chart-pie"></i></span>
-          <span class="category">Core</span>
+          <span class="category-tag">Core</span>
           <h4>Economics</h4>
-          <p style="font-size:.82rem;color:var(--muted);line-height:1.4;">Microeconomics, macroeconomics, economic analysis.</p>
+          <p class="desc">Microeconomics, macroeconomics, economic analysis.</p>
           <div class="stages"><span>KS5</span></div>
+          <span class="exam-badge">A-Level</span>
         </div>
 
-        <div class="subject-card animate-slide-up" data-category="core" data-stage="ks5" style="animation-delay:1.45s;">
+        <!-- Accounting (KS4, KS5) -->
+        <div class="subject-card" data-category="core" data-stage="ks4 ks5">
+          <span class="icon" style="color:var(--subject-maths);"><i class="fas fa-file-invoice-dollar"></i></span>
+          <span class="category-tag">Core</span>
+          <h4>Accounting</h4>
+          <p class="desc">Accounting principles, financial statements, business finance.</p>
+          <div class="stages"><span>KS4</span><span>KS5</span></div>
+          <span class="exam-badge">IGCSE / A-Level</span>
+        </div>
+
+        <!-- ===== KEY STAGE 5 - A-LEVEL (7 SUBJECTS) ===== -->
+        <!-- English (A-Level) (KS5 ONLY) -->
+        <div class="subject-card" data-category="core" data-stage="ks5">
+          <span class="icon" style="color:var(--subject-english);"><i class="fas fa-book"></i></span>
+          <span class="category-tag">Core</span>
+          <h4>English (A-Level)</h4>
+          <p class="desc">Study of prose, poetry and drama. Critical analysis and essay writing.</p>
+          <div class="stages"><span>KS5</span></div>
+          <span class="exam-badge">A-Level</span>
+        </div>
+
+        <!-- Psychology (KS5 ONLY) -->
+        <div class="subject-card" data-category="core" data-stage="ks5">
           <span class="icon" style="color:var(--subject-humanities);"><i class="fas fa-brain"></i></span>
-          <span class="category">Core</span>
+          <span class="category-tag">Core</span>
           <h4>Psychology</h4>
-          <p style="font-size:.82rem;color:var(--muted);line-height:1.4;">Biological, cognitive, social, and developmental psychology.</p>
+          <p class="desc">Biological, cognitive, social, and developmental psychology.</p>
           <div class="stages"><span>KS5</span></div>
+          <span class="exam-badge">A-Level</span>
         </div>
 
-        <div class="subject-card animate-slide-up" data-category="arts" data-stage="ks3 ks4 ks5" style="animation-delay:1.55s;">
-          <span class="icon" style="color:var(--subject-arts);"><i class="fas fa-palette"></i></span>
-          <span class="category">Arts</span>
-          <h4>Art &amp; Design</h4>
-          <p style="font-size:.82rem;color:var(--muted);line-height:1.4;">Drawing, painting, sculpture, printmaking, digital art.</p>
-          <div class="stages"><span>KS3</span><span>KS4</span><span>KS5</span></div>
+        <!-- Sociology (KS5 ONLY) -->
+        <div class="subject-card" data-category="humanities" data-stage="ks5">
+          <span class="icon" style="color:var(--subject-humanities);"><i class="fas fa-users"></i></span>
+          <span class="category-tag">Humanities</span>
+          <h4>Sociology</h4>
+          <p class="desc">Study of society, social structures, institutions, and social change.</p>
+          <div class="stages"><span>KS5</span></div>
+          <span class="exam-badge">A-Level</span>
         </div>
+
+        <!-- Further Mathematics (KS5 ONLY) -->
+        <div class="subject-card" data-category="core" data-stage="ks5">
+          <span class="icon" style="color:var(--subject-maths);"><i class="fas fa-square-root-variable"></i></span>
+          <span class="category-tag">Core</span>
+          <h4>Further Mathematics</h4>
+          <p class="desc">Advanced pure mathematics, further mechanics, further statistics.</p>
+          <div class="stages"><span>KS5</span></div>
+          <span class="exam-badge">A-Level</span>
+        </div>
+
+      </div>
+
+      <!-- No Results -->
+      <div class="no-results" id="noResults">
+        <i class="fas fa-search"></i>
+        <p>No subjects found for this filter. Try selecting a different category.</p>
       </div>
     </div>
   </section>
@@ -875,11 +1049,12 @@
       </div>
       <div class="footer-col">
         <h6>Site</h6>
-        <a href="how-it-works.html">How It Works</a>
-        <a href="teach-with-us.html">Teach With Us</a>
-        <a href="enrolment.html">Enrolment</a>
-        <a href="academic-calendar.html">Academic Calendar</a>
-        <a href="subjects.html">Subjects</a>
+        <a href="key-stage-2.html">Key Stage 2</a>
+        <a href="key-stage-3.html">Key Stage 3</a>
+        <a href="key-stage-4.html">Key Stage 4</a>
+        <a href="key-stage-5.html">Key Stage 5</a>
+        <a href="why-paisley.html">Why Paisley</a>
+        <a href="index.html#faq">FAQs</a>
       </div>
       <div class="footer-col">
         <h6>Connect</h6>
@@ -925,16 +1100,24 @@ const mobileNav = document.getElementById('mobileNav');
 
 function openNav() {
   mobileNav.classList.add('open');
+  document.body.classList.add('nav-open');
   navToggle.setAttribute('aria-expanded', 'true');
 }
 function closeNav() {
   mobileNav.classList.remove('open');
+  document.body.classList.remove('nav-open');
   navToggle.setAttribute('aria-expanded', 'false');
 }
 
 navToggle.addEventListener('click', openNav);
 navClose.addEventListener('click', closeNav);
-mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+mobileNav.querySelectorAll('a:not(.mobile-cta-group a)').forEach(a => a.addEventListener('click', closeNav));
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 960 && mobileNav.classList.contains('open')) {
+    closeNav();
+  }
+});
 
 const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
 const revealObserver = new IntersectionObserver((entries) => {
@@ -946,32 +1129,56 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 revealElements.forEach(el => revealObserver.observe(el));
 
-// Filter functionality
+// ============================================================
+// FILTER FUNCTIONALITY
+// ============================================================
 const filterBtns = document.querySelectorAll('.filter-btn');
 const subjectCards = document.querySelectorAll('.subject-card');
+const noResults = document.getElementById('noResults');
+
+function filterSubjects(filter) {
+  let visibleCount = 0;
+  
+  subjectCards.forEach(card => {
+    const categories = card.dataset.category.split(' ');
+    const stages = card.dataset.stage.split(' ');
+    
+    let show = false;
+    
+    if (filter === 'all') {
+      show = true;
+    } else if (categories.includes(filter) || stages.includes(filter)) {
+      show = true;
+    }
+    
+    if (show) {
+      card.style.display = 'block';
+      card.style.opacity = '1';
+      visibleCount++;
+    } else {
+      card.style.display = 'none';
+      card.style.opacity = '0';
+    }
+  });
+  
+  if (visibleCount === 0) {
+    noResults.style.display = 'block';
+  } else {
+    noResults.style.display = 'none';
+  }
+}
 
 filterBtns.forEach(btn => {
   btn.addEventListener('click', function() {
     filterBtns.forEach(b => b.classList.remove('active'));
     this.classList.add('active');
-    const filter = this.dataset.filter;
-    subjectCards.forEach(card => {
-      const categories = card.dataset.category.split(' ');
-      const stages = card.dataset.stage.split(' ');
-      if (filter === 'all') {
-        card.style.display = 'block';
-        card.style.opacity = '1';
-      } else if (categories.includes(filter) || stages.includes(filter)) {
-        card.style.display = 'block';
-        card.style.opacity = '1';
-      } else {
-        card.style.display = 'none';
-        card.style.opacity = '0';
-      }
-    });
+    filterSubjects(this.dataset.filter);
   });
 });
 
+// ============================================================
+// NEWSLETTER SUBSCRIBE
+// ============================================================
 document.querySelector('.footer-newsletter .btn')?.addEventListener('click', function(e) {
   e.preventDefault();
   const input = this.closest('.newsletter-box').querySelector('input');
@@ -985,19 +1192,33 @@ document.querySelector('.footer-newsletter .btn')?.addEventListener('click', fun
     }, 2000);
     return;
   }
-  const originalText = this.innerHTML;
-  this.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-  this.disabled = true;
-  setTimeout(() => {
+  
+  const formData = new FormData();
+  formData.append('_subject', '[NEWSLETTER] New Subscription - Paisley Studio');
+  formData.append('_captcha', 'false');
+  formData.append('Email', email);
+  
+  fetch('https://formsubmit.co/ajax/90d6bea814211aa12823b48e46f127da', {
+    method: 'POST',
+    headers: { 'Accept': 'application/json' },
+    body: formData
+  })
+  .then(response => {
+    const originalText = this.innerHTML;
     this.innerHTML = '<i class="fas fa-check"></i> Subscribed!';
     this.style.background = '#2EB872';
     input.value = '';
+    this.disabled = true;
+    
     setTimeout(() => {
       this.innerHTML = originalText;
       this.style.background = '';
       this.disabled = false;
     }, 3000);
-  }, 1200);
+  })
+  .catch(error => {
+    alert('Something went wrong. Please try again.');
+  });
 });
 </script>
 
