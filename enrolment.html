@@ -684,7 +684,7 @@
 
     .checkbox-group {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
       gap: 0.5rem;
       margin-top: 0.5rem;
     }
@@ -708,11 +708,19 @@
       border-color: var(--brand);
       background: rgba(85,191,179,0.05);
     }
+    .checkbox-group label.disabled {
+      opacity: 0.7;
+      cursor: default;
+      background: var(--sage);
+    }
     .checkbox-group input[type="checkbox"] {
       width: 16px;
       height: 16px;
       accent-color: var(--brand);
       flex-shrink: 0;
+    }
+    .checkbox-group input[type="checkbox"]:disabled {
+      opacity: 0.5;
     }
 
     .step-nav {
@@ -742,6 +750,16 @@
       border-radius: 4px;
       transition: width .5s ease;
       width: 0%;
+    }
+
+    .subject-note {
+      font-size: .8rem;
+      color: var(--muted);
+      margin-top: .4rem;
+      padding: .3rem .8rem;
+      background: var(--paper);
+      border-radius: 6px;
+      display: inline-block;
     }
 
     .site-footer {
@@ -1015,21 +1033,21 @@
           <div class="form-row">
             <div class="form-group">
               <label>Student's Full Name <span class="required">*</span></label>
-              <input type="text" class="form-control" id="studentName" name="Student Name" placeholder="Enter student's full name" required>
+              <input type="text" class="form-control" id="studentName" placeholder="Enter student's full name" required>
             </div>
             <div class="form-group">
               <label>Date of Birth <span class="required">*</span></label>
-              <input type="date" class="form-control" id="dob" name="Date of Birth" required>
+              <input type="date" class="form-control" id="dob" required>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label>Current School</label>
-              <input type="text" class="form-control" id="currentSchool" name="Current School" placeholder="Enter current school name">
+              <input type="text" class="form-control" id="currentSchool" placeholder="Enter current school name">
             </div>
             <div class="form-group">
               <label>Previous Qualifications</label>
-              <input type="text" class="form-control" id="previousQual" name="Previous Qualifications" placeholder="e.g., KS2 results, previous IGCSEs">
+              <input type="text" class="form-control" id="previousQual" placeholder="e.g., KS2 results, previous IGCSEs">
             </div>
           </div>
 
@@ -1039,11 +1057,11 @@
           <div class="form-row">
             <div class="form-group">
               <label>Parent/Guardian Name <span class="required">*</span></label>
-              <input type="text" class="form-control" id="parentName" name="Parent/Guardian Name" placeholder="Enter parent/guardian name" required>
+              <input type="text" class="form-control" id="parentName" placeholder="Enter parent/guardian name" required>
             </div>
             <div class="form-group">
               <label>Relationship to Student <span class="required">*</span></label>
-              <select class="form-control" id="relationship" name="Relationship" required>
+              <select class="form-control" id="relationship" required>
                 <option value="">Select relationship</option>
                 <option value="Mother">Mother</option>
                 <option value="Father">Father</option>
@@ -1055,11 +1073,11 @@
           <div class="form-row">
             <div class="form-group">
               <label>Email Address <span class="required">*</span></label>
-              <input type="email" class="form-control" id="email" name="Email" placeholder="you@example.com" required>
+              <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
             </div>
             <div class="form-group">
               <label>Phone Number <span class="required">*</span></label>
-              <input type="tel" class="form-control" id="phone" name="Phone" placeholder="+254 720 274530" required>
+              <input type="tel" class="form-control" id="phone" placeholder="+254 720 274530" required>
             </div>
           </div>
 
@@ -1076,7 +1094,7 @@
 
           <div class="form-group">
             <label>Key Stage <span class="required">*</span></label>
-            <select class="form-control" id="keyStage" name="Key Stage" required onchange="showFees()">
+            <select class="form-control" id="keyStage" required onchange="updateSubjectsAndFees()">
               <option value="">Select Key Stage</option>
               <option value="Key Stage 2 (Years 3-6)">Key Stage 2 — Years 3-6 (ages 7-11)</option>
               <option value="Key Stage 3 (Years 7-9)">Key Stage 3 — Years 7-9 (ages 11-14)</option>
@@ -1094,7 +1112,7 @@
 
           <div class="form-group">
             <label>Year Group <span class="required">*</span></label>
-            <select class="form-control" id="yearGroup" name="Year Group" required>
+            <select class="form-control" id="yearGroup" required>
               <option value="">Select Year</option>
               <option value="Year 3">Year 3</option>
               <option value="Year 4">Year 4</option>
@@ -1112,38 +1130,20 @@
 
           <div class="form-group">
             <label>Learning Model <span class="required">*</span></label>
-            <select class="form-control" id="learningModel" name="Learning Model" required>
+            <select class="form-control" id="learningModel" required>
               <option value="">Select learning model</option>
               <option value="Instructor-Led">Instructor-Led (Live Classes)</option>
               <option value="Student-Led">Student-Led (Self-Paced)</option>
             </select>
           </div>
 
+          <!-- ===== SUBJECTS - DYNAMIC ===== -->
           <div class="form-group">
-            <label>Subjects to Study <span class="required">*</span></label>
-            <div class="checkbox-group" id="subjects">
-              <!-- ===== KEY STAGE 4 SUBJECTS (11 subjects) ===== -->
-              <label><input type="checkbox" value="Mathematics" name="Subjects"> Mathematics</label>
-              <label><input type="checkbox" value="English" name="Subjects"> English</label>
-              <label><input type="checkbox" value="Physics" name="Subjects"> Physics</label>
-              <label><input type="checkbox" value="Chemistry" name="Subjects"> Chemistry</label>
-              <label><input type="checkbox" value="Biology" name="Subjects"> Biology</label>
-              <label><input type="checkbox" value="Computer Science" name="Subjects"> Computer Science</label>
-              <label><input type="checkbox" value="History" name="Subjects"> History</label>
-              <label><input type="checkbox" value="Geography" name="Subjects"> Geography</label>
-              <label><input type="checkbox" value="Business Studies" name="Subjects"> Business Studies</label>
-              <label><input type="checkbox" value="Economics" name="Subjects"> Economics</label>
-              <label><input type="checkbox" value="Accounting" name="Subjects"> Accounting</label>
-
-              <!-- ===== KEY STAGE 5 SUBJECTS (7 subjects) ===== -->
-              <label><input type="checkbox" value="Mathematics (A-Level)" name="Subjects"> Mathematics (A-Level)</label>
-              <label><input type="checkbox" value="Physics (A-Level)" name="Subjects"> Physics (A-Level)</label>
-              <label><input type="checkbox" value="Chemistry (A-Level)" name="Subjects"> Chemistry (A-Level)</label>
-              <label><input type="checkbox" value="Biology (A-Level)" name="Subjects"> Biology (A-Level)</label>
-              <label><input type="checkbox" value="English (A-Level)" name="Subjects"> English (A-Level)</label>
-              <label><input type="checkbox" value="Psychology (A-Level)" name="Subjects"> Psychology (A-Level)</label>
-              <label><input type="checkbox" value="Sociology (A-Level)" name="Subjects"> Sociology (A-Level)</label>
+            <label>Subjects <span class="required" id="subjectRequired">*</span></label>
+            <div id="subjectContainer">
+              <p style="color:var(--muted);font-size:.9rem;">Please select a Key Stage first.</p>
             </div>
+            <div id="subjectNote" class="subject-note"></div>
           </div>
 
           <!-- ===== FILE UPLOAD SECTION ===== -->
@@ -1162,7 +1162,7 @@
 
           <div class="form-group">
             <label>Additional Information</label>
-            <textarea class="form-control" id="additionalInfo" name="Additional Information" placeholder="Any additional information you'd like to share..."></textarea>
+            <textarea class="form-control" id="additionalInfo" placeholder="Any additional information you'd like to share..."></textarea>
           </div>
 
           <div id="enrolmentSuccess" class="form-success">
@@ -1308,8 +1308,82 @@ const feeData = {
   }
 };
 
-function showFees() {
-  const keyStage = document.getElementById('keyStage').value;
+// ============================================================
+// SUBJECTS BY KEY STAGE
+// ============================================================
+const subjectData = {
+  'Key Stage 2 (Years 3-6)': {
+    subjects: ['English', 'Mathematics', 'Science', 'Computing'],
+    selectable: false,
+    note: '✅ All core subjects are included. No selection needed.'
+  },
+  'Key Stage 3 (Years 7-9)': {
+    subjects: ['English', 'Mathematics', 'Science', 'Computing'],
+    selectable: false,
+    note: '✅ All core subjects are included. No selection needed.'
+  },
+  'Key Stage 4 (Years 10-11) — IGCSE': {
+    subjects: ['English', 'Mathematics', 'Physics', 'Chemistry', 'Biology', 'Computer Science', 'History', 'Geography', 'Business Studies', 'Economics', 'Accounting'],
+    selectable: true,
+    note: '📌 Select the IGCSE subjects your child will study.'
+  },
+  'Key Stage 5 (Years 12-13) — A-Level': {
+    subjects: ['Mathematics (A-Level)', 'Physics (A-Level)', 'Chemistry (A-Level)', 'Biology (A-Level)', 'English (A-Level)', 'Psychology (A-Level)', 'Sociology (A-Level)'],
+    selectable: true,
+    note: '📌 Select the A-Level subjects your child will study.'
+  }
+};
+
+// ============================================================
+// UPDATE SUBJECTS & FEES BASED ON KEY STAGE
+// ============================================================
+function updateSubjectsAndFees() {
+  const selected = document.getElementById('keyStage').value;
+  const container = document.getElementById('subjectContainer');
+  const note = document.getElementById('subjectNote');
+  const required = document.getElementById('subjectRequired');
+  
+  // Update fees
+  showFees(selected);
+  
+  if (!selected || !subjectData[selected]) {
+    container.innerHTML = '<p style="color:var(--muted);font-size:.9rem;">Please select a Key Stage first.</p>';
+    note.textContent = '';
+    required.style.display = 'none';
+    return;
+  }
+  
+  const data = subjectData[selected];
+  let html = '<div class="checkbox-group">';
+  
+  data.subjects.forEach(subject => {
+    const checked = data.selectable ? '' : 'checked';
+    const disabled = data.selectable ? '' : 'disabled';
+    const labelClass = data.selectable ? '' : 'disabled';
+    html += `
+      <label class="${labelClass}">
+        <input type="checkbox" value="${subject}" name="Subjects" ${checked} ${disabled}>
+        ${subject}
+      </label>
+    `;
+  });
+  
+  html += '</div>';
+  container.innerHTML = html;
+  note.textContent = data.note;
+  
+  // Show/hide required asterisk
+  if (data.selectable) {
+    required.style.display = 'inline';
+  } else {
+    required.style.display = 'none';
+  }
+}
+
+// ============================================================
+// SHOW FEES
+// ============================================================
+function showFees(keyStage) {
   const display = document.getElementById('feeDisplay');
   const content = document.getElementById('feeContent');
 
@@ -1365,6 +1439,9 @@ function updateProgress() {
   document.getElementById('progressFill').style.width = percent + '%';
 }
 
+// ============================================================
+// VALIDATE STEP 1
+// ============================================================
 function validateStep(step) {
   if (step === 1) {
     const studentName = document.getElementById('studentName').value.trim();
@@ -1374,14 +1451,27 @@ function validateStep(step) {
     const phone = document.getElementById('phone').value.trim();
     const relationship = document.getElementById('relationship').value;
     
-    if (!studentName || !dob || !parentName || !email || !phone || !relationship) {
-      alert('Please fill in all required fields.');
+    const missing = [];
+    if (!studentName) missing.push('Student Name');
+    if (!dob) missing.push('Date of Birth');
+    if (!parentName) missing.push('Parent/Guardian Name');
+    if (!email) missing.push('Email');
+    if (!phone) missing.push('Phone');
+    if (!relationship) missing.push('Relationship');
+    
+    if (missing.length > 0) {
+      alert('Please fill in all required fields:\n\n- ' + missing.join('\n- '));
       return false;
     }
     if (!email.includes('@')) {
       alert('Please enter a valid email address.');
       return false;
     }
+    if (phone.length < 8) {
+      alert('Please enter a valid phone number.');
+      return false;
+    }
+    return true;
   }
   return true;
 }
@@ -1459,55 +1549,91 @@ function renderFileList() {
 }
 
 // ============================================================
-// ENROLMENT FORM - AJAX Submission with FormSubmit
+// ENROLMENT FORM - SUBMIT
 // ============================================================
 document.getElementById('enrolmentSubmitBtn').addEventListener('click', function(e) {
   e.preventDefault();
   
   const btn = this;
   const successDiv = document.getElementById('enrolmentSuccess');
-  const formGroups = document.querySelector('.step-content[data-step="2"]').querySelectorAll('.form-group, .step-nav');
+  const step2Content = document.querySelector('.step-content[data-step="2"]');
+  const formGroups = step2Content.querySelectorAll('.form-group, .step-nav');
   const originalText = btn.innerHTML;
   
-  // Validate Step 2
+  // --- VALIDATE ALL FIELDS ---
+  const studentName = document.getElementById('studentName').value.trim();
+  const dob = document.getElementById('dob').value;
+  const parentName = document.getElementById('parentName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const relationship = document.getElementById('relationship').value;
   const keyStage = document.getElementById('keyStage').value;
   const yearGroup = document.getElementById('yearGroup').value;
   const learningModel = document.getElementById('learningModel').value;
-  const subjectsChecked = document.querySelectorAll('#subjects input:checked').length;
   
-  if (!keyStage || !yearGroup || !learningModel || subjectsChecked === 0) {
-    alert('Please select Key Stage, Year Group, Learning Model, and at least one subject.');
+  const missing = [];
+  if (!studentName) missing.push('Student Name');
+  if (!dob) missing.push('Date of Birth');
+  if (!parentName) missing.push('Parent/Guardian Name');
+  if (!email) missing.push('Email');
+  if (!phone) missing.push('Phone');
+  if (!relationship) missing.push('Relationship');
+  if (!keyStage) missing.push('Key Stage');
+  if (!yearGroup) missing.push('Year Group');
+  if (!learningModel) missing.push('Learning Model');
+  
+  if (missing.length > 0) {
+    alert('⚠️ Please fill in all required fields:\n\n- ' + missing.join('\n- '));
     return;
   }
   
-  // Collect all form data
+  if (!email.includes('@')) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+  
+  if (phone.length < 8) {
+    alert('Please enter a valid phone number.');
+    return;
+  }
+  
+  // --- VALIDATE SUBJECTS FOR SELECTABLE KEY STAGES ---
+  const subjectDataEntry = subjectData[keyStage];
+  if (subjectDataEntry && subjectDataEntry.selectable) {
+    const checkedSubjects = document.querySelectorAll('#subjectContainer input:checked');
+    if (checkedSubjects.length === 0) {
+      alert('⚠️ Please select at least one subject for your child.');
+      return;
+    }
+  }
+  
+  // --- BUILD FORM DATA ---
   const formData = new FormData();
   formData.append('_subject', '[ENROLMENT] New Enrolment - Paisley Studio');
   formData.append('_captcha', 'false');
   formData.append('_template', 'table');
   
-  // Step 1 fields
   const fields = {
-    'Student Name': document.getElementById('studentName').value,
-    'Date of Birth': document.getElementById('dob').value,
-    'Current School': document.getElementById('currentSchool').value,
-    'Previous Qualifications': document.getElementById('previousQual').value,
-    'Parent/Guardian Name': document.getElementById('parentName').value,
-    'Relationship': document.getElementById('relationship').value,
-    'Email': document.getElementById('email').value,
-    'Phone': document.getElementById('phone').value,
+    'Student Name': studentName,
+    'Date of Birth': dob,
+    'Current School': document.getElementById('currentSchool').value || 'N/A',
+    'Previous Qualifications': document.getElementById('previousQual').value || 'N/A',
+    'Parent/Guardian Name': parentName,
+    'Relationship': relationship,
+    'Email': email,
+    'Phone': phone,
     'Key Stage': keyStage,
     'Year Group': yearGroup,
     'Learning Model': learningModel,
-    'Additional Information': document.getElementById('additionalInfo').value
+    'Additional Information': document.getElementById('additionalInfo').value || 'N/A'
   };
   
   Object.keys(fields).forEach(key => {
     formData.append(key, fields[key]);
   });
   
-  // Subjects
-  document.querySelectorAll('#subjects input:checked').forEach(cb => {
+  // Subjects - all checked (including preselected for KS2/KS3)
+  document.querySelectorAll('#subjectContainer input:checked').forEach(cb => {
     formData.append('Subjects', cb.value);
   });
   
@@ -1516,11 +1642,10 @@ document.getElementById('enrolmentSubmitBtn').addEventListener('click', function
     formData.append(`document_${index + 1}`, file);
   });
   
-  // Show loading
+  // --- SUBMIT ---
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
   btn.disabled = true;
   
-  // Send to FormSubmit AJAX endpoint
   fetch('https://formsubmit.co/ajax/90d6bea814211aa12823b48e46f127da', {
     method: 'POST',
     headers: { 'Accept': 'application/json' },
@@ -1528,15 +1653,13 @@ document.getElementById('enrolmentSubmitBtn').addEventListener('click', function
   })
   .then(response => {
     if (response.ok) {
-      formGroups.forEach(el => {
-        el.style.display = 'none';
-      });
+      formGroups.forEach(el => { el.style.display = 'none'; });
       successDiv.classList.add('show');
-      
       btn.innerHTML = originalText;
       btn.disabled = false;
       
       setTimeout(() => {
+        // Reset form
         document.getElementById('studentName').value = '';
         document.getElementById('dob').value = '';
         document.getElementById('currentSchool').value = '';
@@ -1549,17 +1672,17 @@ document.getElementById('enrolmentSubmitBtn').addEventListener('click', function
         document.getElementById('yearGroup').value = '';
         document.getElementById('learningModel').value = '';
         document.getElementById('additionalInfo').value = '';
-        document.querySelectorAll('#subjects input:checked').forEach(cb => cb.checked = false);
+        document.getElementById('subjectContainer').innerHTML = '<p style="color:var(--muted);font-size:.9rem;">Please select a Key Stage first.</p>';
+        document.getElementById('subjectNote').textContent = '';
         document.getElementById('feeDisplay').classList.remove('visible');
         
         uploadedFiles = [];
         document.getElementById('documentList').innerHTML = '';
         document.getElementById('documentInput').value = '';
         
-        formGroups.forEach(el => {
-          el.style.display = '';
-        });
+        formGroups.forEach(el => { el.style.display = ''; });
         successDiv.classList.remove('show');
+        goToStep(1);
       }, 5000);
     } else {
       alert('Something went wrong. Please try again.');
@@ -1618,6 +1741,11 @@ document.querySelector('.footer-newsletter .btn')?.addEventListener('click', fun
     alert('Something went wrong. Please try again.');
   });
 });
+
+// ============================================================
+// INITIALIZE
+// ============================================================
+updateProgress();
 </script>
 
 </body>

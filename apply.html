@@ -674,7 +674,6 @@
       width: 1.2rem;
     }
 
-    /* Subject filter message */
     .subject-filter-message {
       color: var(--muted);
       font-size: .85rem;
@@ -961,8 +960,8 @@
               <input type="tel" class="form-control" id="phone" name="Phone" placeholder="+254 720 274530" required>
             </div>
             <div class="form-group">
-              <label>Location</label>
-              <input type="text" class="form-control" id="location" name="Location" placeholder="City, Country">
+              <label>Location <span class="required">*</span></label>
+              <input type="text" class="form-control" id="location" name="Location" placeholder="City, Country" required>
             </div>
           </div>
 
@@ -1270,32 +1269,6 @@ const subjectMap = {
   ]
 };
 
-// Subject value mapping for checkbox values
-const subjectValueMap = {
-  'English': 'english',
-  'English Literature': 'english-lit',
-  'Mathematics': 'maths',
-  'Further Mathematics': 'further-maths',
-  'Physics': 'physics',
-  'Chemistry': 'chemistry',
-  'Biology': 'biology',
-  'History': 'history',
-  'Geography': 'geography',
-  'Economics': 'economics',
-  'Business Studies': 'business',
-  'Psychology': 'psychology',
-  'Modern Languages': 'languages',
-  'Art & Design': 'art',
-  'Computing': 'computing',
-  'Music': 'music',
-  'Physical Education': 'pe',
-  'Drama': 'drama',
-  'Design & Technology': 'design-tech',
-  'Religious Education': 'religious-ed',
-  'Global Perspective': 'global-perspective',
-  'Science': 'science'
-};
-
 function filterSubjects() {
   const checkedKeyStages = document.querySelectorAll('#keyStages input:checked');
   const selectedSubjects = new Set();
@@ -1314,7 +1287,7 @@ function filterSubjects() {
 
   let html = `<div class="checkbox-group" id="subjectCheckboxes">`;
   selectedSubjects.forEach(subject => {
-    const value = subjectValueMap[subject] || subject.toLowerCase().replace(/ /g, '-');
+    const value = subject.toLowerCase().replace(/ /g, '-');
     html += `<label><input type="checkbox" value="${subject}" name="Subjects"> ${subject}</label>`;
   });
   html += `</div>`;
@@ -1347,11 +1320,15 @@ function updateProgress() {
   document.getElementById('progressFill').style.width = percent + '%';
 }
 
+// ============================================================
+// ENFORCE ALL FIELDS - STEP 1 VALIDATION
+// ============================================================
 function validateStep(step) {
   if (step === 1) {
     const name = document.getElementById('fullName').value.trim();
     const email = document.getElementById('email').value.trim();
     const phone = document.getElementById('phone').value.trim();
+    const location = document.getElementById('location').value.trim();
     const exp = document.getElementById('experience').value;
     const qual = document.getElementById('qualifications').value.trim();
     const bio = document.getElementById('bio').value.trim();
@@ -1363,26 +1340,37 @@ function validateStep(step) {
     const availKS23 = document.querySelector('input[name="Availability KS2/3 (8:30am-12:15pm)"]:checked');
     const acceptComp = document.querySelector('input[name="Accept Compensation"]:checked');
     
-    if (!name || !email || !phone || !exp || !qual || !bio) {
-      alert('Please fill in all required fields.');
+    const missing = [];
+    if (!name) missing.push('Full Name');
+    if (!email) missing.push('Email Address');
+    if (!phone) missing.push('Phone Number');
+    if (!location) missing.push('Location');
+    if (!exp) missing.push('Teaching Experience');
+    if (!qual) missing.push('Qualifications');
+    if (!bio) missing.push('Brief Bio');
+    if (!onlineExp) missing.push('Online Teaching Experience');
+    if (!britishExp) missing.push('British Curriculum Experience');
+    if (!presentation) missing.push('Class Presentation');
+    if (!startDate) missing.push('Start Date');
+    if (!availKS4) missing.push('Availability KS4 (8:30am-3:45pm)');
+    if (!availKS23) missing.push('Availability KS2/3 (8:30am-12:15pm)');
+    if (!acceptComp) missing.push('Accept Compensation');
+    
+    if (missing.length > 0) {
+      alert('⚠️ Please fill in all required fields:\n\n- ' + missing.join('\n- '));
       return false;
     }
+    
     if (!email.includes('@')) {
       alert('Please enter a valid email address.');
       return false;
     }
-    if (!onlineExp || !britishExp || !presentation || !startDate) {
-      alert('Please answer all the additional questions.');
+    
+    if (phone.length < 8) {
+      alert('Please enter a valid phone number.');
       return false;
     }
-    if (!availKS4 || !availKS23) {
-      alert('Please indicate your availability for both Key Stage 4 and Key Stage 2/3.');
-      return false;
-    }
-    if (!acceptComp) {
-      alert('Please indicate whether you accept the compensation package.');
-      return false;
-    }
+    
     if (acceptComp.value === 'No') {
       alert('We understand. Please note that the compensation package is fixed at KSh 20,000 per month.');
       return false;
@@ -1392,7 +1380,7 @@ function validateStep(step) {
 }
 
 // ============================================================
-// TUTOR APPLICATION - AJAX Submission with FormSubmit
+// ENFORCE ALL FIELDS - STEP 2 VALIDATION + SUBMIT
 // ============================================================
 document.getElementById('tutorSubmitBtn').addEventListener('click', function(e) {
   e.preventDefault();
@@ -1402,13 +1390,18 @@ document.getElementById('tutorSubmitBtn').addEventListener('click', function(e) 
   const formGroups = document.querySelector('.step-content[data-step="2"]').querySelectorAll('.form-group, .step-nav');
   const originalText = btn.innerHTML;
   
-  // Validate Step 2
+  // Validate Step 2 - ALL fields
   const ksChecked = document.querySelectorAll('#keyStages input:checked').length;
   const subChecked = document.querySelectorAll('#subjectCheckboxes input:checked').length;
   const primarySubject = document.getElementById('primarySubject').value;
   
-  if (ksChecked === 0 || subChecked === 0 || !primarySubject) {
-    alert('Please select at least one Key Stage, one subject, and your primary subject.');
+  const missing = [];
+  if (ksChecked === 0) missing.push('Key Stages (select at least one)');
+  if (subChecked === 0) missing.push('Subjects (select at least one)');
+  if (!primarySubject) missing.push('Primary Subject Specialism');
+  
+  if (missing.length > 0) {
+    alert('⚠️ Please complete all required fields:\n\n- ' + missing.join('\n- '));
     return;
   }
   
@@ -1446,7 +1439,7 @@ document.getElementById('tutorSubmitBtn').addEventListener('click', function(e) 
     formData.append('Key Stages', cb.value);
   });
   
-  // Subjects (from filtered checkboxes)
+  // Subjects
   document.querySelectorAll('#subjectCheckboxes input:checked').forEach(cb => {
     formData.append('Subjects', cb.value);
   });
@@ -1455,7 +1448,7 @@ document.getElementById('tutorSubmitBtn').addEventListener('click', function(e) 
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
   btn.disabled = true;
   
-  // Send to FormSubmit AJAX endpoint
+  // Send to FormSubmit
   fetch('https://formsubmit.co/ajax/90d6bea814211aa12823b48e46f127da', {
     method: 'POST',
     headers: { 'Accept': 'application/json' },
@@ -1463,16 +1456,12 @@ document.getElementById('tutorSubmitBtn').addEventListener('click', function(e) 
   })
   .then(response => {
     if (response.ok) {
-      // Hide form fields, show success
-      formGroups.forEach(el => {
-        el.style.display = 'none';
-      });
+      formGroups.forEach(el => { el.style.display = 'none'; });
       successDiv.classList.add('show');
-      
       btn.innerHTML = originalText;
       btn.disabled = false;
       
-      // Reset form after 5 seconds
+      // Reset after 5 seconds
       setTimeout(() => {
         document.getElementById('fullName').value = '';
         document.getElementById('email').value = '';
@@ -1492,13 +1481,11 @@ document.getElementById('tutorSubmitBtn').addEventListener('click', function(e) 
         document.querySelectorAll('input[name="Availability KS2/3 (8:30am-12:15pm)"]:checked').forEach(cb => cb.checked = false);
         document.querySelectorAll('input[name="Accept Compensation"]:checked').forEach(cb => cb.checked = false);
         
-        // Reset subject container
         document.getElementById('subjectContainer').innerHTML = `<p style="color:var(--muted);font-size:.9rem;">Please select at least one Key Stage above to see available subjects.</p>`;
         
-        formGroups.forEach(el => {
-          el.style.display = '';
-        });
+        formGroups.forEach(el => { el.style.display = ''; });
         successDiv.classList.remove('show');
+        goToStep(1);
       }, 5000);
     } else {
       alert('Something went wrong. Please try again.');
