@@ -1255,6 +1255,12 @@
   <i class="fas fa-arrow-up"></i>
 </button>
 
+<!-- ===== FIREBASE SDK + HELPERS (must load BEFORE the main script below) ===== -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="firestore-helpers.js"></script>
+
 <script>
 document.getElementById('yearNow').textContent = new Date().getFullYear();
 
@@ -1502,6 +1508,29 @@ document.getElementById('tutorSubmitBtn').addEventListener('click', function(e) 
     formData.append('Subjects', cb.value);
   });
   
+  // ============================================================
+  // FIREBASE: SAVE TUTOR APPLICATION
+  // ============================================================
+  saveTutorApplication({
+    fullName: document.getElementById('fullName').value,
+    email: document.getElementById('email').value,
+    phone: document.getElementById('phone').value,
+    location: document.getElementById('location').value || 'N/A',
+    experience: document.getElementById('experience').value,
+    qualifications: document.getElementById('qualifications').value,
+    bio: document.getElementById('bio').value,
+    onlineTeachingExperience: document.querySelector('input[name="Online Teaching Experience"]:checked')?.value || '',
+    britishCurriculumExperience: document.querySelector('input[name="British Curriculum Experience"]:checked')?.value || '',
+    classPresentation: document.querySelector('input[name="Class Presentation"]:checked')?.value || '',
+    startDate: document.getElementById('startDate').value,
+    availabilityKS4: document.querySelector('input[name="Availability KS4 (8:30am-3:45pm)"]:checked')?.value || '',
+    availabilityKS23: document.querySelector('input[name="Availability KS2/3 (8:30am-12:15pm)"]:checked')?.value || '',
+    acceptCompensation: document.querySelector('input[name="Accept Compensation"]:checked')?.value || '',
+    primarySubject: document.getElementById('primarySubject').value,
+    keyStages: Array.from(document.querySelectorAll('#keyStages input:checked')).map(cb => cb.value),
+    subjects: Array.from(document.querySelectorAll('#subjectCheckboxes input:checked')).map(cb => cb.value)
+  }).catch(err => console.error('Firestore save failed:', err));
+  
   // Show loading
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
   btn.disabled = true;
@@ -1559,7 +1588,7 @@ document.getElementById('tutorSubmitBtn').addEventListener('click', function(e) 
 });
 
 // ============================================================
-// NEWSLETTER SUBSCRIBE
+// NEWSLETTER SUBSCRIBE (footer form)
 // ============================================================
 document.querySelector('.footer-newsletter .btn')?.addEventListener('click', function(e) {
   e.preventDefault();
@@ -1575,6 +1604,11 @@ document.querySelector('.footer-newsletter .btn')?.addEventListener('click', fun
     return;
   }
   
+  // Save to Firestore
+  saveNewsletterSignup(email, window.location.pathname.replace('/', '') || 'Homepage')
+    .catch(err => console.error('Firestore save failed:', err));
+  
+  // Also send via FormSubmit
   const formData = new FormData();
   formData.append('_subject', '[NEWSLETTER] New Subscription - Paisley Studio');
   formData.append('_captcha', 'false');

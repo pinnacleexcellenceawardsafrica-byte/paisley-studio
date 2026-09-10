@@ -1081,6 +1081,12 @@
   <i class="fas fa-arrow-up"></i>
 </button>
 
+<!-- ===== FIREBASE SDK + HELPERS ===== -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="firestore-helpers.js"></script>
+
 <script>
 document.getElementById('yearNow').textContent = new Date().getFullYear();
 
@@ -1177,7 +1183,7 @@ filterBtns.forEach(btn => {
 });
 
 // ============================================================
-// NEWSLETTER SUBSCRIBE
+// NEWSLETTER SUBSCRIBE — now saves to Firestore too
 // ============================================================
 document.querySelector('.footer-newsletter .btn')?.addEventListener('click', function(e) {
   e.preventDefault();
@@ -1192,6 +1198,10 @@ document.querySelector('.footer-newsletter .btn')?.addEventListener('click', fun
     }, 2000);
     return;
   }
+  
+  // Save to Firestore for Studio Desk
+  saveNewsletterSignup(email, window.location.pathname.replace('/', '') || 'Homepage')
+    .catch(err => console.error('Firestore save failed:', err));
   
   const formData = new FormData();
   formData.append('_subject', '[NEWSLETTER] New Subscription - Paisley Studio');

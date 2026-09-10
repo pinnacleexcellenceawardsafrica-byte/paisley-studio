@@ -7,7 +7,7 @@
   <meta name="description" content="Enrol your child in Paisley Studio's British Curriculum online homeschooling. Affordable fees from KSh 35,000/term. Flexible learning models. Start your enrolment today!" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://paisleystudio.online/enrolment.html" />
-  
+
   <!-- Open Graph / Social Media -->
   <meta property="og:title" content="Enrol Your Child — British Curriculum Online Homeschooling | Paisley Studio" />
   <meta property="og:description" content="Join Paisley Studio today! British Curriculum online homeschooling from Key Stage 2 to A-Level. Affordable fees starting from KSh 35,000 per term. Enrol now!" />
@@ -18,14 +18,14 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Paisley Studio Logo - British Curriculum Online Homeschooling" />
   <meta property="og:site_name" content="Paisley Studio" />
-  
+
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Enrol Your Child — Online British Curriculum Homeschooling | Paisley Studio" />
   <meta name="twitter:description" content="Affordable British Curriculum online homeschooling. Flexible learning models from Key Stage 2 to A-Level. Fees starting from KSh 35,000/term. Enrol today!" />
   <meta name="twitter:image" content="https://aws-filez.s3.eu-north-1.amazonaws.com/cropped-Paisely-logo-Resized.png" />
   <meta name="twitter:image:alt" content="Paisley Studio Logo" />
-  
+
   <!-- Structured Data / JSON-LD -->
   <script type="application/ld+json">
   {
@@ -57,13 +57,13 @@
     }
   }
   </script>
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="icon" href="https://aws-filez.s3.eu-north-1.amazonaws.com/cropped-Paisely-logo-Resized.png" sizes="32x32" />
-  
+
   <style>
     :root {
       --brand: #55BFB3;
@@ -1280,6 +1280,12 @@
   <i class="fas fa-arrow-up"></i>
 </button>
 
+<!-- ===== FIREBASE SDK + HELPERS (must load BEFORE the main script below) ===== -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="firestore-helpers.js"></script>
+
 <script>
 document.getElementById('yearNow').textContent = new Date().getFullYear();
 
@@ -1651,7 +1657,25 @@ document.getElementById('enrolmentSubmitBtn').addEventListener('click', function
     }
   }
   
-  // --- BUILD FORM DATA ---
+  // --- FIREBASE: SAVE ENROLMENT FIRST ---
+  const subjects = Array.from(document.querySelectorAll('#subjectContainer input:checked')).map(cb => cb.value);
+  saveEnrolment({
+    studentName: studentName,
+    dob: dob,
+    currentSchool: document.getElementById('currentSchool').value || 'N/A',
+    previousQual: document.getElementById('previousQual').value || 'N/A',
+    parentName: parentName,
+    relationship: relationship,
+    email: email,
+    phone: phone,
+    keyStage: keyStage,
+    yearGroup: yearGroup,
+    learningModel: learningModel,
+    subjects: subjects,
+    additionalInfo: document.getElementById('additionalInfo').value || 'N/A'
+  }).catch(err => console.error('Firestore save failed:', err));
+  
+  // --- BUILD FORM DATA FOR FORMSUBMIT (email notification, still works) ---
   const formData = new FormData();
   formData.append('_subject', '[ENROLMENT] New Enrolment - Paisley Studio');
   formData.append('_captcha', 'false');
@@ -1676,17 +1700,15 @@ document.getElementById('enrolmentSubmitBtn').addEventListener('click', function
     formData.append(key, fields[key]);
   });
   
-  // Subjects - all checked (including preselected for KS2/KS3)
-  document.querySelectorAll('#subjectContainer input:checked').forEach(cb => {
-    formData.append('Subjects', cb.value);
-  });
+  // Subjects
+  subjects.forEach(s => formData.append('Subjects', s));
   
   // Uploaded files
   uploadedFiles.forEach((file, index) => {
     formData.append(`document_${index + 1}`, file);
   });
   
-  // --- SUBMIT ---
+  // --- SUBMIT TO FORMSUBMIT ---
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
   btn.disabled = true;
   
@@ -1742,7 +1764,7 @@ document.getElementById('enrolmentSubmitBtn').addEventListener('click', function
 });
 
 // ============================================================
-// NEWSLETTER SUBSCRIBE
+// NEWSLETTER SUBSCRIBE (footer form)
 // ============================================================
 document.querySelector('.footer-newsletter .btn')?.addEventListener('click', function(e) {
   e.preventDefault();
@@ -1758,6 +1780,11 @@ document.querySelector('.footer-newsletter .btn')?.addEventListener('click', fun
     return;
   }
   
+  // Save to Firestore
+  saveNewsletterSignup(email, window.location.pathname.replace('/', '') || 'Homepage')
+    .catch(err => console.error('Firestore save failed:', err));
+  
+  // Also send via FormSubmit
   const formData = new FormData();
   formData.append('_subject', '[NEWSLETTER] New Subscription - Paisley Studio');
   formData.append('_captcha', 'false');

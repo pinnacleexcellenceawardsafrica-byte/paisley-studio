@@ -23,8 +23,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
    <link rel="icon" href="https://aws-filez.s3.eu-north-1.amazonaws.com/cropped-Paisely-logo-Resized.png" sizes="32x32" />
   <style>
-    /* ===== COPY ALL STYLES FROM HOW-IT-WORKS.HTML ===== */
-    /* (Same styles - paste them here) */
     :root {
       --brand: #55BFB3;
       --brand-deep: #245F5A;
@@ -785,6 +783,12 @@
   <i class="fas fa-arrow-up"></i>
 </button>
 
+<!-- ===== FIREBASE SDK + HELPERS ===== -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="firestore-helpers.js"></script>
+
 <script>
 document.getElementById('yearNow').textContent = new Date().getFullYear();
 
@@ -825,6 +829,9 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 revealElements.forEach(el => revealObserver.observe(el));
 
+// ============================================================
+// NEWSLETTER SUBSCRIBE — now saves to Firestore too
+// ============================================================
 document.querySelector('.footer-newsletter .btn')?.addEventListener('click', function(e) {
   e.preventDefault();
   const input = this.closest('.newsletter-box').querySelector('input');
@@ -838,6 +845,11 @@ document.querySelector('.footer-newsletter .btn')?.addEventListener('click', fun
     }, 2000);
     return;
   }
+  
+  // Save to Firestore for Studio Desk
+  saveNewsletterSignup(email, window.location.pathname.replace('/', '') || 'Homepage')
+    .catch(err => console.error('Firestore save failed:', err));
+  
   const originalText = this.innerHTML;
   this.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
   this.disabled = true;
