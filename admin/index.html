@@ -491,6 +491,11 @@
   .badge.b-declined::before{background:var(--error);}
   .badge.b-review{background:rgba(155,89,182,.12); color:#7c3f96;}
   .badge.b-review::before{background:#9B59B6;}
+  .badge.b-plain{
+    background:var(--sage); color:var(--brand-deep); text-transform:none; letter-spacing:0;
+    font-weight:700; font-size:.72rem;
+  }
+  .badge.b-plain::before{ display:none; }
 
   .row-actions{display:flex; gap:.4rem;}
   .mini-btn{
@@ -522,21 +527,33 @@
   }
   .modal-overlay.open{display:flex;}
   .modal{
-    background:var(--surface); border-radius:16px; width:100%; max-width:480px; max-height:88vh; overflow-y:auto;
+    background:var(--surface); border-radius:16px; width:100%; max-width:620px; max-height:88vh; overflow-y:auto;
     box-shadow:0 30px 70px rgba(0,0,0,.25); animation:scaleIn .25s cubic-bezier(.16,1,.3,1);
   }
   @keyframes scaleIn{from{opacity:0; transform:scale(.94);} to{opacity:1; transform:scale(1);}}
   .modal-head{
     padding:1.3rem 1.5rem; border-bottom:1px solid var(--line-soft); display:flex; align-items:center; justify-content:space-between;
+    position:sticky; top:0; background:var(--surface); z-index:2; border-top-left-radius:16px; border-top-right-radius:16px;
   }
   .modal-head h3{font-size:1.05rem; font-weight:800;}
   .modal-close{background:none; border:none; font-size:1.1rem; color:var(--muted); cursor:pointer;}
   .modal-body{padding:1.3rem 1.5rem;}
   .detail-row{display:flex; justify-content:space-between; gap:1rem; padding:.6rem 0; border-bottom:1px solid var(--line-soft); font-size:.85rem;}
   .detail-row:last-child{border-bottom:none;}
-  .detail-row .k{color:var(--muted); font-weight:600;}
-  .detail-row .v{font-weight:700; text-align:right; color:var(--ink);}
-  .modal-foot{padding:1.1rem 1.5rem; border-top:1px solid var(--line-soft); display:flex; gap:.7rem; justify-content:flex-end;}
+  .detail-row .k{color:var(--muted); font-weight:600; flex-shrink:0;}
+  .detail-row .v{font-weight:700; text-align:right; color:var(--ink); word-break:break-word;}
+  .detail-block{padding:.85rem 0; border-bottom:1px solid var(--line-soft);}
+  .detail-block:last-child{border-bottom:none;}
+  .detail-block .k{
+    color:var(--muted); font-weight:700; font-size:.7rem; text-transform:uppercase;
+    letter-spacing:.06em; margin-bottom:.45rem;
+  }
+  .detail-block .v{
+    font-weight:500; color:var(--ink); line-height:1.6; font-size:.88rem; word-break:break-word;
+  }
+  .detail-block .v.empty{ color:var(--muted); font-style:italic; }
+  .pill-wrap{display:flex; flex-wrap:wrap; gap:.3rem;}
+  .modal-foot{padding:1.1rem 1.5rem; border-top:1px solid var(--line-soft); display:flex; gap:.7rem; justify-content:flex-end; position:sticky; bottom:0; background:var(--surface); border-bottom-left-radius:16px; border-bottom-right-radius:16px;}
 
   .footer-note{
     margin-top:2rem; padding:1rem 1.3rem; border-radius:12px; background:var(--sage); border:1px solid var(--brand-soft);
@@ -557,13 +574,17 @@
     .content{padding:1.1rem;}
     .topbar{padding:.85rem 1.1rem;}
     .admin-chip .who{display:none;}
+    .modal{max-height:92vh;}
+    .modal-body{padding:1rem 1.1rem;}
+    .detail-row{flex-direction:column; gap:.2rem; align-items:flex-start;}
+    .detail-row .v{text-align:left;}
   }
 </style>
 </head>
 <body>
 
 <!-- =============================================================
-     LOGIN MODAL — shows on page load, hides after successful login
+     LOGIN MODAL
 ============================================================= -->
 <div id="loginOverlay" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
   <div class="login-card">
@@ -999,6 +1020,9 @@ function escapeHtml(str){
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
 }
+function nl2br(str){
+  return escapeHtml(str || '').replace(/\n/g,'<br>');
+}
 
 let DB = { enrolments: [], tutors: [], messages: [], newsletter: [] };
 
@@ -1231,7 +1255,7 @@ function renderTutorTable(){
     const email = t.email || t['Email'] || '';
     const subject = t.primarySubject || t['Primary Subject Specialism'] || '—';
     const ks = t.keyStages || t['Key Stages'] || [];
-    const ksText = Array.isArray(ks) ? ks.join(', ') : ks;
+    const ksText = Array.isArray(ks) ? ks.map(x=>String(x).replace(/^Key Stage /,'KS')).join(', ') : ks;
     const exp = t.experience || t['Teaching Experience'] || '—';
     const status = t.status || 'New';
     return `<tr>
@@ -1338,46 +1362,170 @@ function openModal(title, rowsHtml, footHtml=''){
   overlay.classList.add('open');
 }
 
+/* ---------- Helpers for building modal bodies ---------- */
+function row(k, v){
+  const val = (v === null || v === undefined || v === '') ? '—' : v;
+  return `<div class="detail-row"><span class="k">${escapeHtml(k)}</span><span class="v">${escapeHtml(val)}</span></div>`;
+}
+function block(label, contentHtml, isEmpty){
+  const body = (isEmpty || !contentHtml) ? '<div class="v empty">Not provided</div>' : `<div class="v">${contentHtml}</div>`;
+  return `<div class="detail-block"><div class="k">${escapeHtml(label)}</div>${body}</div>`;
+}
+function pillList(items, badgeClass){
+  if(!Array.isArray(items) || items.length === 0) return '';
+  return `<div class="pill-wrap">${items.map(x=>`<span class="badge ${badgeClass}">${escapeHtml(x)}</span>`).join('')}</div>`;
+}
+function yesNoBadge(val){
+  if(!val) return '—';
+  const cls = val === 'Yes' ? 'b-confirmed' : 'b-declined';
+  return `<span class="badge ${cls}">${escapeHtml(val)}</span>`;
+}
+
+/* ---------- Enrolment modal ---------- */
 function viewEnrol(id){
   const e = DB.enrolments.find(x=>x.id===id); if(!e) return;
   const ks = e.keyStage || e['Key Stage'] || '';
   const fee = feeData[ks];
   const model = e.learningModel || e['Learning Model'] || '';
   const amount = fee ? (model==='Instructor-Led'? fee.il : fee.sl) : null;
+  const subjects = Array.isArray(e.subjects) ? e.subjects : [];
+
   openModal('Enrolment — '+(e.studentName||e['Student Name']||''), `
-    <div class="detail-row"><span class="k">Student</span><span class="v">${escapeHtml(e.studentName||e['Student Name']||'—')}</span></div>
-    <div class="detail-row"><span class="k">Key Stage</span><span class="v">${escapeHtml(fee?fee.label:ks)}</span></div>
-    <div class="detail-row"><span class="k">Learning model</span><span class="v">${escapeHtml(model||'—')}</span></div>
-    ${amount?`<div class="detail-row"><span class="k">Term fee</span><span class="v">${fmtKES(amount)}</span></div>`:''}
-    <div class="detail-row"><span class="k">Parent</span><span class="v">${escapeHtml(e.parentName||e['Parent/Guardian Name']||'—')}</span></div>
-    <div class="detail-row"><span class="k">Email</span><span class="v">${escapeHtml(e.email||e['Email']||'—')}</span></div>
-    <div class="detail-row"><span class="k">Phone</span><span class="v">${escapeHtml(e.phone||e['Phone']||'—')}</span></div>
-    <div class="detail-row"><span class="k">Status</span><span class="v"><span class="badge ${statusBadgeClass(e.status||'New')}">${escapeHtml(e.status||'New')}</span></span></div>
-    <div class="detail-row"><span class="k">Date</span><span class="v">${fmtDate(e.date)}</span></div>
+    <div class="detail-block">
+      <div class="k">Student details</div>
+      <div class="v">
+        ${row('Full name', e.studentName||e['Student Name'])}
+        ${row('Date of birth', e.dob)}
+        ${row('Current school', e.currentSchool)}
+        ${row('Previous qualifications', e.previousQual)}
+      </div>
+    </div>
+
+    <div class="detail-block">
+      <div class="k">Key Stage &amp; subjects</div>
+      <div class="v">
+        ${row('Key Stage', fee?fee.label:ks)}
+        ${row('Year group', e.yearGroup)}
+        ${row('Learning model', model)}
+        ${amount ? row('Term fee', fmtKES(amount)) : ''}
+      </div>
+    </div>
+
+    ${block('Subjects chosen', pillList(subjects, 'b-plain'), subjects.length === 0)}
+
+    <div class="detail-block">
+      <div class="k">Parent / guardian</div>
+      <div class="v">
+        ${row('Name', e.parentName||e['Parent/Guardian Name'])}
+        ${row('Relationship', e.relationship)}
+        ${row('Email', e.email||e['Email'])}
+        ${row('Phone', e.phone||e['Phone'])}
+      </div>
+    </div>
+
+    ${block('Additional information', nl2br(e.additionalInfo), !e.additionalInfo || e.additionalInfo === 'N/A')}
+
+    <div class="detail-block">
+      <div class="k">Submission</div>
+      <div class="v">
+        ${row('Status', '')}
+        <div class="detail-row" style="border-bottom:none; padding-top:0;">
+          <span class="k" style="opacity:0;">status</span>
+          <span class="v"><span class="badge ${statusBadgeClass(e.status||'New')}">${escapeHtml(e.status||'New')}</span></span>
+        </div>
+        ${row('Date submitted', fmtDate(e.date))}
+      </div>
+    </div>
   `, `<button class="btn btn-ghost btn-sm" onclick="closeModal()" type="button">Close</button><button class="btn btn-primary btn-sm" onclick="cycleStatus('enrolments','${e.id}')" type="button"><i class="fas fa-check" aria-hidden="true"></i> Advance status</button>`);
 }
+
+/* ---------- Tutor modal ---------- */
 function viewTutor(id){
   const t = DB.tutors.find(x=>x.id===id); if(!t) return;
   const ks = t.keyStages || t['Key Stages'] || [];
-  const ksText = Array.isArray(ks) ? ks.join(', ') : ks;
+  const subjects = Array.isArray(t.subjects) ? t.subjects : [];
+
   openModal('Tutor application — '+(t.fullName||t['Full Name']||''), `
-    <div class="detail-row"><span class="k">Applicant</span><span class="v">${escapeHtml(t.fullName||t['Full Name']||'—')}</span></div>
-    <div class="detail-row"><span class="k">Email</span><span class="v">${escapeHtml(t.email||t['Email']||'—')}</span></div>
-    <div class="detail-row"><span class="k">Phone</span><span class="v">${escapeHtml(t.phone||t['Phone']||'—')}</span></div>
-    <div class="detail-row"><span class="k">Primary subject</span><span class="v">${escapeHtml(t.primarySubject||t['Primary Subject Specialism']||'—')}</span></div>
-    <div class="detail-row"><span class="k">Key Stages</span><span class="v">${escapeHtml(ksText||'—')}</span></div>
-    <div class="detail-row"><span class="k">Experience</span><span class="v">${escapeHtml(t.experience||t['Teaching Experience']||'—')}</span></div>
-    <div class="detail-row"><span class="k">Status</span><span class="v"><span class="badge ${statusBadgeClass(t.status||'New')}">${escapeHtml(t.status||'New')}</span></span></div>
-    <div class="detail-row"><span class="k">Applied</span><span class="v">${fmtDate(t.date)}</span></div>
+    <div class="detail-block">
+      <div class="k">Applicant</div>
+      <div class="v">
+        ${row('Full name', t.fullName||t['Full Name'])}
+        ${row('Email', t.email||t['Email'])}
+        ${row('Phone', t.phone||t['Phone'])}
+        ${row('Location', t.location)}
+        ${row('Teaching experience', t.experience||t['Teaching Experience'])}
+        ${row('Can start', t.startDate)}
+      </div>
+    </div>
+
+    ${block('Qualifications', nl2br(t.qualifications), !t.qualifications)}
+    ${block('Bio', nl2br(t.bio), !t.bio)}
+
+    <div class="detail-block">
+      <div class="k">Screening questions</div>
+      <div class="v">
+        ${row('Online teaching experience', '')}
+        <div class="detail-row" style="border-bottom:1px solid var(--line-soft); padding-top:0;">
+          <span class="k" style="opacity:0;">.</span>
+          <span class="v">${yesNoBadge(t.onlineTeachingExperience)}</span>
+        </div>
+        ${row('British curriculum experience', '')}
+        <div class="detail-row" style="border-bottom:1px solid var(--line-soft); padding-top:0;">
+          <span class="k" style="opacity:0;">.</span>
+          <span class="v">${yesNoBadge(t.britishCurriculumExperience)}</span>
+        </div>
+        ${row('Ready for class presentation', '')}
+        <div class="detail-row" style="border-bottom:1px solid var(--line-soft); padding-top:0;">
+          <span class="k" style="opacity:0;">.</span>
+          <span class="v">${yesNoBadge(t.classPresentation)}</span>
+        </div>
+        ${row('Available KS4 (8:30am – 3:45pm)', '')}
+        <div class="detail-row" style="border-bottom:1px solid var(--line-soft); padding-top:0;">
+          <span class="k" style="opacity:0;">.</span>
+          <span class="v">${yesNoBadge(t.availabilityKS4)}</span>
+        </div>
+        ${row('Available KS2/3 (8:30am – 12:15pm)', '')}
+        <div class="detail-row" style="border-bottom:1px solid var(--line-soft); padding-top:0;">
+          <span class="k" style="opacity:0;">.</span>
+          <span class="v">${yesNoBadge(t.availabilityKS23)}</span>
+        </div>
+        ${row('Accepts compensation', '')}
+        <div class="detail-row" style="border-bottom:none; padding-top:0;">
+          <span class="k" style="opacity:0;">.</span>
+          <span class="v">${yesNoBadge(t.acceptCompensation)}</span>
+        </div>
+      </div>
+    </div>
+
+    ${block('Key Stages they can teach', pillList(ks, 'b-plain'), ks.length === 0)}
+    ${block('Subjects they can teach', pillList(subjects, 'b-plain'), subjects.length === 0)}
+
+    <div class="detail-block">
+      <div class="k">Primary subject specialism</div>
+      <div class="v" style="font-weight:700;">${escapeHtml(t.primarySubject||t['Primary Subject Specialism']||'—')}</div>
+    </div>
+
+    <div class="detail-block">
+      <div class="k">Submission</div>
+      <div class="v">
+        <div class="detail-row" style="border-bottom:1px solid var(--line-soft); padding-top:0;">
+          <span class="k">Status</span>
+          <span class="v"><span class="badge ${statusBadgeClass(t.status||'New')}">${escapeHtml(t.status||'New')}</span></span>
+        </div>
+        ${row('Date applied', fmtDate(t.date))}
+      </div>
+    </div>
   `, `<button class="btn btn-ghost btn-sm" onclick="closeModal()" type="button">Close</button><button class="btn btn-primary btn-sm" onclick="cycleStatus('tutors','${t.id}')" type="button"><i class="fas fa-forward" aria-hidden="true"></i> Advance status</button>`);
 }
+
+/* ---------- Message modal ---------- */
 function viewMsg(id){
   const m = DB.messages.find(x=>x.id===id); if(!m) return;
   openModal('Message — '+(m.subject||m.Subject||''), `
     <div class="detail-row"><span class="k">From</span><span class="v">${escapeHtml(m.name||m.Name||'—')}</span></div>
     <div class="detail-row"><span class="k">Email</span><span class="v">${escapeHtml(m.email||m.Email||'—')}</span></div>
     <div class="detail-row"><span class="k">Received</span><span class="v">${fmtDate(m.date)}</span></div>
-    <div style="margin-top:1rem; padding:1rem; background:var(--paper); border-radius:10px; font-size:.85rem; color:var(--ink); line-height:1.6;">${escapeHtml(m.message||m.Message||'').replace(/\n/g,'<br>')}</div>
+    <div style="margin-top:1rem; padding:1rem; background:var(--paper); border-radius:10px; font-size:.85rem; color:var(--ink); line-height:1.6;">${nl2br(m.message||m.Message||'')}</div>
   `, `<button class="btn btn-ghost btn-sm" onclick="closeModal()" type="button">Close</button><button class="btn btn-primary btn-sm" onclick="markReplied('${m.id}')" type="button"><i class="fas fa-reply" aria-hidden="true"></i> Mark replied</button>`);
 }
 
