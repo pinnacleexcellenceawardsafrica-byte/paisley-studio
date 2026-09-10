@@ -3,8 +3,47 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Studio Desk — Paisley Studio Admin</title>
+<title>Studio Desk — Paisley Studio Admin Dashboard</title>
+<meta name="description" content="Paisley Studio administration dashboard. Manage enrolments, tutor applications, messages, newsletter subscribers, and Key Stage fees in one place." />
 <meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#245F5A" />
+<link rel="canonical" href="https://paisleystudio.online/studio-desk.html" />
+
+<!-- Open Graph / Social Media -->
+<meta property="og:title" content="Studio Desk — Paisley Studio Admin Dashboard" />
+<meta property="og:description" content="Paisley Studio administration dashboard. Manage enrolments, tutor applications, messages, and more." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://paisleystudio.online/studio-desk.html" />
+<meta property="og:image" content="https://aws-filez.s3.eu-north-1.amazonaws.com/cropped-Paisely-logo-Resized.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Paisley Studio Admin Dashboard" />
+<meta property="og:site_name" content="Paisley Studio" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Studio Desk — Paisley Studio Admin Dashboard" />
+<meta name="twitter:description" content="Paisley Studio administration dashboard. Manage enrolments, tutor applications, and messages." />
+<meta name="twitter:image" content="https://aws-filez.s3.eu-north-1.amazonaws.com/cropped-Paisely-logo-Resized.png" />
+<meta name="twitter:image:alt" content="Paisley Studio Admin Dashboard" />
+
+<!-- Structured Data / JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Studio Desk — Paisley Studio Admin Dashboard",
+  "description": "Paisley Studio administration dashboard for managing enrolments, tutor applications, messages, and newsletter subscribers.",
+  "url": "https://paisleystudio.online/studio-desk.html",
+  "image": "https://aws-filez.s3.eu-north-1.amazonaws.com/cropped-Paisely-logo-Resized.png",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Paisley Studio",
+    "url": "https://paisleystudio.online"
+  }
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -262,7 +301,7 @@
   }
 
   /* =========================================================
-     APP STYLES (unchanged)
+     APP STYLES
   ========================================================= */
   .sidebar{
     width:var(--sidebar-w); flex-shrink:0;
@@ -526,31 +565,31 @@
 <!-- =============================================================
      LOGIN MODAL — shows on page load, hides after successful login
 ============================================================= -->
-<div id="loginOverlay">
+<div id="loginOverlay" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
   <div class="login-card">
-    <div class="login-logo">
+    <div class="login-logo" aria-hidden="true">
       <i class="fas fa-shield-halved"></i>
     </div>
-    <h1>Studio <span>Desk</span></h1>
+    <h1 id="loginTitle">Studio <span>Desk</span></h1>
     <div class="subtitle">Paisley Studio · Administrator Sign In</div>
 
-    <div class="login-error" id="loginError">
+    <div class="login-error" id="loginError" role="alert">
       <i class="fas fa-circle-exclamation"></i>
       <span id="loginErrorText">Incorrect email or password.</span>
     </div>
 
     <div class="login-field">
-      <input type="email" id="loginEmail" placeholder="Email address" autocomplete="username" spellcheck="false" />
-      <i class="fas fa-envelope"></i>
+      <input type="email" id="loginEmail" placeholder="Email address" autocomplete="username" spellcheck="false" aria-label="Email address" />
+      <i class="fas fa-envelope" aria-hidden="true"></i>
     </div>
 
     <div class="login-field">
-      <input type="password" id="loginPassword" placeholder="Password" autocomplete="current-password" />
-      <i class="fas fa-lock"></i>
+      <input type="password" id="loginPassword" placeholder="Password" autocomplete="current-password" aria-label="Password" />
+      <i class="fas fa-lock" aria-hidden="true"></i>
     </div>
 
-    <button class="login-btn" id="loginBtn">
-      <span class="spinner"></span>
+    <button class="login-btn" id="loginBtn" type="button">
+      <span class="spinner" aria-hidden="true"></span>
       <span class="btn-label"><i class="fas fa-right-to-bracket"></i>&nbsp;Sign in</span>
     </button>
 
@@ -563,36 +602,36 @@
 <div class="shell">
 
   <!-- ===== SIDEBAR ===== -->
-  <aside class="sidebar" id="sidebar">
+  <aside class="sidebar" id="sidebar" aria-label="Admin navigation">
     <div class="sidebar-brand">
-      <img src="https://aws-filez.s3.eu-north-1.amazonaws.com/cropped-Paisely-logo-Resized.png" alt="Paisley Studio">
+      <img src="https://aws-filez.s3.eu-north-1.amazonaws.com/cropped-Paisely-logo-Resized.png" alt="Paisley Studio logo">
       <div class="name">Studio Desk<span>Paisley Studio Admin</span></div>
     </div>
 
     <nav class="sidebar-nav">
       <div class="sidebar-section-label">Overview</div>
-      <button class="nav-item active" data-view="dashboard"><i class="fas fa-chart-pie"></i> Dashboard</button>
+      <button class="nav-item active" data-view="dashboard" type="button"><i class="fas fa-chart-pie" aria-hidden="true"></i> Dashboard</button>
 
       <div class="sidebar-section-label">Students</div>
-      <button class="nav-item" data-view="enrolments"><i class="fas fa-user-graduate"></i> Enrolments <span class="nav-badge" id="navCountEnrol">0</span></button>
+      <button class="nav-item" data-view="enrolments" type="button"><i class="fas fa-user-graduate" aria-hidden="true"></i> Enrolments <span class="nav-badge" id="navCountEnrol">0</span></button>
 
       <div class="sidebar-section-label">Tutors</div>
-      <button class="nav-item" data-view="tutors"><i class="fas fa-chalkboard-teacher"></i> Tutor Applications <span class="nav-badge" id="navCountTutor">0</span></button>
+      <button class="nav-item" data-view="tutors" type="button"><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i> Tutor Applications <span class="nav-badge" id="navCountTutor">0</span></button>
 
       <div class="sidebar-section-label">Records</div>
-      <button class="nav-item" data-view="messages"><i class="fas fa-envelope"></i> Messages <span class="nav-badge" id="navCountMsg">0</span></button>
-      <button class="nav-item" data-view="newsletter"><i class="fas fa-paper-plane"></i> Newsletter</button>
+      <button class="nav-item" data-view="messages" type="button"><i class="fas fa-envelope" aria-hidden="true"></i> Messages <span class="nav-badge" id="navCountMsg">0</span></button>
+      <button class="nav-item" data-view="newsletter" type="button"><i class="fas fa-paper-plane" aria-hidden="true"></i> Newsletter</button>
 
       <div class="sidebar-section-label">Curriculum</div>
-      <button class="nav-item" data-view="keystages"><i class="fas fa-layer-group"></i> Key Stages &amp; Fees</button>
+      <button class="nav-item" data-view="keystages" type="button"><i class="fas fa-layer-group" aria-hidden="true"></i> Key Stages &amp; Fees</button>
 
       <div class="sidebar-section-label">System</div>
-      <button class="nav-item" data-view="settings"><i class="fas fa-gear"></i> Settings</button>
+      <button class="nav-item" data-view="settings" type="button"><i class="fas fa-gear" aria-hidden="true"></i> Settings</button>
     </nav>
 
     <div class="sidebar-foot">
-      <span class="dot" id="connDot"></span> <span id="connText">Connecting to Firestore…</span>
-      <button class="signout" id="signOutBtn" title="Sign out"><i class="fas fa-right-from-bracket"></i> Out</button>
+      <span class="dot" id="connDot" aria-hidden="true"></span> <span id="connText">Connecting to Firestore…</span>
+      <button class="signout" id="signOutBtn" title="Sign out" type="button"><i class="fas fa-right-from-bracket" aria-hidden="true"></i> Out</button>
     </div>
   </aside>
 
@@ -601,7 +640,7 @@
 
     <div class="topbar">
       <div class="topbar-left">
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" type="button"><i class="fas fa-bars" aria-hidden="true"></i></button>
         <div>
           <div class="topbar-title" id="pageTitle">Dashboard</div>
           <div class="topbar-sub" id="pageSub">Term overview across every Key Stage</div>
@@ -609,12 +648,12 @@
       </div>
       <div class="topbar-right">
         <div class="search-box">
-          <i class="fas fa-search"></i>
-          <input type="text" id="globalSearch" placeholder="Search students, tutors, messages…">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          <input type="text" id="globalSearch" placeholder="Search students, tutors, messages…" aria-label="Search records">
         </div>
-        <button class="icon-btn" title="Notifications"><i class="fas fa-bell"></i><span class="ping"></span></button>
+        <button class="icon-btn" title="Notifications" type="button" aria-label="Notifications"><i class="fas fa-bell" aria-hidden="true"></i><span class="ping" aria-hidden="true"></span></button>
         <div class="admin-chip">
-          <div class="avatar">PS</div>
+          <div class="avatar" aria-hidden="true">PS</div>
           <div class="who">Registrar Desk<span>Nairobi Office</span></div>
         </div>
       </div>
@@ -628,28 +667,28 @@
         <div class="stats-row">
           <div class="stat-card">
             <div class="top-row">
-              <div class="icon-wrap ic-1"><i class="fas fa-user-graduate"></i></div>
+              <div class="icon-wrap ic-1"><i class="fas fa-user-graduate" aria-hidden="true"></i></div>
             </div>
             <div class="num" id="statEnrolTotal">0</div>
             <div class="lbl">Total enrolments</div>
           </div>
           <div class="stat-card">
             <div class="top-row">
-              <div class="icon-wrap ic-2"><i class="fas fa-chalkboard-teacher"></i></div>
+              <div class="icon-wrap ic-2"><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i></div>
             </div>
             <div class="num" id="statTutors">0</div>
             <div class="lbl">Tutor applications</div>
           </div>
           <div class="stat-card">
             <div class="top-row">
-              <div class="icon-wrap ic-3"><i class="fas fa-envelope"></i></div>
+              <div class="icon-wrap ic-3"><i class="fas fa-envelope" aria-hidden="true"></i></div>
             </div>
             <div class="num" id="statMsg">0</div>
             <div class="lbl">Unread messages</div>
           </div>
           <div class="stat-card">
             <div class="top-row">
-              <div class="icon-wrap ic-4"><i class="fas fa-paper-plane"></i></div>
+              <div class="icon-wrap ic-4"><i class="fas fa-paper-plane" aria-hidden="true"></i></div>
             </div>
             <div class="num" id="statNl">0</div>
             <div class="lbl">Newsletter subscribers</div>
@@ -664,7 +703,7 @@
                 <div class="sub">New students registered per month</div>
               </div>
             </div>
-            <div class="chart-wrap"><canvas id="growthChart"></canvas></div>
+            <div class="chart-wrap"><canvas id="growthChart" role="img" aria-label="Line chart showing enrolment growth over the last six months"></canvas></div>
           </div>
 
           <div class="panel">
@@ -686,7 +725,7 @@
                 <div class="sub">Distribution of current student base</div>
               </div>
             </div>
-            <div class="chart-wrap small"><canvas id="keyStageChart"></canvas></div>
+            <div class="chart-wrap small"><canvas id="keyStageChart" role="img" aria-label="Bar chart showing enrolments distributed across Key Stages 2 through 5"></canvas></div>
           </div>
 
           <div class="panel">
@@ -696,14 +735,14 @@
                 <div class="sub">Instructor-led vs. self-paced</div>
               </div>
             </div>
-            <div class="chart-wrap small"><canvas id="modelChart"></canvas></div>
+            <div class="chart-wrap small"><canvas id="modelChart" role="img" aria-label="Doughnut chart showing split between instructor-led and student-led learning"></canvas></div>
             <div class="legend-row" id="modelLegend"></div>
           </div>
         </div>
 
         <div class="footer-note" id="setupNote">
-          <i class="fas fa-circle-info"></i>
-          <div>This dashboard is wired to Firestore. If it's stuck on "Connecting…" or shows a permissions error in the browser console, double check firebase-config.js has your real project keys and that Firestore rules allow the admin to read (see firestore.rules).</div>
+          <i class="fas fa-circle-info" aria-hidden="true"></i>
+          <div>This dashboard is wired to Firestore. If it's stuck on "Connecting…" or shows a permissions error in the browser console, double check <code>firebase-config.js</code> has your real project keys and that Firestore rules allow the admin to read.</div>
         </div>
 
       </section>
@@ -713,11 +752,11 @@
         <div class="panel">
           <div class="table-toolbar">
             <div class="filter-chips" id="enrolFilters">
-              <button class="chip-btn active" data-filter="all">All</button>
-              <button class="chip-btn" data-filter="Key Stage 2 (Years 3-6)">KS2</button>
-              <button class="chip-btn" data-filter="Key Stage 3 (Years 7-9)">KS3</button>
-              <button class="chip-btn" data-filter="Key Stage 4 (Years 10-11) — IGCSE">KS4</button>
-              <button class="chip-btn" data-filter="Key Stage 5 (Years 12-13) — A-Level">KS5</button>
+              <button class="chip-btn active" data-filter="all" type="button">All</button>
+              <button class="chip-btn" data-filter="Key Stage 2 (Years 3-6)" type="button">KS2</button>
+              <button class="chip-btn" data-filter="Key Stage 3 (Years 7-9)" type="button">KS3</button>
+              <button class="chip-btn" data-filter="Key Stage 4 (Years 10-11) — IGCSE" type="button">KS4</button>
+              <button class="chip-btn" data-filter="Key Stage 5 (Years 12-13) — A-Level" type="button">KS5</button>
             </div>
           </div>
           <div class="table-wrap">
@@ -737,11 +776,11 @@
         <div class="panel">
           <div class="table-toolbar">
             <div class="filter-chips" id="tutorFilters">
-              <button class="chip-btn active" data-filter="all">All</button>
-              <button class="chip-btn" data-filter="New">New</button>
-              <button class="chip-btn" data-filter="Review">In Review</button>
-              <button class="chip-btn" data-filter="Confirmed">Confirmed</button>
-              <button class="chip-btn" data-filter="Declined">Declined</button>
+              <button class="chip-btn active" data-filter="all" type="button">All</button>
+              <button class="chip-btn" data-filter="New" type="button">New</button>
+              <button class="chip-btn" data-filter="Review" type="button">In Review</button>
+              <button class="chip-btn" data-filter="Confirmed" type="button">Confirmed</button>
+              <button class="chip-btn" data-filter="Declined" type="button">Declined</button>
             </div>
           </div>
           <div class="table-wrap">
@@ -761,9 +800,9 @@
         <div class="panel">
           <div class="table-toolbar">
             <div class="filter-chips" id="msgFilters">
-              <button class="chip-btn active" data-filter="all">All</button>
-              <button class="chip-btn" data-filter="New">Unread</button>
-              <button class="chip-btn" data-filter="Confirmed">Replied</button>
+              <button class="chip-btn active" data-filter="all" type="button">All</button>
+              <button class="chip-btn" data-filter="New" type="button">Unread</button>
+              <button class="chip-btn" data-filter="Confirmed" type="button">Replied</button>
             </div>
           </div>
           <div class="table-wrap">
@@ -817,7 +856,7 @@
           <div class="detail-row"><div class="k">Newsletter</div><div class="v">Footer form, all pages → Firestore "newsletter"</div></div>
           <div class="detail-row"><div class="k">Storage</div><div class="v">Firebase Firestore (cloud, live)</div></div>
           <div style="margin-top:1.3rem; display:flex; gap:.7rem; flex-wrap:wrap;">
-            <button class="btn btn-ghost btn-sm" id="exportBtn"><i class="fas fa-download"></i> Export current view as JSON</button>
+            <button class="btn btn-ghost btn-sm" id="exportBtn" type="button"><i class="fas fa-download" aria-hidden="true"></i> Export current view as JSON</button>
           </div>
         </div>
       </section>
@@ -827,11 +866,11 @@
 </div>
 
 <!-- ===== DETAIL MODAL ===== -->
-<div class="modal-overlay" id="modalOverlay">
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal">
     <div class="modal-head">
       <h3 id="modalTitle">Record details</h3>
-      <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+      <button class="modal-close" id="modalClose" type="button" aria-label="Close dialog"><i class="fas fa-times" aria-hidden="true"></i></button>
     </div>
     <div class="modal-body" id="modalBody"></div>
     <div class="modal-foot" id="modalFoot"></div>
@@ -842,10 +881,8 @@
 /* =========================================================
    LOGIN GATE (hardcoded credentials)
    -----------------------------------------------------------
-   NOTE: This is a client-side gate only. Anyone reading the
-   page source can see the credentials. It keeps casual
-   visitors out, but is not real security. Upgrade to
-   Firebase Authentication later for proper protection.
+   NOTE: Client-side gate only. Upgrade to Firebase
+   Authentication later for proper protection.
 ========================================================= */
 const ADMIN_EMAIL = 'info@paisleystudio.online';
 const ADMIN_PASSWORD = 'Paisley@2026';
@@ -865,12 +902,10 @@ function setAuthed(on){
   }
 }
 
-// If already authed this session, skip the modal immediately
 if(isAuthed()){
   document.body.classList.add('authed');
 }
 
-// Wire up the login modal
 const loginBtn = document.getElementById('loginBtn');
 const loginEmail = document.getElementById('loginEmail');
 const loginPassword = document.getElementById('loginPassword');
@@ -888,7 +923,6 @@ function attemptLogin(){
     return;
   }
 
-  // Fake a tiny delay so the spinner is visible and it feels like a real check
   loginBtn.classList.add('loading');
   loginBtn.disabled = true;
   loginEmail.disabled = true;
@@ -899,13 +933,11 @@ function attemptLogin(){
 
     if(ok){
       setAuthed(true);
-      // Small fade-out before hiding the modal
       const overlay = document.getElementById('loginOverlay');
       overlay.style.transition = 'opacity .3s ease';
       overlay.style.opacity = '0';
       setTimeout(() => {
         overlay.style.display = 'none';
-        // Firestore listeners may already be running; nothing else to trigger here
       }, 300);
     } else {
       loginBtn.classList.remove('loading');
@@ -914,7 +946,6 @@ function attemptLogin(){
       loginPassword.disabled = false;
       loginErrorText.textContent = 'Incorrect email or password. Please try again.';
       loginError.classList.add('show');
-      // Re-trigger the shake animation
       loginError.style.animation = 'none';
       void loginError.offsetWidth;
       loginError.style.animation = '';
@@ -928,7 +959,6 @@ loginBtn.addEventListener('click', attemptLogin);
 loginEmail.addEventListener('keydown', e => { if(e.key === 'Enter') loginPassword.focus(); });
 loginPassword.addEventListener('keydown', e => { if(e.key === 'Enter') attemptLogin(); });
 
-// Sign out button
 document.getElementById('signOutBtn').addEventListener('click', () => {
   if(!confirm('Sign out of Studio Desk?')) return;
   setAuthed(false);
@@ -960,12 +990,25 @@ function toDate(ts){
   if(typeof ts.toDate === 'function') return ts.toDate();
   return new Date(ts);
 }
+function escapeHtml(str){
+  if(str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
 
 let DB = { enrolments: [], tutors: [], messages: [], newsletter: [] };
 
 /* ===================== FIRESTORE LISTENERS ===================== */
 function initFirestore(){
   try{
+    if(typeof db === 'undefined'){
+      handleFirestoreError(new Error('Firestore is not initialised. Check firebase-config.js.'));
+      return;
+    }
     db.collection('enrolments').orderBy('createdAt','desc').onSnapshot(snap=>{
       DB.enrolments = snap.docs.map(d=>({ id:d.id, ...d.data(), date: toDate(d.data().createdAt) }));
       setConnected(true);
@@ -1001,7 +1044,7 @@ function handleFirestoreError(err){
   setConnected(false);
   const note = document.getElementById('setupNote');
   note.classList.add('warn');
-  note.innerHTML = `<i class="fas fa-triangle-exclamation"></i><div><strong>Can't read data yet.</strong> Most likely firebase-config.js still has placeholder keys, or your Firestore Rules block "read" for the admin. Open the browser console (F12) for the exact error: <code>${(err && err.message) || err}</code></div>`;
+  note.innerHTML = `<i class="fas fa-triangle-exclamation" aria-hidden="true"></i><div><strong>Can't read data yet.</strong> Most likely firebase-config.js still has placeholder keys, or your Firestore rules block "read" for the admin. Open the browser console (F12) for the exact error: <code>${escapeHtml((err && err.message) || err)}</code></div>`;
 }
 
 /* ===================== NAVIGATION ===================== */
@@ -1048,9 +1091,21 @@ function renderStats(){
 /* ===================== RENDER: ACTIVITY ===================== */
 function renderActivity(){
   const items = [];
-  DB.enrolments.slice(0,5).forEach(e=> items.push({t:'New enrolment', d:(e.studentName||e['Student Name']||'Unnamed')+' — '+(feeData[e.keyStage||e['Key Stage']]?.label||e.keyStage||e['Key Stage']||''), date:e.date, icon:'fa-user-graduate', cls:'ic-1'}));
-  DB.tutors.slice(0,4).forEach(t=> items.push({t:'Tutor application', d:(t.fullName||t['Full Name']||'Unnamed')+' — '+(t.primarySubject||t['Primary Subject Specialism']||''), date:t.date, icon:'fa-chalkboard-teacher', cls:'ic-3'}));
-  DB.messages.slice(0,4).forEach(m=> items.push({t:'New message', d:(m.name||m.Name||'Unnamed')+' — '+(m.subject||m.Subject||''), date:m.date, icon:'fa-envelope', cls:'ic-4'}));
+  DB.enrolments.slice(0,5).forEach(e=> items.push({
+    t:'New enrolment',
+    d:(e.studentName||e['Student Name']||'Unnamed')+' — '+(feeData[e.keyStage||e['Key Stage']]?.label||e.keyStage||e['Key Stage']||''),
+    date:e.date, icon:'fa-user-graduate', cls:'ic-1'
+  }));
+  DB.tutors.slice(0,4).forEach(t=> items.push({
+    t:'Tutor application',
+    d:(t.fullName||t['Full Name']||'Unnamed')+' — '+(t.primarySubject||t['Primary Subject Specialism']||''),
+    date:t.date, icon:'fa-chalkboard-teacher', cls:'ic-3'
+  }));
+  DB.messages.slice(0,4).forEach(m=> items.push({
+    t:'New message',
+    d:(m.name||m.Name||'Unnamed')+' — '+(m.subject||m.Subject||''),
+    date:m.date, icon:'fa-envelope', cls:'ic-4'
+  }));
   items.sort((a,b)=> b.date-a.date);
 
   const list = document.getElementById('activityList');
@@ -1058,11 +1113,11 @@ function renderActivity(){
     const daysDiff = Math.floor((new Date()-it.date)/86400000);
     const when = daysDiff===0 ? 'Today' : daysDiff===1 ? 'Yesterday' : daysDiff+'d ago';
     return `<div class="activity-item">
-      <div class="activity-icon ${it.cls}"><i class="fas ${it.icon}"></i></div>
-      <div class="activity-body"><div class="t">${it.t}</div><div class="d">${it.d}</div></div>
+      <div class="activity-icon ${it.cls}"><i class="fas ${it.icon}" aria-hidden="true"></i></div>
+      <div class="activity-body"><div class="t">${escapeHtml(it.t)}</div><div class="d">${escapeHtml(it.d)}</div></div>
       <div class="activity-time">${when}</div>
     </div>`;
-  }).join('') || '<div class="table-empty"><i class="fas fa-inbox"></i>No activity yet</div>';
+  }).join('') || '<div class="table-empty"><i class="fas fa-inbox" aria-hidden="true"></i>No activity yet</div>';
 }
 
 /* ===================== CHARTS ===================== */
@@ -1136,7 +1191,10 @@ function renderEnrolTable(){
   const tbody = document.getElementById('enrolTableBody');
   const list = DB.enrolments.filter(e=> enrolFilter==='all' || (e.keyStage||e['Key Stage'])===enrolFilter);
   document.getElementById('enrolCountText').textContent = list.length + ' record' + (list.length===1?'':'s');
-  if(list.length===0){ tbody.innerHTML = `<tr><td colspan="7"><div class="table-empty"><i class="fas fa-inbox"></i>No enrolments yet — they'll appear here the moment someone submits the enrolment form.</div></td></tr>`; return; }
+  if(list.length===0){
+    tbody.innerHTML = `<tr><td colspan="7"><div class="table-empty"><i class="fas fa-inbox" aria-hidden="true"></i>No enrolments yet — they'll appear here the moment someone submits the enrolment form.</div></td></tr>`;
+    return;
+  }
   tbody.innerHTML = list.map(e=>{
     const ks = e.keyStage || e['Key Stage'] || '';
     const label = feeData[ks]?.label || ks;
@@ -1146,15 +1204,15 @@ function renderEnrolTable(){
     const phone = e.phone || e['Phone'] || '';
     const status = e.status || 'New';
     return `<tr>
-      <td><div class="cell-name">${name}</div><div class="cell-sub">${e.id.slice(0,6)}</div></td>
-      <td>${label}</td>
-      <td>${model}</td>
-      <td><div class="cell-name" style="font-weight:600;font-size:.78rem;">${email}</div><div class="cell-sub">${phone}</div></td>
-      <td><span class="badge ${statusBadgeClass(status)}">${status}</span></td>
+      <td><div class="cell-name">${escapeHtml(name)}</div><div class="cell-sub">${escapeHtml(e.id.slice(0,6))}</div></td>
+      <td>${escapeHtml(label)}</td>
+      <td>${escapeHtml(model)}</td>
+      <td><div class="cell-name" style="font-weight:600;font-size:.78rem;">${escapeHtml(email)}</div><div class="cell-sub">${escapeHtml(phone)}</div></td>
+      <td><span class="badge ${statusBadgeClass(status)}">${escapeHtml(status)}</span></td>
       <td>${fmtDate(e.date)}</td>
       <td><div class="row-actions">
-        <button class="mini-btn" onclick="viewEnrol('${e.id}')" title="View"><i class="fas fa-eye"></i></button>
-        <button class="mini-btn danger" onclick="deleteRecord('enrolments','${e.id}')" title="Delete"><i class="fas fa-trash"></i></button>
+        <button class="mini-btn" onclick="viewEnrol('${e.id}')" title="View" type="button" aria-label="View enrolment"><i class="fas fa-eye" aria-hidden="true"></i></button>
+        <button class="mini-btn danger" onclick="deleteRecord('enrolments','${e.id}')" title="Delete" type="button" aria-label="Delete enrolment"><i class="fas fa-trash" aria-hidden="true"></i></button>
       </div></td>
     </tr>`;
   }).join('');
@@ -1164,7 +1222,10 @@ function renderTutorTable(){
   const tbody = document.getElementById('tutorTableBody');
   const list = DB.tutors.filter(t=> tutorFilter==='all' || (t.status||'New')===tutorFilter);
   document.getElementById('tutorCountText').textContent = list.length + ' record' + (list.length===1?'':'s');
-  if(list.length===0){ tbody.innerHTML = `<tr><td colspan="7"><div class="table-empty"><i class="fas fa-inbox"></i>No tutor applications yet.</div></td></tr>`; return; }
+  if(list.length===0){
+    tbody.innerHTML = `<tr><td colspan="7"><div class="table-empty"><i class="fas fa-inbox" aria-hidden="true"></i>No tutor applications yet.</div></td></tr>`;
+    return;
+  }
   tbody.innerHTML = list.map(t=>{
     const name = t.fullName || t['Full Name'] || '—';
     const email = t.email || t['Email'] || '';
@@ -1174,15 +1235,15 @@ function renderTutorTable(){
     const exp = t.experience || t['Teaching Experience'] || '—';
     const status = t.status || 'New';
     return `<tr>
-      <td><div class="cell-name">${name}</div><div class="cell-sub">${email}</div></td>
-      <td>${subject}</td>
-      <td style="font-size:.78rem;">${ksText}</td>
-      <td>${exp}</td>
-      <td><span class="badge ${statusBadgeClass(status)}">${status}</span></td>
+      <td><div class="cell-name">${escapeHtml(name)}</div><div class="cell-sub">${escapeHtml(email)}</div></td>
+      <td>${escapeHtml(subject)}</td>
+      <td style="font-size:.78rem;">${escapeHtml(ksText)}</td>
+      <td>${escapeHtml(exp)}</td>
+      <td><span class="badge ${statusBadgeClass(status)}">${escapeHtml(status)}</span></td>
       <td>${fmtDate(t.date)}</td>
       <td><div class="row-actions">
-        <button class="mini-btn" onclick="viewTutor('${t.id}')" title="View"><i class="fas fa-eye"></i></button>
-        <button class="mini-btn danger" onclick="deleteRecord('tutors','${t.id}')" title="Delete"><i class="fas fa-trash"></i></button>
+        <button class="mini-btn" onclick="viewTutor('${t.id}')" title="View" type="button" aria-label="View application"><i class="fas fa-eye" aria-hidden="true"></i></button>
+        <button class="mini-btn danger" onclick="deleteRecord('tutors','${t.id}')" title="Delete" type="button" aria-label="Delete application"><i class="fas fa-trash" aria-hidden="true"></i></button>
       </div></td>
     </tr>`;
   }).join('');
@@ -1192,7 +1253,10 @@ function renderMsgTable(){
   const tbody = document.getElementById('msgTableBody');
   const list = DB.messages.filter(m=> msgFilter==='all' || (m.status||'New')===msgFilter);
   document.getElementById('msgCountText').textContent = list.length + ' record' + (list.length===1?'':'s');
-  if(list.length===0){ tbody.innerHTML = `<tr><td colspan="6"><div class="table-empty"><i class="fas fa-inbox"></i>No messages yet.</div></td></tr>`; return; }
+  if(list.length===0){
+    tbody.innerHTML = `<tr><td colspan="6"><div class="table-empty"><i class="fas fa-inbox" aria-hidden="true"></i>No messages yet.</div></td></tr>`;
+    return;
+  }
   tbody.innerHTML = list.map(m=>{
     const name = m.name || m.Name || '—';
     const email = m.email || m.Email || '';
@@ -1200,14 +1264,14 @@ function renderMsgTable(){
     const body = m.message || m.Message || '';
     const status = m.status || 'New';
     return `<tr>
-      <td><div class="cell-name">${name}</div><div class="cell-sub">${email}</div></td>
-      <td>${subject}</td>
-      <td style="max-width:260px;"><div class="cell-sub" style="color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${body}</div></td>
+      <td><div class="cell-name">${escapeHtml(name)}</div><div class="cell-sub">${escapeHtml(email)}</div></td>
+      <td>${escapeHtml(subject)}</td>
+      <td style="max-width:260px;"><div class="cell-sub" style="color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(body)}</div></td>
       <td><span class="badge ${statusBadgeClass(status)}">${status==='New'?'Unread':'Replied'}</span></td>
       <td>${fmtDate(m.date)}</td>
       <td><div class="row-actions">
-        <button class="mini-btn" onclick="viewMsg('${m.id}')" title="View"><i class="fas fa-eye"></i></button>
-        <button class="mini-btn danger" onclick="deleteRecord('messages','${m.id}')" title="Delete"><i class="fas fa-trash"></i></button>
+        <button class="mini-btn" onclick="viewMsg('${m.id}')" title="View" type="button" aria-label="View message"><i class="fas fa-eye" aria-hidden="true"></i></button>
+        <button class="mini-btn danger" onclick="deleteRecord('messages','${m.id}')" title="Delete" type="button" aria-label="Delete message"><i class="fas fa-trash" aria-hidden="true"></i></button>
       </div></td>
     </tr>`;
   }).join('');
@@ -1217,14 +1281,17 @@ function renderNlTable(){
   const tbody = document.getElementById('nlTableBody');
   const list = DB.newsletter;
   document.getElementById('nlCountText').textContent = list.length + ' record' + (list.length===1?'':'s');
-  if(list.length===0){ tbody.innerHTML = `<tr><td colspan="5"><div class="table-empty"><i class="fas fa-inbox"></i>No subscribers yet.</div></td></tr>`; return; }
+  if(list.length===0){
+    tbody.innerHTML = `<tr><td colspan="5"><div class="table-empty"><i class="fas fa-inbox" aria-hidden="true"></i>No subscribers yet.</div></td></tr>`;
+    return;
+  }
   tbody.innerHTML = list.slice(0,80).map(n=>`
     <tr>
-      <td class="cell-name">${n.email}</td>
-      <td>${n.source||'Footer'}</td>
-      <td><span class="badge ${statusBadgeClass(n.status||'Active')}">${n.status||'Active'}</span></td>
+      <td class="cell-name">${escapeHtml(n.email)}</td>
+      <td>${escapeHtml(n.source||'Footer')}</td>
+      <td><span class="badge ${statusBadgeClass(n.status||'Active')}">${escapeHtml(n.status||'Active')}</span></td>
       <td>${fmtDate(n.date)}</td>
-      <td><div class="row-actions"><button class="mini-btn danger" onclick="deleteRecord('newsletter','${n.id}')" title="Remove"><i class="fas fa-trash"></i></button></div></td>
+      <td><div class="row-actions"><button class="mini-btn danger" onclick="deleteRecord('newsletter','${n.id}')" title="Remove" type="button" aria-label="Remove subscriber"><i class="fas fa-trash" aria-hidden="true"></i></button></div></td>
     </tr>`).join('');
 }
 
@@ -1234,7 +1301,7 @@ function renderKsTable(){
     const fee = feeData[ks];
     const active = DB.enrolments.filter(e=> (e.keyStage||e['Key Stage'])===ks);
     return `<tr>
-      <td class="cell-name">${fee.label}</td>
+      <td class="cell-name">${escapeHtml(fee.label)}</td>
       <td>${fmtKES(fee.il)} <span class="cell-sub">(≈ $${Math.round(fee.il/KES_USD).toLocaleString()})</span></td>
       <td>${fmtKES(fee.sl)} <span class="cell-sub">(≈ $${Math.round(fee.sl/KES_USD).toLocaleString()})</span></td>
       <td>${active.length}</td>
@@ -1261,6 +1328,8 @@ wireChips('msgFilters', v=>msgFilter=v, renderMsgTable);
 const overlay = document.getElementById('modalOverlay');
 document.getElementById('modalClose').addEventListener('click', closeModal);
 overlay.addEventListener('click', (e)=>{ if(e.target===overlay) closeModal(); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && overlay.classList.contains('open')) closeModal(); });
+
 function closeModal(){ overlay.classList.remove('open'); }
 function openModal(title, rowsHtml, footHtml=''){
   document.getElementById('modalTitle').textContent = title;
@@ -1276,40 +1345,40 @@ function viewEnrol(id){
   const model = e.learningModel || e['Learning Model'] || '';
   const amount = fee ? (model==='Instructor-Led'? fee.il : fee.sl) : null;
   openModal('Enrolment — '+(e.studentName||e['Student Name']||''), `
-    <div class="detail-row"><span class="k">Student</span><span class="v">${e.studentName||e['Student Name']||'—'}</span></div>
-    <div class="detail-row"><span class="k">Key Stage</span><span class="v">${fee?fee.label:ks}</span></div>
-    <div class="detail-row"><span class="k">Learning model</span><span class="v">${model||'—'}</span></div>
+    <div class="detail-row"><span class="k">Student</span><span class="v">${escapeHtml(e.studentName||e['Student Name']||'—')}</span></div>
+    <div class="detail-row"><span class="k">Key Stage</span><span class="v">${escapeHtml(fee?fee.label:ks)}</span></div>
+    <div class="detail-row"><span class="k">Learning model</span><span class="v">${escapeHtml(model||'—')}</span></div>
     ${amount?`<div class="detail-row"><span class="k">Term fee</span><span class="v">${fmtKES(amount)}</span></div>`:''}
-    <div class="detail-row"><span class="k">Parent</span><span class="v">${e.parentName||e['Parent/Guardian Name']||'—'}</span></div>
-    <div class="detail-row"><span class="k">Email</span><span class="v">${e.email||e['Email']||'—'}</span></div>
-    <div class="detail-row"><span class="k">Phone</span><span class="v">${e.phone||e['Phone']||'—'}</span></div>
-    <div class="detail-row"><span class="k">Status</span><span class="v"><span class="badge ${statusBadgeClass(e.status||'New')}">${e.status||'New'}</span></span></div>
+    <div class="detail-row"><span class="k">Parent</span><span class="v">${escapeHtml(e.parentName||e['Parent/Guardian Name']||'—')}</span></div>
+    <div class="detail-row"><span class="k">Email</span><span class="v">${escapeHtml(e.email||e['Email']||'—')}</span></div>
+    <div class="detail-row"><span class="k">Phone</span><span class="v">${escapeHtml(e.phone||e['Phone']||'—')}</span></div>
+    <div class="detail-row"><span class="k">Status</span><span class="v"><span class="badge ${statusBadgeClass(e.status||'New')}">${escapeHtml(e.status||'New')}</span></span></div>
     <div class="detail-row"><span class="k">Date</span><span class="v">${fmtDate(e.date)}</span></div>
-  `, `<button class="btn btn-ghost btn-sm" onclick="closeModal()">Close</button><button class="btn btn-primary btn-sm" onclick="cycleStatus('enrolments','${e.id}')"><i class="fas fa-check"></i> Advance status</button>`);
+  `, `<button class="btn btn-ghost btn-sm" onclick="closeModal()" type="button">Close</button><button class="btn btn-primary btn-sm" onclick="cycleStatus('enrolments','${e.id}')" type="button"><i class="fas fa-check" aria-hidden="true"></i> Advance status</button>`);
 }
 function viewTutor(id){
   const t = DB.tutors.find(x=>x.id===id); if(!t) return;
   const ks = t.keyStages || t['Key Stages'] || [];
   const ksText = Array.isArray(ks) ? ks.join(', ') : ks;
   openModal('Tutor application — '+(t.fullName||t['Full Name']||''), `
-    <div class="detail-row"><span class="k">Applicant</span><span class="v">${t.fullName||t['Full Name']||'—'}</span></div>
-    <div class="detail-row"><span class="k">Email</span><span class="v">${t.email||t['Email']||'—'}</span></div>
-    <div class="detail-row"><span class="k">Phone</span><span class="v">${t.phone||t['Phone']||'—'}</span></div>
-    <div class="detail-row"><span class="k">Primary subject</span><span class="v">${t.primarySubject||t['Primary Subject Specialism']||'—'}</span></div>
-    <div class="detail-row"><span class="k">Key Stages</span><span class="v">${ksText||'—'}</span></div>
-    <div class="detail-row"><span class="k">Experience</span><span class="v">${t.experience||t['Teaching Experience']||'—'}</span></div>
-    <div class="detail-row"><span class="k">Status</span><span class="v"><span class="badge ${statusBadgeClass(t.status||'New')}">${t.status||'New'}</span></span></div>
+    <div class="detail-row"><span class="k">Applicant</span><span class="v">${escapeHtml(t.fullName||t['Full Name']||'—')}</span></div>
+    <div class="detail-row"><span class="k">Email</span><span class="v">${escapeHtml(t.email||t['Email']||'—')}</span></div>
+    <div class="detail-row"><span class="k">Phone</span><span class="v">${escapeHtml(t.phone||t['Phone']||'—')}</span></div>
+    <div class="detail-row"><span class="k">Primary subject</span><span class="v">${escapeHtml(t.primarySubject||t['Primary Subject Specialism']||'—')}</span></div>
+    <div class="detail-row"><span class="k">Key Stages</span><span class="v">${escapeHtml(ksText||'—')}</span></div>
+    <div class="detail-row"><span class="k">Experience</span><span class="v">${escapeHtml(t.experience||t['Teaching Experience']||'—')}</span></div>
+    <div class="detail-row"><span class="k">Status</span><span class="v"><span class="badge ${statusBadgeClass(t.status||'New')}">${escapeHtml(t.status||'New')}</span></span></div>
     <div class="detail-row"><span class="k">Applied</span><span class="v">${fmtDate(t.date)}</span></div>
-  `, `<button class="btn btn-ghost btn-sm" onclick="closeModal()">Close</button><button class="btn btn-primary btn-sm" onclick="cycleStatus('tutors','${t.id}')"><i class="fas fa-forward"></i> Advance status</button>`);
+  `, `<button class="btn btn-ghost btn-sm" onclick="closeModal()" type="button">Close</button><button class="btn btn-primary btn-sm" onclick="cycleStatus('tutors','${t.id}')" type="button"><i class="fas fa-forward" aria-hidden="true"></i> Advance status</button>`);
 }
 function viewMsg(id){
   const m = DB.messages.find(x=>x.id===id); if(!m) return;
   openModal('Message — '+(m.subject||m.Subject||''), `
-    <div class="detail-row"><span class="k">From</span><span class="v">${m.name||m.Name||'—'}</span></div>
-    <div class="detail-row"><span class="k">Email</span><span class="v">${m.email||m.Email||'—'}</span></div>
+    <div class="detail-row"><span class="k">From</span><span class="v">${escapeHtml(m.name||m.Name||'—')}</span></div>
+    <div class="detail-row"><span class="k">Email</span><span class="v">${escapeHtml(m.email||m.Email||'—')}</span></div>
     <div class="detail-row"><span class="k">Received</span><span class="v">${fmtDate(m.date)}</span></div>
-    <div style="margin-top:1rem; padding:1rem; background:var(--paper); border-radius:10px; font-size:.85rem; color:var(--ink); line-height:1.6;">${m.message||m.Message||''}</div>
-  `, `<button class="btn btn-ghost btn-sm" onclick="closeModal()">Close</button><button class="btn btn-primary btn-sm" onclick="markReplied('${m.id}')"><i class="fas fa-reply"></i> Mark replied</button>`);
+    <div style="margin-top:1rem; padding:1rem; background:var(--paper); border-radius:10px; font-size:.85rem; color:var(--ink); line-height:1.6;">${escapeHtml(m.message||m.Message||'').replace(/\n/g,'<br>')}</div>
+  `, `<button class="btn btn-ghost btn-sm" onclick="closeModal()" type="button">Close</button><button class="btn btn-primary btn-sm" onclick="markReplied('${m.id}')" type="button"><i class="fas fa-reply" aria-hidden="true"></i> Mark replied</button>`);
 }
 
 function cycleStatus(collection, id){
