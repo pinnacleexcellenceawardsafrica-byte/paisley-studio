@@ -9,7 +9,6 @@
 <meta name="theme-color" content="#245F5A" />
 <link rel="canonical" href="https://paisleystudio.online/studio-desk.html" />
 
-<!-- Open Graph / Social Media -->
 <meta property="og:title" content="Studio Desk — Paisley Studio Admin Dashboard" />
 <meta property="og:description" content="Paisley Studio administration dashboard. Manage enrolments, tutor applications, messages, and more." />
 <meta property="og:type" content="website" />
@@ -20,14 +19,12 @@
 <meta property="og:image:alt" content="Paisley Studio Admin Dashboard" />
 <meta property="og:site_name" content="Paisley Studio" />
 
-<!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Studio Desk — Paisley Studio Admin Dashboard" />
 <meta name="twitter:description" content="Paisley Studio administration dashboard. Manage enrolments, tutor applications, and messages." />
 <meta name="twitter:image" content="https://aws-filez.s3.eu-north-1.amazonaws.com/cropped-Paisely-logo-Resized.png" />
 <meta name="twitter:image:alt" content="Paisley Studio Admin Dashboard" />
 
-<!-- Structured Data / JSON-LD -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -51,9 +48,10 @@
 <link rel="icon" href="https://aws-filez.s3.eu-north-1.amazonaws.com/cropped-Paisely-logo-Resized.png" sizes="32x32" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 
-<!-- ===== FIREBASE ===== -->
+<!-- ===== FIREBASE (app + firestore + auth) ===== -->
 <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
 <script src="firebase-config.js"></script>
 
 <style>
@@ -82,16 +80,11 @@
   ::-webkit-scrollbar-thumb{background:var(--brand-soft); border-radius:8px;}
   ::-webkit-scrollbar-track{background:transparent;}
 
-  /* =========================================================
-     HIDE THE ENTIRE APP UNTIL LOGGED IN
-  ========================================================= */
   .shell{display:flex; min-height:100vh;}
   body:not(.authed) .shell{display:none;}
   body.authed #loginOverlay{display:none;}
 
-  /* =========================================================
-     LOGIN MODAL
-  ========================================================= */
+  /* ===== LOGIN MODAL ===== */
   #loginOverlay{
     position:fixed; inset:0; z-index:5000;
     background:
@@ -300,9 +293,7 @@
     .login-card h1{ font-size:1.3rem; }
   }
 
-  /* =========================================================
-     APP STYLES
-  ========================================================= */
+  /* ===== APP STYLES ===== */
   .sidebar{
     width:var(--sidebar-w); flex-shrink:0;
     background:var(--dark); color:var(--dark-muted);
@@ -583,9 +574,6 @@
 </head>
 <body>
 
-<!-- =============================================================
-     LOGIN MODAL
-============================================================= -->
 <div id="loginOverlay" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
   <div class="login-card">
     <div class="login-logo" aria-hidden="true">
@@ -622,7 +610,6 @@
 
 <div class="shell">
 
-  <!-- ===== SIDEBAR ===== -->
   <aside class="sidebar" id="sidebar" aria-label="Admin navigation">
     <div class="sidebar-brand">
       <img src="https://aws-filez.s3.eu-north-1.amazonaws.com/cropped-Paisely-logo-Resized.png" alt="Paisley Studio logo">
@@ -651,12 +638,11 @@
     </nav>
 
     <div class="sidebar-foot">
-      <span class="dot" id="connDot" aria-hidden="true"></span> <span id="connText">Connecting to Firestore…</span>
+      <span class="dot" id="connDot" aria-hidden="true"></span> <span id="connText">Waiting for sign-in…</span>
       <button class="signout" id="signOutBtn" title="Sign out" type="button"><i class="fas fa-right-from-bracket" aria-hidden="true"></i> Out</button>
     </div>
   </aside>
 
-  <!-- ===== MAIN ===== -->
   <div class="main">
 
     <div class="topbar">
@@ -682,7 +668,6 @@
 
     <div class="content">
 
-      <!-- ===================== DASHBOARD ===================== -->
       <section class="view active" id="view-dashboard">
 
         <div class="stats-row">
@@ -763,12 +748,11 @@
 
         <div class="footer-note" id="setupNote">
           <i class="fas fa-circle-info" aria-hidden="true"></i>
-          <div>This dashboard is wired to Firestore. If it's stuck on "Connecting…" or shows a permissions error in the browser console, double check <code>firebase-config.js</code> has your real project keys and that Firestore rules allow the admin to read.</div>
+          <div>This dashboard is wired to Firestore. You must be signed in with your admin account to read data. If you see a "permission denied" error, verify your login and that Firestore rules require authentication.</div>
         </div>
 
       </section>
 
-      <!-- ===================== ENROLMENTS ===================== -->
       <section class="view" id="view-enrolments">
         <div class="panel">
           <div class="table-toolbar">
@@ -792,7 +776,6 @@
         </div>
       </section>
 
-      <!-- ===================== TUTORS ===================== -->
       <section class="view" id="view-tutors">
         <div class="panel">
           <div class="table-toolbar">
@@ -816,7 +799,6 @@
         </div>
       </section>
 
-      <!-- ===================== MESSAGES ===================== -->
       <section class="view" id="view-messages">
         <div class="panel">
           <div class="table-toolbar">
@@ -838,7 +820,6 @@
         </div>
       </section>
 
-      <!-- ===================== NEWSLETTER ===================== -->
       <section class="view" id="view-newsletter">
         <div class="panel">
           <div class="table-toolbar"><h3 style="font-size:1.02rem;">All subscribers</h3></div>
@@ -852,7 +833,6 @@
         </div>
       </section>
 
-      <!-- ===================== KEY STAGES ===================== -->
       <section class="view" id="view-keystages">
         <div class="panel">
           <div class="panel-head">
@@ -867,7 +847,6 @@
         </div>
       </section>
 
-      <!-- ===================== SETTINGS ===================== -->
       <section class="view" id="view-settings">
         <div class="panel" style="max-width:620px;">
           <div class="panel-head"><div><h3>Data source</h3><div class="sub">How this dashboard gets its numbers</div></div></div>
@@ -876,6 +855,7 @@
           <div class="detail-row"><div class="k">Contact form</div><div class="v">index.html #contact → Firestore "messages"</div></div>
           <div class="detail-row"><div class="k">Newsletter</div><div class="v">Footer form, all pages → Firestore "newsletter"</div></div>
           <div class="detail-row"><div class="k">Storage</div><div class="v">Firebase Firestore (cloud, live)</div></div>
+          <div class="detail-row"><div class="k">Authentication</div><div class="v">Firebase Auth (email &amp; password)</div></div>
           <div style="margin-top:1.3rem; display:flex; gap:.7rem; flex-wrap:wrap;">
             <button class="btn btn-ghost btn-sm" id="exportBtn" type="button"><i class="fas fa-download" aria-hidden="true"></i> Export current view as JSON</button>
           </div>
@@ -886,7 +866,6 @@
   </div>
 </div>
 
-<!-- ===== DETAIL MODAL ===== -->
 <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal">
     <div class="modal-head">
@@ -900,32 +879,9 @@
 
 <script>
 /* =========================================================
-   LOGIN GATE (hardcoded credentials)
-   -----------------------------------------------------------
-   NOTE: Client-side gate only. Upgrade to Firebase
-   Authentication later for proper protection.
+   FIREBASE AUTHENTICATION (replaces the old hardcoded check)
 ========================================================= */
-const ADMIN_EMAIL = 'info@paisleystudio.online';
-const ADMIN_PASSWORD = 'Paisley@2026';
-const SESSION_KEY = 'studioDeskAuthed';
-
-function isAuthed(){
-  return sessionStorage.getItem(SESSION_KEY) === '1';
-}
-
-function setAuthed(on){
-  if(on){
-    sessionStorage.setItem(SESSION_KEY, '1');
-    document.body.classList.add('authed');
-  } else {
-    sessionStorage.removeItem(SESSION_KEY);
-    document.body.classList.remove('authed');
-  }
-}
-
-if(isAuthed()){
-  document.body.classList.add('authed');
-}
+const auth = firebase.auth();
 
 const loginBtn = document.getElementById('loginBtn');
 const loginEmail = document.getElementById('loginEmail');
@@ -933,14 +889,40 @@ const loginPassword = document.getElementById('loginPassword');
 const loginError = document.getElementById('loginError');
 const loginErrorText = document.getElementById('loginErrorText');
 
+let listenersStarted = false;
+
+auth.onAuthStateChanged(function(user){
+  if(user){
+    document.body.classList.add('authed');
+    const overlay = document.getElementById('loginOverlay');
+    if(overlay) overlay.style.display = 'none';
+    // Start Firestore listeners the first time we become authed
+    if(!listenersStarted){
+      listenersStarted = true;
+      initFirestore();
+    }
+  } else {
+    document.body.classList.remove('authed');
+    const overlay = document.getElementById('loginOverlay');
+    if(overlay) overlay.style.display = '';
+  }
+});
+
+function showLoginError(msg){
+  loginErrorText.textContent = msg;
+  loginError.classList.add('show');
+  loginError.style.animation = 'none';
+  void loginError.offsetWidth;
+  loginError.style.animation = '';
+}
+
 function attemptLogin(){
   const email = loginEmail.value.trim();
   const pass = loginPassword.value;
   loginError.classList.remove('show');
 
   if(!email || !pass){
-    loginErrorText.textContent = 'Please enter both email and password.';
-    loginError.classList.add('show');
+    showLoginError('Please enter both email and password.');
     return;
   }
 
@@ -949,31 +931,33 @@ function attemptLogin(){
   loginEmail.disabled = true;
   loginPassword.disabled = true;
 
-  setTimeout(() => {
-    const ok = (email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) && (pass === ADMIN_PASSWORD);
-
-    if(ok){
-      setAuthed(true);
-      const overlay = document.getElementById('loginOverlay');
-      overlay.style.transition = 'opacity .3s ease';
-      overlay.style.opacity = '0';
-      setTimeout(() => {
-        overlay.style.display = 'none';
-      }, 300);
-    } else {
+  auth.signInWithEmailAndPassword(email, pass)
+    .then(() => {
+      // onAuthStateChanged handles the rest
       loginBtn.classList.remove('loading');
       loginBtn.disabled = false;
       loginEmail.disabled = false;
       loginPassword.disabled = false;
-      loginErrorText.textContent = 'Incorrect email or password. Please try again.';
-      loginError.classList.add('show');
-      loginError.style.animation = 'none';
-      void loginError.offsetWidth;
-      loginError.style.animation = '';
+      loginEmail.value = '';
+      loginPassword.value = '';
+    })
+    .catch(err => {
+      loginBtn.classList.remove('loading');
+      loginBtn.disabled = false;
+      loginEmail.disabled = false;
+      loginPassword.disabled = false;
+
+      let msg = 'Incorrect email or password. Please try again.';
+      if(err.code === 'auth/user-not-found')      msg = 'No admin account found with that email.';
+      else if(err.code === 'auth/wrong-password') msg = 'Incorrect password. Please try again.';
+      else if(err.code === 'auth/invalid-email')  msg = 'That email address is not valid.';
+      else if(err.code === 'auth/too-many-requests') msg = 'Too many attempts. Please wait a few minutes.';
+      else if(err.code === 'auth/network-request-failed') msg = 'Network error. Check your internet connection.';
+      showLoginError(msg);
+
       loginPassword.value = '';
       loginPassword.focus();
-    }
-  }, 700);
+    });
 }
 
 loginBtn.addEventListener('click', attemptLogin);
@@ -982,12 +966,15 @@ loginPassword.addEventListener('keydown', e => { if(e.key === 'Enter') attemptLo
 
 document.getElementById('signOutBtn').addEventListener('click', () => {
   if(!confirm('Sign out of Studio Desk?')) return;
-  setAuthed(false);
-  location.reload();
+  auth.signOut().then(() => {
+    // Full reload so we start clean
+    location.reload();
+  });
 });
 
 /* =========================================================
-   STUDIO DESK — reads/writes LIVE Firestore data.
+   STUDIO DESK — reads LIVE Firestore data.
+   Firestore listeners only start AFTER auth state is confirmed.
 ========================================================= */
 
 const KES_USD = 129;
@@ -1026,7 +1013,6 @@ function nl2br(str){
 
 let DB = { enrolments: [], tutors: [], messages: [], newsletter: [] };
 
-/* ===================== FIRESTORE LISTENERS ===================== */
 function initFirestore(){
   try{
     if(typeof db === 'undefined'){
@@ -1067,11 +1053,11 @@ function handleFirestoreError(err){
   console.error('Firestore error:', err);
   setConnected(false);
   const note = document.getElementById('setupNote');
+  if(!note) return;
   note.classList.add('warn');
-  note.innerHTML = `<i class="fas fa-triangle-exclamation" aria-hidden="true"></i><div><strong>Can't read data yet.</strong> Most likely firebase-config.js still has placeholder keys, or your Firestore rules block "read" for the admin. Open the browser console (F12) for the exact error: <code>${escapeHtml((err && err.message) || err)}</code></div>`;
+  note.innerHTML = `<i class="fas fa-triangle-exclamation" aria-hidden="true"></i><div><strong>Can't read data yet.</strong> Check firebase-config.js and that your Firestore rules allow authenticated reads. Open the browser console (F12) for the exact error: <code>${escapeHtml((err && err.message) || err)}</code></div>`;
 }
 
-/* ===================== NAVIGATION ===================== */
 const titles = {
   dashboard: ['Dashboard', 'Term overview across every Key Stage'],
   enrolments: ['Enrolments', 'Every student registered through the enrolment form'],
@@ -1098,7 +1084,6 @@ document.getElementById('menuToggle').addEventListener('click', ()=>{
   document.getElementById('sidebar').classList.toggle('open');
 });
 
-/* ===================== RENDER: STATS ===================== */
 function monthKey(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1); }
 
 function renderStats(){
@@ -1112,7 +1097,6 @@ function renderStats(){
   document.getElementById('navCountMsg').textContent = DB.messages.filter(m=>m.status==='New').length;
 }
 
-/* ===================== RENDER: ACTIVITY ===================== */
 function renderActivity(){
   const items = [];
   DB.enrolments.slice(0,5).forEach(e=> items.push({
@@ -1144,7 +1128,6 @@ function renderActivity(){
   }).join('') || '<div class="table-empty"><i class="fas fa-inbox" aria-hidden="true"></i>No activity yet</div>';
 }
 
-/* ===================== CHARTS ===================== */
 Chart.defaults.font.family = "'Quicksand', sans-serif";
 Chart.defaults.color = '#5A6E6A';
 let growthChartInstance, keyStageChartInstance, modelChartInstance;
@@ -1203,9 +1186,8 @@ function renderModelChart(){
   `;
 }
 
-/* ===================== RENDER: TABLES ===================== */
 function statusBadgeClass(status){
-  const map = { New:'b-new', Pending:'b-pending', Confirmed:'b-confirmed', Declined:'b-declined', Review:'b-review', Active:'b-confirmed' };
+  const map = { New:'b-new', Pending:'b-pending', Confirmed:'b-confirmed', Declined:'b-declined', Review:'b-review', Active:'b-confirmed', Replied:'b-confirmed' };
   return map[status] || 'b-pending';
 }
 
@@ -1333,9 +1315,10 @@ function renderKsTable(){
   }).join('');
 }
 
-/* ===================== FILTER CHIP HANDLERS ===================== */
 function wireChips(containerId, setFn, renderFn){
-  document.getElementById(containerId).addEventListener('click', (e)=>{
+  const container = document.getElementById(containerId);
+  if(!container) return;
+  container.addEventListener('click', (e)=>{
     const btn = e.target.closest('.chip-btn');
     if(!btn) return;
     document.querySelectorAll('#'+containerId+' .chip-btn').forEach(b=>b.classList.remove('active'));
@@ -1348,7 +1331,6 @@ wireChips('enrolFilters', v=>enrolFilter=v, renderEnrolTable);
 wireChips('tutorFilters', v=>tutorFilter=v, renderTutorTable);
 wireChips('msgFilters', v=>msgFilter=v, renderMsgTable);
 
-/* ===================== MODAL ===================== */
 const overlay = document.getElementById('modalOverlay');
 document.getElementById('modalClose').addEventListener('click', closeModal);
 overlay.addEventListener('click', (e)=>{ if(e.target===overlay) closeModal(); });
@@ -1362,7 +1344,6 @@ function openModal(title, rowsHtml, footHtml=''){
   overlay.classList.add('open');
 }
 
-/* ---------- Helpers for building modal bodies ---------- */
 function row(k, v){
   const val = (v === null || v === undefined || v === '') ? '—' : v;
   return `<div class="detail-row"><span class="k">${escapeHtml(k)}</span><span class="v">${escapeHtml(val)}</span></div>`;
@@ -1381,7 +1362,6 @@ function yesNoBadge(val){
   return `<span class="badge ${cls}">${escapeHtml(val)}</span>`;
 }
 
-/* ---------- Enrolment modal ---------- */
 function viewEnrol(id){
   const e = DB.enrolments.find(x=>x.id===id); if(!e) return;
   const ks = e.keyStage || e['Key Stage'] || '';
@@ -1428,9 +1408,8 @@ function viewEnrol(id){
     <div class="detail-block">
       <div class="k">Submission</div>
       <div class="v">
-        ${row('Status', '')}
-        <div class="detail-row" style="border-bottom:none; padding-top:0;">
-          <span class="k" style="opacity:0;">status</span>
+        <div class="detail-row" style="border-bottom:1px solid var(--line-soft); padding-top:0;">
+          <span class="k">Status</span>
           <span class="v"><span class="badge ${statusBadgeClass(e.status||'New')}">${escapeHtml(e.status||'New')}</span></span>
         </div>
         ${row('Date submitted', fmtDate(e.date))}
@@ -1439,7 +1418,6 @@ function viewEnrol(id){
   `, `<button class="btn btn-ghost btn-sm" onclick="closeModal()" type="button">Close</button><button class="btn btn-primary btn-sm" onclick="cycleStatus('enrolments','${e.id}')" type="button"><i class="fas fa-check" aria-hidden="true"></i> Advance status</button>`);
 }
 
-/* ---------- Tutor modal ---------- */
 function viewTutor(id){
   const t = DB.tutors.find(x=>x.id===id); if(!t) return;
   const ks = t.keyStages || t['Key Stages'] || [];
@@ -1464,34 +1442,28 @@ function viewTutor(id){
     <div class="detail-block">
       <div class="k">Screening questions</div>
       <div class="v">
-        ${row('Online teaching experience', '')}
         <div class="detail-row" style="border-bottom:1px solid var(--line-soft); padding-top:0;">
-          <span class="k" style="opacity:0;">.</span>
+          <span class="k">Online teaching experience</span>
           <span class="v">${yesNoBadge(t.onlineTeachingExperience)}</span>
         </div>
-        ${row('British curriculum experience', '')}
         <div class="detail-row" style="border-bottom:1px solid var(--line-soft); padding-top:0;">
-          <span class="k" style="opacity:0;">.</span>
+          <span class="k">British curriculum experience</span>
           <span class="v">${yesNoBadge(t.britishCurriculumExperience)}</span>
         </div>
-        ${row('Ready for class presentation', '')}
         <div class="detail-row" style="border-bottom:1px solid var(--line-soft); padding-top:0;">
-          <span class="k" style="opacity:0;">.</span>
+          <span class="k">Ready for class presentation</span>
           <span class="v">${yesNoBadge(t.classPresentation)}</span>
         </div>
-        ${row('Available KS4 (8:30am – 3:45pm)', '')}
         <div class="detail-row" style="border-bottom:1px solid var(--line-soft); padding-top:0;">
-          <span class="k" style="opacity:0;">.</span>
+          <span class="k">Available KS4 (8:30am – 3:45pm)</span>
           <span class="v">${yesNoBadge(t.availabilityKS4)}</span>
         </div>
-        ${row('Available KS2/3 (8:30am – 12:15pm)', '')}
         <div class="detail-row" style="border-bottom:1px solid var(--line-soft); padding-top:0;">
-          <span class="k" style="opacity:0;">.</span>
+          <span class="k">Available KS2/3 (8:30am – 12:15pm)</span>
           <span class="v">${yesNoBadge(t.availabilityKS23)}</span>
         </div>
-        ${row('Accepts compensation', '')}
         <div class="detail-row" style="border-bottom:none; padding-top:0;">
-          <span class="k" style="opacity:0;">.</span>
+          <span class="k">Accepts compensation</span>
           <span class="v">${yesNoBadge(t.acceptCompensation)}</span>
         </div>
       </div>
@@ -1518,7 +1490,6 @@ function viewTutor(id){
   `, `<button class="btn btn-ghost btn-sm" onclick="closeModal()" type="button">Close</button><button class="btn btn-primary btn-sm" onclick="cycleStatus('tutors','${t.id}')" type="button"><i class="fas fa-forward" aria-hidden="true"></i> Advance status</button>`);
 }
 
-/* ---------- Message modal ---------- */
 function viewMsg(id){
   const m = DB.messages.find(x=>x.id===id); if(!m) return;
   openModal('Message — '+(m.subject||m.Subject||''), `
@@ -1545,7 +1516,6 @@ function deleteRecord(collection, id){
   db.collection(collection).doc(id).delete().catch(e=>alert('Could not delete: '+e.message));
 }
 
-/* ===================== EXPORT ===================== */
 document.getElementById('exportBtn').addEventListener('click', ()=>{
   const blob = new Blob([JSON.stringify(DB, null, 2)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
@@ -1554,7 +1524,6 @@ document.getElementById('exportBtn').addEventListener('click', ()=>{
   URL.revokeObjectURL(url);
 });
 
-/* ===================== GLOBAL SEARCH ===================== */
 document.getElementById('globalSearch').addEventListener('input', (e)=>{
   const q = e.target.value.trim().toLowerCase();
   if(!q) return;
@@ -1566,7 +1535,6 @@ document.getElementById('globalSearch').addEventListener('input', (e)=>{
   else if(hitMsg) document.querySelector('.nav-item[data-view="messages"]').click();
 });
 
-/* ===================== REFRESH ALL ===================== */
 function refreshAll(){
   renderStats();
   renderActivity();
@@ -1579,9 +1547,6 @@ function refreshAll(){
   renderNlTable();
   renderKsTable();
 }
-
-refreshAll();
-initFirestore();
 </script>
 
 </body>
