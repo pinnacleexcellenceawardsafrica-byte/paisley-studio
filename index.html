@@ -20,6 +20,8 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="en_GB" />
   <meta property="og:site_name" content="Paisley Studio" />
+  <meta name="theme-color" content="#245F5A" />
+<link rel="manifest" href="/manifest.json" />
 
   <!-- ===== TWITTER CARD ===== -->
   <meta name="twitter:card" content="summary_large_image" />
@@ -1940,6 +1942,15 @@
 <script src="firestore-helpers.js"></script>
 
 <script>
+
+  // Register service worker for PWA
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(() => console.log('SW registered'))
+      .catch(err => console.log('SW failed:', err));
+  });
+}
 // ============================================================
 // YEAR
 // ============================================================
